@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="#">
+        <meta charset="UTF-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>On Beat</title>
+        {% load static %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      />
+    <link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}"
+    />
+    </head>
+    <body>
+        <div id='main'>
+            <div id='app' class="center"></div>
+        </div>
+        
+        {% csrf_token %}
+        <script>
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        </script>
+
+        <script src="{% static 'frontend/main.js' %}"></script>
+    </body>
+</html>
