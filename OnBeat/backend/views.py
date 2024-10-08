@@ -1,3 +1,4 @@
+import json
 from django.db import IntegrityError
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -14,11 +15,12 @@ def login(request):
 
 def register(request):
     if request.method == 'POST':
-        username = request.POST["username"]
-        email = request.POST["email"]
-        password = request.POST["password"]
-        confirmation = request.POST["confirmation"]
+        data = json.loads(request.body)
         
+        username =data.get("username")
+        email = data.get("email")
+        password = data.get("password")
+        confirmation = data.get("confirmation")
         # test password and confirmation
         if password != confirmation:
             return JsonResponse({'error': 'Password does not match confirmation password.'}, status=status.HTTP_409_CONFLICT)
