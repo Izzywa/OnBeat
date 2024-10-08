@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect} from "react";
+import { Link } from 'react-router-dom';
 import TextInputField from "./TextInputField";
 import csrftoken from "./CSRFCookie";
 
@@ -72,7 +73,7 @@ export default function Register(props) {
                 <TextInputField 
                 field="PasswordConfirmation" type="password" placeholder="Reenter password" ref={confirmationRef} 
                 message={fieldMessage.confirmation.message} error={fieldMessage.confirmation.error}/>
-                <button type="submit" className="btn btn-primary">Submit</button> 
+                <button type="submit" className="btn btn-primary">Register</button> 
             </form>
             </div>
         </div>

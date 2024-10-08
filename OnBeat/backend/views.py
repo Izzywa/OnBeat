@@ -1,7 +1,9 @@
 import json
 from django.db import IntegrityError
-from django.http import HttpResponse, JsonResponse
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from rest_framework import status
 
 from .models import User
@@ -12,7 +14,28 @@ def index(request):
     return HttpResponse("BACKEND VIEW")
 
 def login(request):
-    pass
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            # login(request, user)
+            #return HttpResponseRedirect(reverse("frontend:index"))
+            return JsonResponse({
+                'error': False,
+                'message': 'Login Successful'
+            }, status=status.HTTP_200_OK)
+        else:
+            return JsonResponse({
+                'error': True,
+                'message': 'Invalid username and/or password'
+            }, status=status.HTTP_409_CONFLICT)
+
+def logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("frontend:login"))
 
 def register(request):
     if request.method == 'POST':
