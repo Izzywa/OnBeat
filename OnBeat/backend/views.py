@@ -5,6 +5,7 @@ from django.shortcuts import render
 from rest_framework import status
 
 from .models import User
+from .helpers import validateUsername, validatePassword, validateEmail
 
 # Create your views here.
 def index(request):
@@ -16,24 +17,33 @@ def login(request):
 def register(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        error_status = {
+            'username': '',
+            'email': '',
+            'password': '',
+            'confirmation': {
+                'error': False,
+                'message': ''
+            }
+        }
         
         username =data.get("username")
         email = data.get("email")
         password = data.get("password")
         confirmation = data.get("confirmation")
-        # test password and confirmation
-        if len(password) < 6:
-            return JsonResponse({'error': 'Password should be at least 6 characters.'}, status=status.HTTP_409_CONFLICT)
-        if password != confirmation:
-            return JsonResponse({'error': 'Password does not match confirmation password.'}, status=status.HTTP_409_CONFLICT)
         
-        # test if username taken
-        try:
-            user = User.objects.create_user(username,email,password)
-            user.save()
-            return JsonResponse(None, status=status.HTTP_200_OK, safe=False)
-        except IntegrityError:
-            return JsonResponse({'error': f'Username {username} already taken.'}, status=status.HTTP_409_CONFLICT)
+        error_status['username'] = validateUsername(username)
+        error_status['email'] = validateEmail(email)
+        error_status['password'] = validatePassword(password)
+        if password != confirmation:
+            error_status['confirmation'] = {
+                'error': True,
+                'message': 'Reenter password.'
+            }
+        if True in [value['error'] for key, value in error_status.items()]:
+            return JsonResponse(error_status, status=status.HTTP_409_CONFLICT)
+        else:
+            return JsonResponse(error_status, status=status.HTTP_200_OK)
         
     else:
         return JsonResponse({'error': 'Method not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
