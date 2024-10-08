@@ -22,6 +22,8 @@ def register(request):
         password = data.get("password")
         confirmation = data.get("confirmation")
         # test password and confirmation
+        if len(password) < 6:
+            return JsonResponse({'error': 'Password should be at least 6 characters.'}, status=status.HTTP_409_CONFLICT)
         if password != confirmation:
             return JsonResponse({'error': 'Password does not match confirmation password.'}, status=status.HTTP_409_CONFLICT)
         
@@ -29,10 +31,9 @@ def register(request):
         try:
             user = User.objects.create_user(username,email,password)
             user.save()
+            return JsonResponse(None, status=status.HTTP_200_OK, safe=False)
         except IntegrityError:
-            return JsonResponse({'error': 'Username already taken'}, status=status.HTTP_409_CONFLICT)
+            return JsonResponse({'error': f'Username {username} already taken.'}, status=status.HTTP_409_CONFLICT)
         
-        
-        pass
     else:
         return JsonResponse({'error': 'Method not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
