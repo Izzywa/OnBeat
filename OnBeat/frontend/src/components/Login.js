@@ -14,11 +14,6 @@ export default function Login(props) {
     const { login } = useAuth();
     const nav = useNavigate();
 
-    function printLocalStorage() {
-        console.log(localStorage.getItem('test'))
-    }
-
-
     function handleLoginSubmit(event) {
         event.preventDefault()
 

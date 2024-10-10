@@ -1,28 +1,57 @@
-import React from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Homepage(props) {
-    const nav = useNavigate();
     const { logout } = useAuth();
 
     function handleLogout() {
-        fetch('/backend/logout').then(response => {
-            if (response.ok) {
-                console.log("logout successful")
-                localStorage.setItem('test', 'TEST')
-                logout();
-                nav("/login")
-            } else {
-                throw new error("Error logging out")
-            }
-        })
+        logout();
     }
+
+    function DropdownItem(props) {
+        return (
+            <a className="dropdown-item" href="#">{props.label}</a>
+        )
+    }
+
+    function Dropdown() {
+        return (
+            <li className="nav-item dropdown">
+        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <DropdownItem label='hello'/>
+          <DropdownItem label="world" />
+          <div className="dropdown-divider"></div>
+          <DropdownItem label="other" />
+        </div>
+      </li>
+        )
+    }
+
 
     return(
     <div>
-         <h1>HOMEPAGE DISPLAY</h1>
-         <button onClick={handleLogout} className="btn btn-warning">Logout</button>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <Link className="navbar-brand" to="/">USERNAME</Link>
+  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+
+  <div className="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul className="navbar-nav mr-auto">
+      <li className="nav-item active">
+        <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" onClick={handleLogout}>logout</a>
+      </li>
+      <Dropdown />
+    </ul>
+  </div>
+</nav>
     </div>
     )
 }

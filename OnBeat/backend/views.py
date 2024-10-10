@@ -8,7 +8,7 @@ from django.urls import reverse
 from rest_framework import status
 
 from .models import User
-from .helpers import validateUsername, validatePassword, validateEmail, getJWToken
+from .helpers import validateUsername, validatePassword, validateEmail
 
 # Create your views here.
 def index(request):
@@ -31,6 +31,8 @@ def login_view(request):
                 'error': True,
                 'message': 'Invalid username and/or password'
             }, status=status.HTTP_409_CONFLICT)
+    else:
+        return HttpResponseRedirect(reverse("frontend:login"))
 
 @login_required(login_url='/login')
 def logout_view(request):
@@ -72,4 +74,16 @@ def register(request):
             return JsonResponse({'username': user.username}, status=status.HTTP_200_OK)
         
     else:
-        return JsonResponse({'error': 'Method not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        return HttpResponseRedirect(reverse("frontend:register"))
+    
+def getCurrentUser(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            username = json.loads(request.body).get("username")
+            if request.user.username != username:
+                return JsonResponse({'message': 'NOT AUTHENTICATED'}, status=status.HTTP_403_FORBIDDEN)
+            return JsonResponse({'message': 'user authenticated'}, status=status.HTTP_200_OK)
+        else:
+            return JsonResponse({'message': 'NOT AUTHENTICATED'}, status=status.HTTP_403_FORBIDDEN)
+    else:
+        return HttpResponseRedirect(reverse("frontend:login"))

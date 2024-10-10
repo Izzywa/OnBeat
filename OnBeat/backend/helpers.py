@@ -60,15 +60,3 @@ def validateEmail(email):
             'error': True,
             'message': 'Email not valid.'
         }
-
-def getJWToken(payload):
-    response = post(os.getenv('DJANGO_APP_URL') + 'token/', data=payload).json()
-    print('GET JWTOKEN')
-    print(response)
-    return response
-
-def refreshJWT(payload):
-    response = post(os.getenv('DJANGO_APP_URL', default="")  + 'token/refresh/', data=payload).json()
-    print('REFRESH TOKEN DONE')
-    print(response)
-    return response 

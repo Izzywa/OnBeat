@@ -5,8 +5,9 @@ import App from "./components/App";
 
 const appDiv = createRoot(document.getElementById("app"));
 appDiv.render(
-        <BrowserRouter>
+    <React.StrictMode>
+         <BrowserRouter>
             < App/>
         </BrowserRouter>
-
+    </React.StrictMode>
 )

@@ -1,16 +1,27 @@
-import React, { Children, createContext, useContext, useState} from "react";
+import React, { useEffect, createContext, useContext,} from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
  
 export const AuthProvider = ({children}) => {
 
+    const nav = useNavigate();
+
     const login = (user) => {
-        setUsername(user)
         localStorage.clear();
         localStorage.setItem('username', user);
     } 
 
     const logout = () => {
+        fetch('/backend/logout').then(response => {
+            if (response.ok) {
+                console.log("logout successful")
+                nav("/login")
+            } else {
+                throw new error("Error logging out")
+            }
+        })
+       
         localStorage.clear();
     }
 
