@@ -9,7 +9,7 @@ export const AuthProvider = ({children}) => {
 
     const login = (user) => {
         localStorage.clear();
-        localStorage.setItem('username', user);
+        localStorage.setItem('auth', true);
     } 
 
     const logout = () => {
@@ -25,8 +25,8 @@ export const AuthProvider = ({children}) => {
         localStorage.clear();
     }
 
-    const user = localStorage.getItem('username')
-    const isAuth = !!user
+    const user = localStorage.getItem('auth')
+    const isAuth = user
 
     return (
         <AuthContext.Provider value={{ login, logout, isAuth }}>
