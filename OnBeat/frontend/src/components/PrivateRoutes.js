@@ -4,13 +4,15 @@ import { useAuth } from "./AuthContext";
 import csrftoken from "./CSRFCookie";
 
 const PrivateRoutes = () => {
-    const { logout } = useAuth()
+    const { logout, login } = useAuth()
     
     useEffect(() => {
         fetch('/backend/current-user').then(response => {
             if (!response.ok) {
                 logout()
 
+            } else {
+                login()
             }
         })
     },[])
