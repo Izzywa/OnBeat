@@ -1,13 +1,16 @@
 import React, {useRef, useState, useEffect} from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextInputField from "./TextInputField";
 import csrftoken from "./CSRFCookie";
+import { useAuth } from "./AuthContext";
 
 export default function Register(props) {
     const usernameRef = useRef()
     const emailRef = useRef()
     const passwordRef = useRef()
     const confirmationRef = useRef()
+    const { login } = useAuth();
+    const nav = useNavigate();
 
     const [fieldMessage, setFieldMessage] = useState({
         'username': {
@@ -48,8 +51,15 @@ export default function Register(props) {
        }
 
        fetch('backend/register', requestOptions)
-       .then(response => response.json())
-       .then(result => {
+       .then(response => {
+            if (response.ok) {
+                console.log("user registered successfully")
+                login(usernameRef.current.value)
+                nav("/")
+            } else {
+                return response.json()
+            }
+        }).then(result => {
         setFieldMessage(result)
        })
     }
@@ -73,7 +83,8 @@ export default function Register(props) {
                 <TextInputField 
                 field="PasswordConfirmation" type="password" placeholder="Reenter password" ref={confirmationRef} 
                 message={fieldMessage.confirmation.message} error={fieldMessage.confirmation.error}/>
-                <button type="submit" className="btn btn-primary">Register</button> 
+                <button type="submit" className="btn btn-primary mx-2">Register</button> 
+                <Link to="/login" className="btn btn-primary">Login</Link>
             </form>
             </div>
         </div>

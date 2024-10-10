@@ -23,6 +23,4 @@ urlpatterns = [
     path('backend/', include("backend.urls")),
     path('', include("frontend.urls")),
     path('youtube/', include("youtube.urls")),
-    path('token/', jwt_views.TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name="token_refresh")
 ]

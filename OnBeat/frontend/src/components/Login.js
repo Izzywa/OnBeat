@@ -1,7 +1,8 @@
 import React, {useRef, useState} from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextInputField from "./TextInputField";
 import csrftoken from "./CSRFCookie";
+import { useAuth } from "./AuthContext";
 
 export default function Login(props) {
     const usernameRef = useRef()
@@ -10,6 +11,13 @@ export default function Login(props) {
         'error': false,
         'message': ''
     })
+    const { login } = useAuth();
+    const nav = useNavigate();
+
+    function printLocalStorage() {
+        console.log(localStorage.getItem('test'))
+    }
+
 
     function handleLoginSubmit(event) {
         event.preventDefault()
@@ -30,7 +38,9 @@ export default function Login(props) {
            fetch('backend/login', requestOptions)
            .then(response => {
             if (response.ok) {
-                window.location.href = "/"
+                console.log("login successful")
+                login(usernameRef.current.value)
+                nav("/");
             } else {
                 return response.json()
             }
@@ -50,7 +60,7 @@ export default function Login(props) {
                 <TextInputField field="Username" type="text" placeholder="Username" ref={usernameRef}
                 error={message.error} message={message.message}/>
                 <TextInputField field="Password" type="password" placeholder="Password" ref={passwordRef} error={message.error}/>
-                <button type="submit" className="btn btn-primary">Submit</button> 
+                <button type="submit" className="btn btn-primary">Login</button> 
                 <Link to="/register" className="btn btn-primary mx-2">Register</Link>
             </form>
             </div>
