@@ -77,8 +77,10 @@ def register(request):
         return HttpResponseRedirect(reverse("frontend:register"))
     
 def getCurrentUser(request):
-    if request.user.is_authenticated:
-        return JsonResponse({'message': 'user authenticated'}, status=status.HTTP_200_OK)
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            return JsonResponse({'message': 'user authenticated'}, status=status.HTTP_200_OK)
+        else:
+            return JsonResponse({'message': 'NOT AUTHENTICATED'}, status=status.HTTP_403_FORBIDDEN)
     else:
-        return JsonResponse({'message': 'NOT AUTHENTICATED'}, status=status.HTTP_403_FORBIDDEN)
-    
+        return HttpResponseRedirect(reverse("frontend:index"))

@@ -5,13 +5,23 @@ import csrftoken from "./CSRFCookie";
 
 const PrivateRoutes = () => {
     const { logout, login } = useAuth()
+
+    const requestOptions = {
+        method: ('POST'),
+        headers: {
+            'X-CSRFToken': csrftoken()
+        },
+        mode: 'same-origin'
+    }
     
     useEffect(() => {
-        fetch('/backend/current-user').then(response => {
+        fetch('/backend/current-user', requestOptions).then(response => {
             if (!response.ok) {
+                console.log('user not authenticated')
                 logout()
 
             } else {
+                console.log('AUTHENTICATED')
                 login()
             }
         })
