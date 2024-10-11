@@ -13,9 +13,9 @@ jobs:
               uses: actions/setup-python@v3
             - name: Run Unit test
               run: |
-                    cd OnBeat
                     pipx install virtualenv
                     virtualenv newenv
                     source newenv/bin/activate
                     pipx install Django
+                    cd OnBeat
                     python3 manage.py test
