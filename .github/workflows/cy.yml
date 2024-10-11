@@ -11,5 +11,6 @@ jobs:
             - uses: actions/checkout@v4
             - name: Run Unit test
               run: |
+                    python3 -m venv path/to/venv
                     pip3 install --user Django
                     python3 manage.py test
