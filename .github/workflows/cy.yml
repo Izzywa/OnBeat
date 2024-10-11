@@ -12,5 +12,9 @@ jobs:
             - name: Run Unit test
               run: |
                     cd OnBeat
+                    pipx install virtualenv
+                    python3 -m venv venv
+                    source venv/bin/activate
                     pipx install Django
+                    python -c "import sys; print('\n'.join(sys.path))"
                     python3 manage.py test
