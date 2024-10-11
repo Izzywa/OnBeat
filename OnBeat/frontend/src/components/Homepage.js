@@ -31,6 +31,10 @@ export default function Homepage(props) {
         )
     }
 
+    function popup() {
+        alert('world clicked')
+    }
+
 
     return(
     <div>
@@ -53,6 +57,9 @@ export default function Homepage(props) {
     </ul>
   </div>
 </nav>
+<div>
+    Hello <span onClick={popup} className="pointer text-light bg-dark">world</span> !!!
+</div>
     </div>
     )
 }

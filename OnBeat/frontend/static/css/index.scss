@@ -3,13 +3,14 @@
 html, body {
     height: 100%;
 }
-.container {
-    border: 2px solid red;
-}
 
 #main, #app {
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
+}
+
+.pointer {
+    cursor: pointer;
 }

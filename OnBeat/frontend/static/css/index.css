@@ -9,4 +9,8 @@ html, body {
   top: 0;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=index.css.map */
