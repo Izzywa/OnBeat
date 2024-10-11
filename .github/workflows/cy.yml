@@ -10,7 +10,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Install dependencies
-              run: pipx install -r requirements.txt
+              run: pipx install requirements.txt
             - name: Run Unit test
               run: |
                     cd OnBeat
