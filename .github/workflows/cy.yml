@@ -11,7 +11,7 @@ jobs:
             - uses: actions/checkout@v4
             - name: Run Unit test
               run: |
-                    python -m venv env
+                    python3 -m venv env
                     venv\Scripts\activate
                     pipx install Django
                     cd OnBeat
