@@ -7,6 +7,8 @@ on:
 jobs: 
     test_app:
         runs-on: ubuntu-latest
+        env: 
+            DJANGO_SECRET_KEY: ${{secrets.DJANGO_SECRET_KEY}}
         steps:
             - uses: actions/checkout@v4
             - name: Run Unit test
@@ -15,5 +17,6 @@ jobs:
                     python3 -m venv venv
                     source venv/bin/activate
                     python3 -m pip install -r requirements.txt
+                    echo "DJANGO_SECRET_KEY=${{ env.DJANGO_SECRET_KEY }}" > .env
                     cd OnBeat
                     python3 manage.py test
