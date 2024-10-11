@@ -11,10 +11,6 @@ jobs:
             - uses: actions/checkout@v4
             - name: Run Unit test
               run: |
+                    pipx install --user Django
                     cd OnBeat
-                    pipx install virtualenv
-                    python3 -m venv venv
-                    source venv/bin/activate
-                    pipx install Django
-                    import Django
                     python3 manage.py test
