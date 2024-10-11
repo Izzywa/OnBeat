@@ -11,6 +11,6 @@ jobs:
             - uses: actions/checkout@v4
             - name: Run Unit test
               run: |
-                    pipx install --user Django
                     cd OnBeat
+                    pipx install Django
                     python3 manage.py test
