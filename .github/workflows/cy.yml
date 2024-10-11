@@ -9,8 +9,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            - name: Install dependencies
+              run: pip install -r requirements.txt
             - name: Run Unit test
               run: |
-                    pipx install Django
                     cd OnBeat
                     python3 manage.py test
