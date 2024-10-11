@@ -14,9 +14,6 @@ jobs:
                     pipx install virtualenv
                     python3 -m venv venv
                     source venv/bin/activate
-                    python -c "import sys; print('\n'.join(sys.path))"
-                    python3 -m pip install -U Django
-                    python3 -m pip install python-dotenv
                     python3 -m pip install -r requirements.txt
                     cd OnBeat
                     python3 manage.py test
