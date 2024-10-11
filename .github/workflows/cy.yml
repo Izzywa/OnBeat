@@ -13,7 +13,6 @@ jobs:
               uses: actions/setup-python@v1
             - name: Run Unit test
               run: |
-                    venv\Scripts\activate
-                    pipx install Django
                     cd OnBeat
+                    pipx install Django
                     python3 manage.py test
