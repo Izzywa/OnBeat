@@ -9,13 +9,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - name: Set up Python
-              uses: actions/setup-python@v3
             - name: Run Unit test
               run: |
                     pipx install virtualenv
-                    virtualenv newenv
-                    source newenv/bin/activate
+                    python3 -m venv venv
+                    source venv/bin/activate
                     pipx install Django
                     cd OnBeat
                     python3 manage.py test
