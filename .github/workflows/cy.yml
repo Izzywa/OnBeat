@@ -17,5 +17,5 @@ jobs:
                     source venv/bin/activate
                     python -c "import sys; print('\n'.join(sys.path))"
                     python3 -m pip install -U Django
-                    python3 install -U python-dontenv
+                    python3 -m pip install python-dotenv
                     python3 manage.py test
