@@ -1,13 +1,19 @@
 import React, {forwardRef} from "react";
 
 const TextInputField =  forwardRef(function TextInputField(props, ref) {
-    const id = `Register${props.field}Input`
+
+  let id;
+  if (props.field.split(' ').length == 1) {
+    id = `Register${props.field}Input`
+  } else {
+    id = `Register${props.field.split(' ').join('-')}Input`
+  }
     const describedby = `${props.field}Help`
 
     return (
     
         <div className="form-group">
-        <label className="form-label" htmlFor={id}>{props.field === "PasswordConfirmation" ? "Password Confirmation" : props.field}</label>
+        <label className="form-label" htmlFor={id}>{props.field}</label>
         <input 
         ref={ref}
         type={props.type} 

@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "react-selection-highlighter": "^2.0.1"
+  },
+  "devDependencies": {
+    "reactjs-editor": "^10.0.1"
   }
 }

@@ -38,7 +38,7 @@ export const AuthProvider = ({children}) => {
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if(!context) {
-        throw new Error("useAuth Error");
+        throw new Error("useAuth Error. useAuth should be in AuthProvider");
     }
 
     return context

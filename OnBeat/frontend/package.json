@@ -17,8 +17,12 @@
     "babel-loader": "^9.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-from-dom": "^0.7.3",
+    "react-selection-highlighter": "^2.0.1",
+    "tslib": "^2.7.0",
     "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "xpath-range": "^1.1.1"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -28,6 +32,7 @@
     "@mui/icons-material": "^6.1.2",
     "@mui/material": "^6.1.2",
     "js-cookie": "^3.0.5",
-    "react-router-dom": "^6.26.2"
+    "react-router-dom": "^6.26.2",
+    "zustand": "^5.0.0-rc.2"
   }
 }

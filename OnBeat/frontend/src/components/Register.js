@@ -81,7 +81,7 @@ export default function Register(props) {
                 field="Password" type="password" placeholder="Password minimum 6 characters" ref={passwordRef} 
                 message={fieldMessage.password.message} error={fieldMessage.password.error}/>
                 <TextInputField 
-                field="PasswordConfirmation" type="password" placeholder="Reenter password" ref={confirmationRef} 
+                field="Password Confirmation" type="password" placeholder="Reenter password" ref={confirmationRef} 
                 message={fieldMessage.confirmation.message} error={fieldMessage.confirmation.error}/>
                 <button type="submit" className="btn btn-primary mx-2">Register</button> 
                 <Link to="/login" className="btn btn-primary">Login</Link>

@@ -10,9 +10,15 @@ export default function Homepage(props) {
     }
 
     function DropdownItem(props) {
+      if (props.link) {
+        return (
+          <Link className="dropdown-item" to={props.link}>{props.label}</Link>
+        )
+      } else {
         return (
             <a className="dropdown-item" href="#">{props.label}</a>
         )
+      }
     }
 
     function Dropdown() {
@@ -22,7 +28,7 @@ export default function Homepage(props) {
           Dropdown
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <DropdownItem label='hello'/>
+            <DropdownItem label='Create Note' link="/create-note"/>
           <DropdownItem label="world" />
           <div className="dropdown-divider"></div>
           <DropdownItem label="other" />

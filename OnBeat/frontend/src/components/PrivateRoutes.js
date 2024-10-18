@@ -17,11 +17,9 @@ const PrivateRoutes = () => {
     useEffect(() => {
         fetch('/backend/current-user', requestOptions).then(response => {
             if (!response.ok) {
-                console.log('user not authenticated')
                 logout()
 
             } else {
-                console.log('AUTHENTICATED')
                 login()
             }
         })
