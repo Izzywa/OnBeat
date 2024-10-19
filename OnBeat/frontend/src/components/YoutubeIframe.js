@@ -12,52 +12,64 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
       },
     }
 
-    const [state, setState] = useState(-1)
+    const [ready, setReady] = useState(false);
     const [currentTime, setCurrentTime] = useState(0)
 
     function onReady(event) {
         event.target.pauseVideo();
-      //  console.log(event.target)
-       // console.log(event.target.getDuration())
-    }
-
-    function handlePause(event) {
-        setState(YouTube.PlayerState.PAUSED)
+        setReady(true);
     }
 
     function handlePlay(event) {
-        setState(YouTube.PlayerState.PLAYING)
         const interval = setInterval(() => {
             setCurrentTime(event.target.getCurrentTime())
         }, 100);
 
-        //Clearing the interval
         return () => clearInterval(interval);
     }
 
-    function onPlayerStateChange(event) {
-        console.log(event.data)
+    const [x, setX] = useState(null)
+    function click() {
+        ref.current.internalPlayer.getDuration().then(response => setX(response))
     }
 
-   /* const [x, setX] = useState('');
-    function click() {
-        vidref.current.internalPlayer.getDuration().then(response => setX(response))
-        //console.log(vidref.current.internalPlayer.getDuration())
-    } */
+    const [t, setT] = useState(null);
+    function time(){
+        ref.current.internalPlayer.getCurrentTime().then(response => setT(response))
+    }
 
+    function seek() {
+        ref.current.internalPlayer.seekTo(30);
+    }
+
+    function RenderAfterReady() {
+        return (
+            <>
+             <h1>{currentTime}</h1>
+         <button className="btn btn-primary" onClick={click}>DURATION</button>
+         <button className="btn btn-primary" onClick={time}>CURRENT TIME</button>
+         <button className="btn btn-primary" onClick={seek}>SEEK TO 30s</button>
+         <h4>{x}</h4>
+         <h4>{new Date(t * 1000).toISOString().slice(11,19)}</h4>
+            </>
+        )
+    }
+
+    function handleError(){
+        alert('error')
+    }
 
     return (
-    <div className="my-2">
+    <div className="my-2 container">
          <YouTube 
          ref={ref}
          videoId={props.id} 
-         title="YOUTUBE TITLE"
          opts={opts} 
          onReady={onReady} 
-         onPause={handlePause} 
-         onPlay={handlePlay}
-         onStateChange={onPlayerStateChange}/>
-         <h1>{currentTime}</h1>
+         onError={handleError}
+         onPlay={handlePlay}/>
+
+         { ready ? <RenderAfterReady/>:null}
     </div>
     )
 });
