@@ -1,5 +1,6 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useCallback} from "react";
 import TextInputField from "./TextInputField";
+import YoutubeIframe from "./YoutubeIframe";
 
 export default function YoutubeLinkInput(props) {
     const videoUrl = useRef()
@@ -8,6 +9,7 @@ export default function YoutubeLinkInput(props) {
         'error': false,
         'message': ''
     })
+    const IframeRef = useRef();
 
     function handleVideUrlSubmit(event) {
         event.preventDefault();
@@ -34,6 +36,34 @@ export default function YoutubeLinkInput(props) {
         }
     }
 
+    const [x, setX] = useState(null)
+    function click() {
+        console.log(IframeRef)
+        IframeRef.current.internalPlayer.getDuration().then(response => setX(response))
+    }
+
+    const [PlayerState, setPlayerState] = useState(null)
+    function logChange() {
+        IframeRef.current.internalPlayer.getPlayerState().then(response => setPlayerState(response))
+    }
+
+
+    const [t, setT] = useState(null);
+    function getCurrentTime() {
+        IframeRef.current.internalPlayer.getCurrentTime().then(response => setT(response))
+    }
+
+    function YoutubeIframeComponents() {
+        return(
+            <div>
+                <YoutubeIframe id={videoID} ref={IframeRef} onStateChange={logChange}/>
+                <button className="btn btn-success" onClick={click}>DURATION</button>
+                <button className="btn btn-dark" onClick={getCurrentTime}>CURRENT TIME</button>
+            </div>
+        )
+    }
+
+
     return (
         <>
          <form onSubmit={handleVideUrlSubmit}>
@@ -42,7 +72,8 @@ export default function YoutubeLinkInput(props) {
             <button type="submit" className="btn btn-primary">Video Url</button> 
         </form>
 
-        <h1>VIDEO ID: {videoID}</h1>
+        { videoID != null ? <YoutubeIframeComponents/> : null}
+        <h5 className="text-warning">{t}</h5>
         </>
     )
 }
