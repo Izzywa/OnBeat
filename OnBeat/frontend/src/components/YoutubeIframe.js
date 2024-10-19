@@ -42,7 +42,7 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
     }
 
     function RenderAfterReady() {
-        return (
+      /*  return (
             <>
          <button className="btn btn-primary" onClick={click}>DURATION</button>
          <button className="btn btn-primary" onClick={time}>CURRENT TIME</button>
@@ -50,7 +50,10 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
          <h4>{x}</h4>
          <h4>{new Date(t * 1000).toISOString().slice(11,19)}</h4>
             </>
-        )
+        ) */
+       return (
+        <></>
+       )
     }
 
     function handleError(){

@@ -14,4 +14,67 @@ html, body {
   cursor: pointer;
 }
 
+#expand-menu {
+  position: fixed;
+  bottom: 1.5em;
+  right: 1em;
+}
+#expand-menu.hide .add-content-menu .content-menu-toggle a {
+  transform: none !important;
+}
+#expand-menu.hide .add-content-menu span {
+  transform: translateY(-2.5em) !important;
+}
+#expand-menu .add-content-menu {
+  z-index: 100;
+}
+#expand-menu .add-content-menu .content-menu-toggle a {
+  transform: rotate(45deg);
+  transition: all 0.4s ease;
+}
+#expand-menu .add-content-menu .content-menu-toggle, #expand-menu .add-content-menu span a {
+  height: 2.5em;
+  width: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #212121;
+  aspect-ratio: 1/0.8660254038;
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+}
+#expand-menu .add-content-menu .content-menu-toggle {
+  background: #ffab00;
+  z-index: 100;
+}
+#expand-menu .add-content-menu span {
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+#expand-menu .add-content-menu span:nth-child(2) {
+  transform: translateY(-5.1em);
+}
+#expand-menu .add-content-menu span:nth-child(3) {
+  transform: translateX(-2em) translateY(-3.8em);
+}
+#expand-menu .add-content-menu span:nth-child(4) {
+  transform: translateX(-2em) translateY(-1.2em);
+}
+#expand-menu .add-content-menu span a {
+  background: #ffd54f;
+}
+
+/*#expand-1 {
+  transform: translateY(-5.1em);
+  all span translatey(-2.5em) to hide behind
+
+
+#expand-2 {
+  transform: translateX(-2em) translateY(-3.8em);
+}
+
+#expand-3 {
+  transform: translateX(-2em) translateY(-1.2em);
+}*/
+
 /*# sourceMappingURL=index.css.map */

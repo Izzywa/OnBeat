@@ -1,5 +1,10 @@
 //sass --watch input.scss output.css
 
+$orange-primary: #ffab00;
+$orange-light: #ffd54f;
+$dark: #212121;
+
+
 html, body {
     height: 100%;
     margin: 0;
@@ -16,3 +21,74 @@ html, body {
     cursor: pointer;
 }
 
+#expand-menu {
+  position: fixed;
+  bottom: 1.5em;
+  right: 1em;
+
+  &.hide{
+    .add-content-menu {
+      .content-menu-toggle a {
+        transform: none !important;
+      }
+        span{
+        transform: translateY(-2.5em) !important;
+      }
+    }
+  }
+
+  .add-content-menu{
+    z-index: 100;
+
+    .content-menu-toggle a {
+      transform: rotate(45deg);
+      transition: all 0.4s ease;
+    }
+    .content-menu-toggle, span a {
+      height: 2.5em;
+      width: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $dark;
+      aspect-ratio: 1/cos(30deg);
+      clip-path: polygon(50% -50%,100% 50%,50% 150%,0 50%);
+    }
+
+    .content-menu-toggle {
+      background: $orange-primary;
+      z-index: 100;
+    }
+
+    span {
+      position: absolute;
+      z-index: -1;
+      transition: all 0.3s ease;
+      &:nth-child(2) {
+        transform: translateY(-5.1em);
+      }
+      &:nth-child(3) {
+        transform: translateX(-2em) translateY(-3.8em);
+      }
+      &:nth-child(4) {
+        transform: translateX(-2em) translateY(-1.2em);
+      }
+      a {
+        background: $orange-light;
+      }
+    }
+  }
+}
+
+/*#expand-1 {
+  transform: translateY(-5.1em);
+  all span translatey(-2.5em) to hide behind
+
+
+#expand-2 {
+  transform: translateX(-2em) translateY(-3.8em);
+}
+
+#expand-3 {
+  transform: translateX(-2em) translateY(-1.2em);
+}*/
