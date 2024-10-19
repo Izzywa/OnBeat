@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import YoutubeLinkInput from "./YoutubeLinkInput";
+import NavBar from "./NavBar";
 
 
 export default function CreateNote(props) {
@@ -20,9 +21,12 @@ export default function CreateNote(props) {
      },[]) */
 
     return(
-    <div id='1' className="container">
+        <>
+        <NavBar />
+         <div id='1' className="container">
         <h1>CREATE NOTE COMPONENT</h1>
         <YoutubeLinkInput />
     </div>
+        </>
     )
 }

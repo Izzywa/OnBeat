@@ -5,8 +5,7 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
 
    // const vidref = useRef();
     const opts = {
-        height: '390',
-      width: '640',
+      width: '100%',
       playerVars: {
         autoplay: 0
       },
@@ -45,7 +44,6 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
     function RenderAfterReady() {
         return (
             <>
-             <h1>{currentTime}</h1>
          <button className="btn btn-primary" onClick={click}>DURATION</button>
          <button className="btn btn-primary" onClick={time}>CURRENT TIME</button>
          <button className="btn btn-primary" onClick={seek}>SEEK TO 30s</button>
@@ -60,14 +58,13 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
     }
 
     return (
-    <div className="my-2 container">
-         <YouTube 
-         ref={ref}
-         videoId={props.id} 
-         opts={opts} 
-         onReady={onReady} 
+    <div className="my-2">
+        <YouTube className="ratio ratio-16x9"
+         ref={ref} videoId={props.id} 
+         opts={opts} onReady={onReady} 
          onError={handleError}
          onPlay={handlePlay}/>
+
 
          { ready ? <RenderAfterReady/>:null}
     </div>
