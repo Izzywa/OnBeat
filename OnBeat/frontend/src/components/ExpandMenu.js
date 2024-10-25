@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState, } from "react";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
@@ -15,20 +15,29 @@ export default function ExpandMenu(props) {
             setNavClassName('')
         }
     }
+
+    function handle() {
+        alert('clicked')
+    }
+
+    /*<span id="expand-1" style={props.NoteIconStyle}>
+    <a><EditNoteIcon/></a>
+    </span>*/
+
     return(
-        <nav id="expand-menu" className={navClassName}>
+        <nav id="expand-menu" className={navClassName} style={props.ExpandMenuStyle}>
             <div className="add-content-menu">
                 <div className="content-menu-toggle" onClick={toggleOpen}>
                     <a><AddCircleIcon /></a>
                 </div>
-                <span id="expand-1">
-                    <a><EditNoteIcon/></a>
+                <span style={props.NoteIconStyle}>
+                <a><EditNoteIcon/></a>
                 </span>
-                <span id="expand-2">
+                <span style={props.TimeIconStyle}>
                     <a><MoreTimeIcon/></a>
                 </span>
-                <span id="expand-3">
-                    <a><YouTubeIcon/></a>
+                <span style={props.YouTubeIconStyle}>
+                    <a><YouTubeIcon onClick={props.handleYoutubeBtnClicked}/></a>
                 </span>
             </div>
         </nav>

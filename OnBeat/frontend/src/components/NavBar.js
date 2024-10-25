@@ -37,10 +37,6 @@ export default function NavBar(props) {
         )
     }
 
-    function popup() {
-        alert('world clicked')
-    }
-
 
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -56,7 +52,7 @@ export default function NavBar(props) {
         <Link className="nav-link" to="/">Home</Link>
       </li>
       <li className="nav-item">
-        <a className="nav-link" onClick={handleLogout}>logout</a>
+        <a className="nav-link" onClick={handleLogout}>Logout</a>
       </li>
       <Dropdown />
     </ul>

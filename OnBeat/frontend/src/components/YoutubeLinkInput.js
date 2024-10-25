@@ -37,35 +37,6 @@ export default function YoutubeLinkInput(props) {
         }
     }
 
-    /*
-    const [x, setX] = useState(null)
-    function click() {
-        console.log(IframeRef)
-        IframeRef.current.internalPlayer.getDuration().then(response => setX(response))
-        console.log(x)
-    }
-
-    const [t, setT] = useState(null);
-    function getCurrentTime() {
-        IframeRef.current.internalPlayer.getCurrentTime().then(response => setT(response))
-    }
-
-    function handleReady() {
-        console.log(IframeRef.current)
-    }
-
-    function YoutubeIframeComponents() {
-        return(
-            <div>
-                <YoutubeIframe id={videoID} ref={IframeRef}/>
-                <button className="btn btn-success" onClick={click}>DURATION</button>
-                <button className="btn btn-dark" onClick={getCurrentTime}>CURRENT TIME</button>
-            </div>
-        )
-    }
-
-*/
-
     return (
         <>
          <form onSubmit={handleVideUrlSubmit}>
