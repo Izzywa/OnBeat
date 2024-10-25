@@ -1,9 +1,11 @@
-import React, { useEffect, createContext, useContext,} from "react";
+import React, { useState, createContext, useContext,} from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
  
 export const AuthProvider = ({children}) => {
+
+    const [pageName, setPageName] = useState('')
 
     const nav = useNavigate();
 
@@ -29,7 +31,7 @@ export const AuthProvider = ({children}) => {
     const isAuth = user
 
     return (
-        <AuthContext.Provider value={{ login, logout, isAuth }}>
+        <AuthContext.Provider value={{ login, logout, isAuth, pageName, setPageName }}>
             {children}
         </AuthContext.Provider>
     );

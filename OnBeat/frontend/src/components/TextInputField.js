@@ -15,6 +15,7 @@ const TextInputField =  forwardRef(function TextInputField(props, ref) {
         <div className="form-group">
         <label className="form-label" htmlFor={id}>{props.field}</label>
         <input 
+        autoFocus={props.autoFocus}
         ref={ref}
         type={props.type} 
         className={props.error ? "form-control is-invalid": "form-control"}

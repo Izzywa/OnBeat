@@ -3,7 +3,7 @@ import { useAuth } from "./AuthContext";
 import { Link } from "react-router-dom";
 
 export default function NavBar(props) {
-    const { logout } = useAuth();
+    const { logout, pageName } = useAuth();
 
     function handleLogout() {
         logout();
@@ -25,7 +25,7 @@ export default function NavBar(props) {
         return (
             <li className="nav-item dropdown">
         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          More
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <DropdownItem label='Create Note' link="/create-note"/>
@@ -39,24 +39,24 @@ export default function NavBar(props) {
 
 
     return(
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-  <Link className="navbar-brand" to="/">USERNAME</Link>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
-  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <h4 id="nav-page-name">{pageName}</h4>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
 
-  <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul className="navbar-nav mr-auto">
-      <li className="nav-item active">
-        <Link className="nav-link" to="/">Home</Link>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" onClick={handleLogout}>Logout</a>
-      </li>
-      <Dropdown />
-    </ul>
-  </div>
-</nav>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/">Home</Link>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" onClick={handleLogout}>Logout</a>
+          </li>
+          <Dropdown />
+        </ul>
+      </div>
+    </nav>
     )
 }

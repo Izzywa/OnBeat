@@ -1,6 +1,8 @@
 html, body {
   height: 100%;
   margin: 0;
+  background: #212121;
+  color: #ede7f6;
 }
 
 #main, #app {
@@ -64,6 +66,20 @@ html, body {
 }
 #expand-menu .add-content-menu span a {
   background: #ffd54f;
+}
+
+#nav-page-name {
+  color: #ede7f6;
+}
+
+.submit-btn {
+  background: #7e57c2;
+  color: #ede7f6;
+}
+
+.cancel-icon {
+  position: absolute;
+  color: #7e57c2;
 }
 
 /*# sourceMappingURL=index.css.map */

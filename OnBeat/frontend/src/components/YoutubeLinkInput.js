@@ -1,7 +1,6 @@
 import React, {useRef, useState, useCallback} from "react";
 import TextInputField from "./TextInputField";
 import YoutubeIframe from "./YoutubeIframe";
-import YouTube from "react-youtube";
 
 export default function YoutubeLinkInput(props) {
     const videoUrl = useRef()
@@ -37,15 +36,20 @@ export default function YoutubeLinkInput(props) {
         }
     }
 
+    function VideoUrlInput() {
+        return (
+            <form onSubmit={handleVideUrlSubmit}>
+            <TextInputField field="Youtube Video Url" type="text" placeholder="Insert Youtube URL" ref={videoUrl} 
+                message={UrlValidation.message} error={UrlValidation.error} autoFocus={true}/>
+            <button type="submit" className="btn submit-btn">Submit Video URL</button> 
+        </form>
+        )
+    }
+
     return (
         <>
-         <form onSubmit={handleVideUrlSubmit}>
-            <TextInputField field="Youtube Video Url" type="text" placeholder="Insert Youtube URL" ref={videoUrl} 
-                message={UrlValidation.message} error={UrlValidation.error}/>
-            <button type="submit" className="btn btn-primary">Video Url</button> 
-        </form>
 
-        { videoID != null ? <YoutubeIframe id={videoID} ref={IframeRef}/> : null}
+        { videoID != null ? <YoutubeIframe id={videoID} ref={IframeRef} setVideoID={setVideoID}/> : <VideoUrlInput/>}
         </>
     )
 }

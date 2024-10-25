@@ -41,6 +41,10 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
         ref.current.internalPlayer.seekTo(30);
     }
 
+    function handleChangeVideo() {
+        props.setVideoID(null)
+    }
+
     function RenderAfterReady() {
       /*  return (
             <>
@@ -52,7 +56,7 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
             </>
         ) */
        return (
-        <></>
+        <button className="btn submit-btn" onClick={handleChangeVideo}>Change Video</button>
        )
     }
 

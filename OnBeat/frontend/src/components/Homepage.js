@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect} from "react";
 import { useAuth } from "./AuthContext";
-import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 
 export default function Homepage(props) {
+    const { setPageName } = useAuth();
+
+    useEffect(() => {
+        setPageName('Homepage')
+    })
     
     return(
     <div>

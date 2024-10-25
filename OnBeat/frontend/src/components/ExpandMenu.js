@@ -3,6 +3,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import SaveIcon from '@mui/icons-material/Save';
+import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 
 export default function ExpandMenu(props) {
 
@@ -16,10 +18,6 @@ export default function ExpandMenu(props) {
         }
     }
 
-    function handle() {
-        alert('clicked')
-    }
-
     /*<span id="expand-1" style={props.NoteIconStyle}>
     <a><EditNoteIcon/></a>
     </span>*/
@@ -31,13 +29,23 @@ export default function ExpandMenu(props) {
                     <a><AddCircleIcon /></a>
                 </div>
                 <span style={props.NoteIconStyle}>
-                <a><EditNoteIcon/></a>
-                </span>
-                <span style={props.TimeIconStyle}>
-                    <a><MoreTimeIcon/></a>
+                <a><EditNoteIcon onClick={props.handleNoteBtnClicked}/></a>
                 </span>
                 <span style={props.YouTubeIconStyle}>
-                    <a><YouTubeIcon onClick={props.handleYoutubeBtnClicked}/></a>
+                    <a>
+                        {props.insertYoutubeLink ? <DoDisturbIcon onClick={props.handleYoutubeBtnClicked} className="cancel-icon" style={{fontSize: 28}}/> : null }
+                        <YouTubeIcon onClick={props.handleYoutubeBtnClicked}/></a>
+                </span>
+
+                {props.insertYoutubeLink ? 
+                <span style={props.TimeIconStyle}>
+                <a><MoreTimeIcon onClick={props.handleTimestampBtnClicked}/></a>
+                </span>
+                : null
+                }
+                
+                <span style={props.SaveIconStyle}>
+                    <a><SaveIcon onClick={props.handleSaveBtnClicked}/></a>
                 </span>
             </div>
         </nav>
