@@ -40,8 +40,8 @@ export default function YoutubeLinkInput(props) {
         return (
             <form onSubmit={handleVideUrlSubmit}>
             <TextInputField field="Youtube Video Url" type="text" placeholder="Insert Youtube URL" ref={videoUrl} 
-                message={UrlValidation.message} error={UrlValidation.error} autoFocus={true}/>
-            <button type="submit" className="btn submit-btn">Submit Video URL</button> 
+                message={UrlValidation.message} error={UrlValidation.error}/>
+            <button type="submit" className="btn submit-btn">Submit</button> 
         </form>
         )
     }
@@ -49,7 +49,7 @@ export default function YoutubeLinkInput(props) {
     return (
         <>
 
-        { videoID != null ? <YoutubeIframe id={videoID} ref={IframeRef} setVideoID={setVideoID}/> : <VideoUrlInput/>}
+        { videoID != null ? <YoutubeIframe id={videoID} ref={IframeRef} setVideoID={setVideoID} setInsertTimestamp={props.setInsertTimestamp}/> : <VideoUrlInput/>}
         </>
     )
 }

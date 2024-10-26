@@ -16,6 +16,9 @@ export default function CreateNote(props) {
     const [insertTimestamp, setInsertTimestamp] = useState(false)
 
     function handleYoutubeBtnClicked() {
+        if (insertYoutubeLink === true) {
+            setInsertTimestamp(false)
+        }
         setInsertYoutubeLink(!insertYoutubeLink)
     }
 
@@ -37,22 +40,26 @@ export default function CreateNote(props) {
     return(
         <>
         <NavBar />
-        <div className="container mt-2">
-        <div className="input-group input-group-lg">
-        <span className="input-group-text" id="title">Title</span>
-        <input type="text" className="form-control" aria-label="Title Input" aria-describedby="title"></input>
+        <div className="container mt-2 mb-3">
+            <div className="input-group input-group-lg my-3">
+                <span className="input-group-text" id="title">Title</span>
+                <input type="text" className="form-control" aria-label="Title Input" aria-describedby="title"></input>
+            </div>
+            
+            {insertYoutubeLink ? <YoutubeLinkInput setInsertTimestamp={setInsertTimestamp}/>: null}
+
+            <div className="my-1">
+                <ExpandMenu 
+                insertYoutubeLink={insertYoutubeLink}
+                handleYoutubeBtnClicked={handleYoutubeBtnClicked} 
+                handleNoteBtnClicked={handleNoteBtnClicked}
+                insertTimestamp={insertTimestamp}
+                handleTimestampBtnClicked={handleTimestampBtnClicked}
+                NoteIconStyle={IconStyle("2.5")}
+                YouTubeIconStyle={IconStyle("5")} TimeIconStyle={IconStyle("7.5")}/>
+            </div>
         </div>
-        {insertYoutubeLink ? <YoutubeLinkInput setInsertTimestamp={setInsertTimestamp}/>: null}
-        <div className="my-1">
-            <ExpandMenu 
-            insertYoutubeLink={insertYoutubeLink}
-            handleYoutubeBtnClicked={handleYoutubeBtnClicked} 
-            handleNoteBtnClicked={handleNoteBtnClicked}
-            handleTimestampBtnClicked={handleTimestampBtnClicked}
-            NoteIconStyle={IconStyle("2.5")}
-            YouTubeIconStyle={IconStyle("5")} TimeIconStyle={IconStyle("7.5")}/>
-        </div>
-        </div>
+        <footer style={{height: "5em"}}></footer>
         </>
     )
 }

@@ -37,13 +37,13 @@ export default function ExpandMenu(props) {
                         <YouTubeIcon onClick={props.handleYoutubeBtnClicked}/></a>
                 </span>
 
-                {props.insertYoutubeLink ? 
+                {props.insertTimestamp ? 
                 <span style={props.TimeIconStyle}>
                 <a><MoreTimeIcon onClick={props.handleTimestampBtnClicked}/></a>
                 </span>
                 : null
                 }
-                
+
                 <span style={props.SaveIconStyle}>
                     <a><SaveIcon onClick={props.handleSaveBtnClicked}/></a>
                 </span>

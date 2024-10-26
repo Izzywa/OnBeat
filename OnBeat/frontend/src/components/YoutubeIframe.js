@@ -17,6 +17,7 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
     function onReady(event) {
         event.target.pauseVideo();
         setReady(true);
+        props.setInsertTimestamp(true)
     }
 
     function handlePlay(event) {
@@ -43,6 +44,7 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
 
     function handleChangeVideo() {
         props.setVideoID(null)
+        props.setInsertTimestamp(false)
     }
 
     function RenderAfterReady() {
