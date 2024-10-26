@@ -41,7 +41,7 @@ export default function YoutubeLinkInput(props) {
             <form onSubmit={handleVideUrlSubmit}>
             <TextInputField field="Youtube Video Url" type="text" placeholder="Insert Youtube URL" ref={videoUrl} 
                 message={UrlValidation.message} error={UrlValidation.error}/>
-            <button type="submit" className="btn submit-btn">Submit</button> 
+            <button type="submit" className="btn submit-btn">Submit Url</button> 
         </form>
         )
     }

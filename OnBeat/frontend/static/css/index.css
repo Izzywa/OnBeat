@@ -82,4 +82,15 @@ html, body {
   color: #7e57c2;
 }
 
+.markdown-display {
+  border: 0.5px solid #ede7f6;
+  border-radius: 5px;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+pre {
+  background: #ede7f6;
+}
+
 /*# sourceMappingURL=index.css.map */

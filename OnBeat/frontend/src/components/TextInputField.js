@@ -4,16 +4,16 @@ const TextInputField =  forwardRef(function TextInputField(props, ref) {
 
   let id;
   if (props.field.split(' ').length == 1) {
-    id = `Register${props.field}Input`
+    id = `${props.field}Input`
   } else {
-    id = `Register${props.field.split(' ').join('-')}Input`
+    id = `${props.field.split(' ').join('-')}Input`
   }
     const describedby = `${props.field}Help`
 
     return (
     
         <div className="form-group">
-        <label className="form-label" htmlFor={id}>{props.field}</label>
+        {props.field ? <label className="form-label" htmlFor={id}>{props.field}</label>: null }
         <input 
         autoFocus={props.autoFocus}
         ref={ref}

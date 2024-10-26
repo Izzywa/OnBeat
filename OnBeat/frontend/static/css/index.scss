@@ -100,3 +100,15 @@ html, body {
   position: absolute;
   color: $purple-light;
 }
+
+.markdown-display {
+  border: 0.5px solid $light;
+  border-radius: 5px;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+pre {
+  background: $light;
+}
+

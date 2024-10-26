@@ -3,6 +3,7 @@ import YoutubeLinkInput from "./YoutubeLinkInput";
 import NavBar from "./NavBar";
 import ExpandMenu from "./ExpandMenu";
 import { useAuth } from "./AuthContext";
+import NewNoteInput from "./NewNoteInput";
 
 
 export default function CreateNote(props) {
@@ -46,7 +47,9 @@ export default function CreateNote(props) {
                 <input type="text" className="form-control" aria-label="Title Input" aria-describedby="title"></input>
             </div>
             
-            {insertYoutubeLink ? <YoutubeLinkInput setInsertTimestamp={setInsertTimestamp}/>: null}
+            {insertYoutubeLink ? <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp}/></div>: null}
+
+            <NewNoteInput/>
 
             <div className="my-1">
                 <ExpandMenu 
