@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import ExpandMenu from "./ExpandMenu";
 import { useAuth } from "./AuthContext";
 import NewNoteInput from "./NewNoteInput";
-import zIndex from "@mui/material/styles/zIndex";
+import NewTimestamp from "./NewTimestamp";
 
 
 export default function CreateNote(props) {
@@ -30,14 +30,13 @@ export default function CreateNote(props) {
     }
 
     function handleTimestampBtnClicked() {
-        console.log('Timestamp btn')
+       console.log('timestamp')
     }
 
     function IconStyle(X, Y = "-2.5", Z = "1") {
 
         return {
              transform: `translateY(${Y}em) translateX(${X}em)`,
-             zIndex: `${Z}`
         }
     }
 
@@ -53,6 +52,7 @@ export default function CreateNote(props) {
             {insertYoutubeLink ? <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp}/></div>: null}
 
             <NewNoteInput/>
+            <NewTimestamp/>
 
             <div className="my-1">
                 <ExpandMenu 

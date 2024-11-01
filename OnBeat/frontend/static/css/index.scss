@@ -6,6 +6,22 @@ $dark: #212121;
 $purple-light: #7e57c2;
 $light: #ede7f6;
 
+%primary-btn{
+  background: $purple-light;
+  color: $light;
+}
+
+%primary-btn-hover{
+  background: $light;
+  color: $purple-light;
+}
+
+%secondary-btn {
+  background: $orange-primary;
+  color: $dark;
+}
+
+
 
 html, body {
     height: 100%;
@@ -69,7 +85,7 @@ html, body {
 
     span {
       position: absolute;
-      //z-index: 1;
+      z-index: 1;
       transition: all 0.3s ease;
       /*&:nth-child(2) {
         transform: translateY(-5.1em);
@@ -92,8 +108,11 @@ html, body {
 }
 
 .submit-btn {
-  background: $purple-light;
-  color: $light;
+  @extend %primary-btn;
+}
+
+.submit-btn-secondary {
+  @extend %secondary-btn;
 }
 
 .cancel-icon {
@@ -106,6 +125,8 @@ html, body {
   border-radius: 5px;
   margin-top: 0.2em;
   margin-bottom: 0.2em;
+  padding-left: 10px;
+  padding-right: 5px;
 }
 
 pre {
