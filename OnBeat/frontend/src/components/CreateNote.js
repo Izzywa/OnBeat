@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import ExpandMenu from "./ExpandMenu";
 import { useAuth } from "./AuthContext";
 import NewNoteInput from "./NewNoteInput";
+import zIndex from "@mui/material/styles/zIndex";
 
 
 export default function CreateNote(props) {
@@ -15,6 +16,7 @@ export default function CreateNote(props) {
 
     const [insertYoutubeLink, setInsertYoutubeLink]  = useState(false)
     const [insertTimestamp, setInsertTimestamp] = useState(false)
+    const [insertNote, setInsetNote] = useState(false)
 
     function handleYoutubeBtnClicked() {
         if (insertYoutubeLink === true) {
@@ -31,10 +33,11 @@ export default function CreateNote(props) {
         console.log('Timestamp btn')
     }
 
-    function IconStyle(X) {
+    function IconStyle(X, Y = "-2.5", Z = "1") {
 
         return {
-             transform: `translateY(-2.5em) translateX(${X}em)`
+             transform: `translateY(${Y}em) translateX(${X}em)`,
+             zIndex: `${Z}`
         }
     }
 
@@ -59,7 +62,8 @@ export default function CreateNote(props) {
                 insertTimestamp={insertTimestamp}
                 handleTimestampBtnClicked={handleTimestampBtnClicked}
                 NoteIconStyle={IconStyle("2.5")}
-                YouTubeIconStyle={IconStyle("5")} TimeIconStyle={IconStyle("7.5")}/>
+                YouTubeIconStyle={IconStyle("5")} 
+                TimeIconStyle={IconStyle("7.5")}/>
             </div>
         </div>
         <footer style={{height: "5em"}}></footer>

@@ -69,7 +69,7 @@ html, body {
 
     span {
       position: absolute;
-      z-index: 0;
+      //z-index: 1;
       transition: all 0.3s ease;
       /*&:nth-child(2) {
         transform: translateY(-5.1em);
