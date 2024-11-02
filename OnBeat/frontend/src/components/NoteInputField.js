@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import MarkdownDisplay from "./MarkdownDisplay";
 
-function NoteInputField(props) {
-    const content = useRef();
+const NoteInputField = forwardRef(function NoteInputField(props, ref) {
     const [displayTextAsMarkdown, setDisplayTextAsMarkdown] = useState(true)
 
     function handleMarkdownDisplayToggle() {
@@ -13,7 +12,7 @@ function NoteInputField(props) {
     const [markdwonText, setMarkdownText] = useState('');
 
     function handleTextChange(event) {
-        setMarkdownText(content.current.value)
+        setMarkdownText(ref.current.value)
         event.target.style.height = 'auto'
         event.target.style.height = `${event.target.scrollHeight}px`
     }
@@ -24,7 +23,7 @@ function NoteInputField(props) {
             <div className={displayTextAsMarkdown && markdwonText.trim().length != 0 ? "col-sm-6 col-12": "col-12"}>
                 <div className="textarea-div">
                 <textarea className="form-control" placeholder="Start writing in markdown" id="content input"
-            ref={content} onChange={handleTextChange}
+            ref={ref} onChange={handleTextChange}
             ></textarea>  
                 </div>
             </div>
@@ -32,6 +31,6 @@ function NoteInputField(props) {
         <button className="btn submit-btn mr-1 my-1" onClick={handleMarkdownDisplayToggle}>{ displayTextAsMarkdown ? "Hide" : "Show"} Markdown Display</button>
         </>
     )
-}
+});
 
 export default NoteInputField

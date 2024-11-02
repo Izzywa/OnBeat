@@ -3,7 +3,6 @@ import YouTube from 'react-youtube';
 
 const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
 
-   // const vidref = useRef();
     const opts = {
       width: '100%',
       playerVars: {
@@ -11,8 +10,20 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
       },
     }
 
+    const errorMessage = {
+        2: 'Invalid Video Id.',
+        5: 'Content cannot be played in HTML5 player.',
+        100: 'Video not found.',
+        101: 'Video not allowed to be played in embedded player.',
+        150: 'Video not allowed to be played in embedded player.'
+    }
+
     const [ready, setReady] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0)
+
+    const [error, setError] = useState({
+        error: false,
+        message: ''
+    })
 
     function onReady(event) {
         event.target.pauseVideo();
@@ -62,12 +73,24 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
        )
     }
 
-    function handleError(){
-        alert('error')
+    function handleError(event){
+        setError({
+            error: true,
+            message: errorMessage[event.data]
+        })
+    }
+
+    function ErrorAlert(){
+        return (
+            <div className="alert alert-danger container" role="alert">
+            {error.message}
+            </div>
+        )
     }
 
     return (
     <div className="my-2">
+        {error.error ? <ErrorAlert/> : null}
         <YouTube className="ratio ratio-16x9"
          ref={ref} videoId={props.id} 
          opts={opts} onReady={onReady} 

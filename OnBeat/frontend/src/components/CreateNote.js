@@ -16,7 +16,8 @@ export default function CreateNote(props) {
 
     const [insertYoutubeLink, setInsertYoutubeLink]  = useState(false)
     const [insertTimestamp, setInsertTimestamp] = useState(false)
-    const [insertNote, setInsetNote] = useState(false)
+    const [insertNote, setInsertNote] = useState(false)
+    const [timestampInput, setTimestampInput] = useState(false)
 
     function handleYoutubeBtnClicked() {
         if (insertYoutubeLink === true) {
@@ -26,11 +27,11 @@ export default function CreateNote(props) {
     }
 
     function handleNoteBtnClicked() {
-        console.log('Note btn')
+        setInsertNote(true)
     }
 
     function handleTimestampBtnClicked() {
-       console.log('timestamp')
+        setTimestampInput(true)
     }
 
     function IconStyle(X, Y = "-2.5", Z = "1") {
@@ -51,8 +52,8 @@ export default function CreateNote(props) {
             
             {insertYoutubeLink ? <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp}/></div>: null}
 
-            <NewNoteInput/>
-            <NewTimestamp/>
+            {insertNote ? <NewNoteInput setInsertNote={setInsertNote}/>: null }
+            {timestampInput ? <NewTimestamp/> : null }
 
             <div className="my-1">
                 <ExpandMenu 
