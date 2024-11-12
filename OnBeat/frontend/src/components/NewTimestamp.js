@@ -56,9 +56,9 @@ export default function NewTimestamp(props) {
 
     function handleInsertTimestamp() {
 
-        const hour = parseFloat(HourRef.current.value);
-        const min = parseFloat(MinRef.current.value);
-        const sec = parseFloat(SecRef.current.value);
+        const hour = HourRef.current.value != "" ? parseFloat(HourRef.current.value) : 0;
+        const min = MinRef.current.value != "" ? parseFloat(MinRef.current.value) : 0;
+        const sec = SecRef.current.value != "" ? parseFloat(SecRef.current.value) : 0;
 
         const validTimestamp = validateTimestamp(hour, min, sec)
         if (validTimestamp) {
