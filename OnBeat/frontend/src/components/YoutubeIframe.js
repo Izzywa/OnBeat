@@ -29,7 +29,6 @@ export default function YoutubeIframe(props) {
         event.target.pauseVideo();
         setReady(true);
         props.setInsertTimestamp(true)
-        //props.IframeRef.current.internalPlayer.getCurrentTime().then(response => console.log(response))
     }
 
     function handlePlay(event) {
@@ -60,15 +59,6 @@ export default function YoutubeIframe(props) {
     }
 
     function RenderAfterReady() {
-      /*  return (
-            <>
-         <button className="btn btn-primary" onClick={click}>DURATION</button>
-         <button className="btn btn-primary" onClick={time}>CURRENT TIME</button>
-         <button className="btn btn-primary" onClick={seek}>SEEK TO 30s</button>
-         <h4>{x}</h4>
-         <h4>{new Date(t * 1000).toISOString().slice(11,19)}</h4>
-            </>
-        ) */
        return (
         <button className="btn submit-btn" onClick={handleChangeVideo}>Change Video</button>
        )

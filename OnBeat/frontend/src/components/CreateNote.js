@@ -42,6 +42,10 @@ export default function CreateNote(props) {
         }
     }
 
+    function handleDeleteTimestamp() {
+        console.log('delete timestamp')
+    }
+
     return(
         <>
         <NavBar />
@@ -54,7 +58,7 @@ export default function CreateNote(props) {
             {insertYoutubeLink ? <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}/></div>: null}
 
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote}/>: null }
-            {timestampInput ? <NewTimestamp IframeRef={IframeRef}/> : null }
+            {timestampInput ? <NewTimestamp IframeRef={IframeRef} handleDeleteTimestamp={handleDeleteTimestamp}/> : null }
 
             <div className="my-1">
                 <ExpandMenu 
