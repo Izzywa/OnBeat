@@ -29,30 +29,58 @@ export default function NewTimestamp(props) {
         })
     },[])
 
-    function validateTimestamp(event, time) { 
+    function validateTimestamp(hour, min, sec) { 
+        setError({
+            hour: !(hour >= 0),
+            min: !(min >= 0),
+            sec: !(sec >= 0)
+        })
+
+        let totalSec = hour * 3600 + min * 60 + sec
+
+        if (totalSec > duration) {
+            setError({
+                hour: true,
+                min: true,
+                sec: true
+            })
+        }
+
+        if (hour >= 0 && min >= 0 && sec >= 0 && totalSec <= duration) {
+            return true
+        } else {
+            return false
+        }
     }
 
 
     function handleInsertTimestamp() {
+
         const hour = parseFloat(HourRef.current.value);
         const min = parseFloat(MinRef.current.value);
         const sec = parseFloat(SecRef.current.value);
 
-        console.log(hour)
-        console.log(min)
+        const validTimestamp = validateTimestamp(hour, min, sec)
+        if (validTimestamp) {
+            console.log('valid timestamp')
+        } else {
+            console.log('error')
+        }
     }
     return(
         <div>
             <div className="d-flex">
-            <div className="mr-1" style={{ width: "3.7em"}}>
+            <div className="mr-1" style={{ width: "6em"}}>
                 <TextInputField field="Hour" type="number" placeholder="" ref={HourRef}
-                error={error.hour} message={'Invalid'} onChange={(e) => {validateTimestamp(e, 'hour')}}/>
+                error={error.hour} message={'Invalid'} />
             </div>
-            <div className="mr-1" style={{ width: "3.7em"}}><TextInputField field="Min" type="number" placeholder="" ref={MinRef}
-            error={error.min}message={'Invalid'} onChange={(e) => {validateTimestamp(e, 'min')}}/>
+            <div className="mr-1" style={{ width: "6em"}}>
+                <TextInputField field="Min" type="number" placeholder="" ref={MinRef}
+            error={error.min}message={'Invalid'} />
             </div>
-            <div style={{ width: "3.7em"}}><TextInputField field="Sec" type="number" placeholder="" ref={SecRef}
-            error={error.sec} message={'Invalid'} onChange={(e) => {validateTimestamp(e, 'sec')}}/>
+            <div style={{ width: "6em"}}>
+                <TextInputField field="Sec" type="number" placeholder="" ref={SecRef}
+            error={error.sec} message={'Invalid'}/>
             </div>
             </div>
 

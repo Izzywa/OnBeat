@@ -20,7 +20,6 @@ const TextInputField =  forwardRef(function TextInputField(props, ref) {
         type={props.type} 
         className={props.error ? "form-control is-invalid": "form-control"}
         id={id}
-        onChange={props.onChange}
         aria-describedby={describedby} 
         placeholder={props.placeholder}>
 
