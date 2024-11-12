@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import YoutubeLinkInput from "./YoutubeLinkInput";
 import NavBar from "./NavBar";
 import ExpandMenu from "./ExpandMenu";
@@ -9,10 +9,11 @@ import NewTimestamp from "./NewTimestamp";
 
 export default function CreateNote(props) {
     const { setPageName } = useAuth();
+    const IframeRef = useRef();
 
     useEffect(() => {
         setPageName('Create Note')
-    })
+    },[])
 
     const [insertYoutubeLink, setInsertYoutubeLink]  = useState(false)
     const [insertTimestamp, setInsertTimestamp] = useState(false)
@@ -50,10 +51,10 @@ export default function CreateNote(props) {
                 <input type="text" className="form-control" aria-label="Title Input" aria-describedby="title"></input>
             </div>
             
-            {insertYoutubeLink ? <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp}/></div>: null}
+            {insertYoutubeLink ? <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}/></div>: null}
 
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote}/>: null }
-            {timestampInput ? <NewTimestamp/> : null }
+            {timestampInput ? <NewTimestamp IframeRef={IframeRef}/> : null }
 
             <div className="my-1">
                 <ExpandMenu 

@@ -9,7 +9,6 @@ export default function YoutubeLinkInput(props) {
         'error': false,
         'message': ''
     })
-    const IframeRef = useRef();
 
     function handleVideUrlSubmit(event) {
         event.preventDefault();
@@ -49,7 +48,7 @@ export default function YoutubeLinkInput(props) {
     return (
         <>
 
-        { videoID != null ? <YoutubeIframe id={videoID} ref={IframeRef} setVideoID={setVideoID} setInsertTimestamp={props.setInsertTimestamp}/> : <VideoUrlInput/>}
+        { videoID != null ? <YoutubeIframe id={videoID} IframeRef={props.IframeRef} setVideoID={setVideoID} setInsertTimestamp={props.setInsertTimestamp}/> : <VideoUrlInput/>}
         </>
     )
 }

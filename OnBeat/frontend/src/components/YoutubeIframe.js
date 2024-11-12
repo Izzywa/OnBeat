@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect, forwardRef} from "react";
 import YouTube from 'react-youtube';
 
-const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
+export default function YoutubeIframe(props) {
 
     const opts = {
       width: '100%',
@@ -29,28 +29,29 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
         event.target.pauseVideo();
         setReady(true);
         props.setInsertTimestamp(true)
+        //props.IframeRef.current.internalPlayer.getCurrentTime().then(response => console.log(response))
     }
 
     function handlePlay(event) {
-        const interval = setInterval(() => {
+       /* const interval = setInterval(() => {
             setCurrentTime(event.target.getCurrentTime())
         }, 100);
 
-        return () => clearInterval(interval);
+        return () => clearInterval(interval);*/
     }
 
     const [x, setX] = useState(null)
     function click() {
-        ref.current.internalPlayer.getDuration().then(response => setX(response))
+       // ref.current.internalPlayer.getDuration().then(response => setX(response))
     }
 
     const [t, setT] = useState(null);
     function time(){
-        ref.current.internalPlayer.getCurrentTime().then(response => setT(response))
+       // ref.current.internalPlayer.getCurrentTime().then(response => setT(response))
     }
 
     function seek() {
-        ref.current.internalPlayer.seekTo(30);
+       // ref.current.internalPlayer.seekTo(30);
     }
 
     function handleChangeVideo() {
@@ -92,7 +93,7 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
     <div className="my-2">
         {error.error ? <ErrorAlert/> : null}
         <YouTube className="ratio ratio-16x9"
-         ref={ref} videoId={props.id} 
+         ref={props.IframeRef} videoId={props.id} 
          opts={opts} onReady={onReady} 
          onError={handleError}
          onPlay={handlePlay}/>
@@ -101,6 +102,4 @@ const YoutubeIframe = forwardRef(function YoutubeIframe(props, ref) {
          { ready ? <RenderAfterReady/>:null}
     </div>
     )
-});
-
-export default YoutubeIframe
+}

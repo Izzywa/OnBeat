@@ -19,9 +19,12 @@ const TextInputField =  forwardRef(function TextInputField(props, ref) {
         ref={ref}
         type={props.type} 
         className={props.error ? "form-control is-invalid": "form-control"}
-        id={id} 
+        id={id}
+        onChange={props.onChange}
         aria-describedby={describedby} 
-        placeholder={props.placeholder}></input>
+        placeholder={props.placeholder}>
+
+        </input>
         <div className="invalid-feedback">
         {props.error ? props.message: null}
       </div>
