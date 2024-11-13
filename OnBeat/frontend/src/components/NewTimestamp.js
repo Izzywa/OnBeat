@@ -1,6 +1,7 @@
 import React, {useRef, useEffect, useState} from "react";
 import TextInputField from "./TextInputField";
 import NoteInputField from "./NoteInputField";
+import { v4 as uuid } from "uuid";
 
 
 export default function NewTimestamp(props) {
@@ -58,10 +59,10 @@ export default function NewTimestamp(props) {
 
     function handleInsertTimestamp() {
         const text = TimestampNote.current.value;
-
         const hour = HourRef.current.value != "" ? parseFloat(HourRef.current.value) : 0;
         const min = MinRef.current.value != "" ? parseFloat(MinRef.current.value) : 0;
         const sec = SecRef.current.value != "" ? parseFloat(SecRef.current.value) : 0;
+        let timestampObject = {};
 
         const validTimestamp = validateTimestamp(hour, min, sec)
 
@@ -73,6 +74,22 @@ export default function NewTimestamp(props) {
 
         if (validTimestamp && text.trim() != "") {
             console.log('valid timestamp')
+            timestampObject = {
+                id: (props.edit ? props.id : uuid()),
+                type: 'timestamp',
+                content: {
+                    timestamp: hour * 3600 + min * 60 + sec,
+                    text: text
+                }
+
+            }
+
+            if (props.edit) {
+                console.log('edit')
+            } else {
+                props.setNoteList([...props.noteList, timestampObject]);
+                props.setTimestampInput(false)
+            }
         } else {
             console.log('error')
         }

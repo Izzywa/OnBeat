@@ -6,6 +6,7 @@ import { useAuth } from "./AuthContext";
 import NewNoteInput from "./NewNoteInput";
 import NewTimestamp from "./NewTimestamp";
 import DisplayNoteComponent from "./DisplayNoteComponent";
+import DisplayTimestamp from "./DisplayTimestamp";
 
 
 export default function CreateNote(props) {
@@ -63,7 +64,8 @@ export default function CreateNote(props) {
             )
         } else {
             return (
-                <h1>none</h1>
+                <DisplayTimestamp index={index} id={value.id}
+                noteList={noteList} setNoteList={setNoteList}/>
             )
         }
     }
@@ -91,7 +93,7 @@ export default function CreateNote(props) {
             }
 
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
-            {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput}/> : null }
+            {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/> : null }
 
             <div className="my-1">
                 <ExpandMenu 
