@@ -28,6 +28,7 @@ html, body {
     margin: 0;
     background: $dark;
     color: $light;
+    word-wrap: break-word;
 }
 
 #main, #app {
@@ -127,6 +128,7 @@ html, body {
   margin-bottom: 0.2em;
   padding-left: 10px;
   padding-right: 5px;
+  word-wrap: break-all;
 }
 
 pre {

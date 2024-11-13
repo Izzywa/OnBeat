@@ -12,6 +12,8 @@ export default function NewTimestamp(props) {
     const Vid = props.IframeRef.current.internalPlayer
     let [duration, setDuration] = useState(null);
 
+    const [noteError, setNoteError] = useState(false);
+
     const [error, setError] = useState({
         hour: false,
         min: false,
@@ -55,17 +57,29 @@ export default function NewTimestamp(props) {
 
 
     function handleInsertTimestamp() {
+        const text = TimestampNote.current.value;
 
         const hour = HourRef.current.value != "" ? parseFloat(HourRef.current.value) : 0;
         const min = MinRef.current.value != "" ? parseFloat(MinRef.current.value) : 0;
         const sec = SecRef.current.value != "" ? parseFloat(SecRef.current.value) : 0;
 
         const validTimestamp = validateTimestamp(hour, min, sec)
-        if (validTimestamp) {
+
+        if (text.trim() != "") {
+            setNoteError(false)
+        } else {
+            setNoteError(true)
+        }
+
+        if (validTimestamp && text.trim() != "") {
             console.log('valid timestamp')
         } else {
             console.log('error')
         }
+    }
+
+    function handleDeleteTimestamp() {
+        props.setTimestampInput(false)
     }
     return(
         <div>
@@ -84,11 +98,11 @@ export default function NewTimestamp(props) {
             </div>
             </div>
 
-            <NoteInputField ref={TimestampNote} />
+            <NoteInputField ref={TimestampNote} error={noteError} setError={setNoteError}/>
 
         <div>
-        <button type="button" className="btn submit-btn mr-1" onClick={handleInsertTimestamp}>Save Timestamp</button>
-        <button type="button" className="btn submit-btn-secondary" onClick={props.handleDeleteTimestamp}>Delete Timestamp</button></div>
+        <button type="button" className="btn submit-btn mr-1" disabled={noteError ? true : false} onClick={handleInsertTimestamp}>Save Timestamp</button>
+        <button type="button" className="btn submit-btn-secondary" onClick={handleDeleteTimestamp}>Cancel</button></div>
         </div>
     )
 }

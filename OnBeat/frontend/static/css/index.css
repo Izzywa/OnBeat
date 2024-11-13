@@ -13,6 +13,7 @@ html, body {
   margin: 0;
   background: #212121;
   color: #ede7f6;
+  word-wrap: break-word;
 }
 
 #main, #app {
@@ -94,6 +95,7 @@ html, body {
   margin-bottom: 0.2em;
   padding-left: 10px;
   padding-right: 5px;
+  word-wrap: break-all;
 }
 
 pre {

@@ -36,7 +36,7 @@ export default function CreateNote(props) {
         setTimestampInput(true)
     }
 
-    function IconStyle(X, Y = "-2.5", Z = "1") {
+    function IconStyle(X, Y = "-2.5") {
 
         return {
              transform: `translateY(${Y}em) translateX(${X}em)`,
@@ -44,52 +44,6 @@ export default function CreateNote(props) {
     }
 
     const [noteList, setNoteList] = useState([]);
-
-    function handleDeleteTimestamp() {
-        console.log('delete timestamp')
-    }
-
-
-    /*
-    const [list, setList] = useState([
-        {
-            id: 'key',
-            type: 'note/timestamp',
-            content: {
-                heading: 'if note',
-                timestamp: 'if timestamp',
-                text: 'both'
-            }
-        }
-    ])
-
-    function ExampleRender(props) {
-        return(<>
-            <h1>Example {props.x}</h1>
-            <button className="btn submit-btn-secondary" onClick={() => {deleteX(props.x)}}>delete</button>
-            </>
-        )
-    }
-    const [x, setX] = useState([])
-    function handleX() {
-        setX( x => [...x, x + 1])
-    }
-    function deleteX(value) {
-        var y = x.filter(item => item != value);
-        setX(y)
-    }
-
-    {
-                x.map((value, key) => {
-                    return(
-                        <div key={key} id={key}>
-                            <ExampleRender x={value} key={key}/>
-                        </div>
-                    )
-                })
-            }
-            <button className="btn submit-btn" onClick={handleX}>click</button>
-        */
 
     function handleDeleteNote(id) {
         var templist = noteList.filter(item => item.id != id)
@@ -137,7 +91,7 @@ export default function CreateNote(props) {
             }
 
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
-            {timestampInput ? <NewTimestamp IframeRef={IframeRef} handleDeleteTimestamp={handleDeleteTimestamp}/> : null }
+            {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput}/> : null }
 
             <div className="my-1">
                 <ExpandMenu 

@@ -63,6 +63,6 @@ export default function NewNoteInput(props) {
         <NoteInputField ref={content} setError={setError} error={error}/>
         <button className="btn submit-btn" disabled={error ? true : false} onClick={handleSaveNote}>Save Note</button>
         <button className="btn submit-btn-secondary my-1" onClick={props.edit ? handleCancelEdit : handleDeleteNote}>
-            {props.edit ? "Cancel Edit" : "Delete"}</button>
+            {props.edit ? "Cancel Edit" : "Cancel"}</button>
     </div>)
 }
