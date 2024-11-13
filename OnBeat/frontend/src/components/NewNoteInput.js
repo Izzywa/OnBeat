@@ -58,7 +58,7 @@ export default function NewNoteInput(props) {
         props.setEdit(false)
     }
 
-    return( <div className="my-2">
+    return( <div className="my-1">
         <TextInputField field="" type="text" placeholder="Insert Heading" ref={subheading} />
         <NoteInputField ref={content} setError={setError} error={error}/>
         <button className="btn submit-btn" disabled={error ? true : false} onClick={handleSaveNote}>Save Note</button>

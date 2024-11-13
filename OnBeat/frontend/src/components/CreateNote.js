@@ -63,9 +63,12 @@ export default function CreateNote(props) {
                 </>
             )
         } else {
-            return (
+            return (<>
                 <DisplayTimestamp index={index} id={value.id}
-                noteList={noteList} setNoteList={setNoteList}/>
+                noteList={noteList} setNoteList={setNoteList} setTimestampInput={setTimestampInput}
+                IframeRef={IframeRef}/>
+                <button className="btn submit-btn-secondary" onClick={() => {handleDeleteNote(value.id)}}>Delete Timestamp</button>
+                </>
             )
         }
     }

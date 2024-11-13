@@ -21,15 +21,25 @@ export default function NewTimestamp(props) {
         sec: false
     })
 
+    let currentTime = null;
+
     useEffect(() => {
-        let currentTime = null;
         Vid.getDuration().then(response => setDuration(response))
-        Vid.getCurrentTime().then(response => {
-            currentTime = new Date (response * 1000).toISOString().slice(11,19).split(':')
+        if (props.edit) {
+            TimestampNote.current.value = props.text
+
+            currentTime = new Date (props.timestamp * 1000).toISOString().slice(11,19).split(':')
             HourRef.current.value = parseInt(currentTime[0])
             MinRef.current.value = parseInt(currentTime[1])
             SecRef.current.value = parseInt(currentTime[2])
-        })
+        } else {
+            Vid.getCurrentTime().then(response => {
+                currentTime = new Date (response * 1000).toISOString().slice(11,19).split(':')
+                HourRef.current.value = parseInt(currentTime[0])
+                MinRef.current.value = parseInt(currentTime[1])
+                SecRef.current.value = parseInt(currentTime[2])
+            })
+        }
     },[])
 
     function validateTimestamp(hour, min, sec) { 
@@ -73,7 +83,6 @@ export default function NewTimestamp(props) {
         }
 
         if (validTimestamp && text.trim() != "") {
-            console.log('valid timestamp')
             timestampObject = {
                 id: (props.edit ? props.id : uuid()),
                 type: 'timestamp',
@@ -85,21 +94,30 @@ export default function NewTimestamp(props) {
             }
 
             if (props.edit) {
+
                 console.log('edit')
+                const index = props.noteList.findIndex((item) => item.id === props.id)
+                let templist = props.noteList
+                templist[index] = timestampObject
+                props.setNoteList(templist)
+                props.setEdit(false)
+                
             } else {
                 props.setNoteList([...props.noteList, timestampObject]);
                 props.setTimestampInput(false)
             }
-        } else {
-            console.log('error')
         }
     }
 
     function handleDeleteTimestamp() {
         props.setTimestampInput(false)
     }
+
+    function handleCancelEdit() {
+        props.setEdit(false)
+    }
     return(
-        <div>
+        <div className="my-1">
             <div className="d-flex">
             <div className="mr-1" style={{ width: "6em"}}>
                 <TextInputField field="Hour" type="number" placeholder="" ref={HourRef}
@@ -119,7 +137,7 @@ export default function NewTimestamp(props) {
 
         <div>
         <button type="button" className="btn submit-btn mr-1" disabled={noteError ? true : false} onClick={handleInsertTimestamp}>Save Timestamp</button>
-        <button type="button" className="btn submit-btn-secondary" onClick={handleDeleteTimestamp}>Cancel</button></div>
+        <button type="button" className="btn submit-btn-secondary" onClick={props.edit ? handleCancelEdit : handleDeleteTimestamp}>Cancel</button></div>
         </div>
     )
 }
