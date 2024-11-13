@@ -4,9 +4,9 @@ import remarkGfm from 'remark-gfm'
 
 export default function MarkdownDisplay(props) {
     return (
-        <div className="col-sm-6 col-12 container">
+        <div className={props.className ? props.className : "col-sm-6 col-12 container"}>
             <div className="markdown-display">
-                <ReactMarkdown children={props.markdwonText} remarkPlugins={[remarkGfm]}/>
+                <ReactMarkdown children={props.markdownText} remarkPlugins={[remarkGfm]}/>
                 </div>
             </div>
     )

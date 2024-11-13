@@ -5,7 +5,7 @@ import ExpandMenu from "./ExpandMenu";
 import { useAuth } from "./AuthContext";
 import NewNoteInput from "./NewNoteInput";
 import NewTimestamp from "./NewTimestamp";
-import { darken } from "@mui/material";
+import DisplayNoteComponent from "./DisplayNoteComponent";
 
 
 export default function CreateNote(props) {
@@ -91,6 +91,29 @@ export default function CreateNote(props) {
             <button className="btn submit-btn" onClick={handleX}>click</button>
         */
 
+    function handleDeleteNote(id) {
+        var templist = noteList.filter(item => item.id != id)
+        setNoteList(templist)
+    }
+
+    function DisplayNote({ value }) {
+        const index = noteList.findIndex((item) => item.id === value.id)
+
+        if (value.type === "note") {
+            return (
+                <>
+                <DisplayNoteComponent index={index} id={value.id}
+                noteList={noteList} setNoteList={setNoteList}/>
+                <button className="btn submit-btn-secondary" onClick={() => {handleDeleteNote(value.id)}}>Delete Note</button>
+                </>
+            )
+        } else {
+            return (
+                <h1>none</h1>
+            )
+        }
+    }
+
     return(
         <>
         <NavBar />
@@ -101,6 +124,17 @@ export default function CreateNote(props) {
             </div>
             
             {insertYoutubeLink ? <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}/></div>: null}
+
+            {   noteList.length > 0 ?
+                noteList.map((value, key) => {
+                    return(
+                        <div key={key}>
+                        <DisplayNote value={value}/>
+                        </div>
+                    )
+                })
+                : null
+            }
 
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
             {timestampInput ? <NewTimestamp IframeRef={IframeRef} handleDeleteTimestamp={handleDeleteTimestamp}/> : null }

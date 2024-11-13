@@ -26,7 +26,7 @@ const NoteInputField = forwardRef(function NoteInputField(props, ref) {
 
     return (<>
         <div className="row">
-            { markdwonText.trim().length != 0 && displayTextAsMarkdown ? <MarkdownDisplay markdwonText={markdwonText} />: null }
+            { markdwonText.trim().length != 0 && displayTextAsMarkdown ? <MarkdownDisplay markdownText={markdwonText} />: null }
             <div className={displayTextAsMarkdown && markdwonText.trim().length != 0 ? "col-sm-6 col-12": "col-12"}>
                 <div className="textarea-div">
                 <textarea className={props.error ? "form-control is-invalid" : "form-control"} placeholder="Start writing in markdown" id="content input"
