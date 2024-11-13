@@ -87,7 +87,7 @@ export default function NewTimestamp(props) {
             <NoteInputField ref={TimestampNote} />
 
         <div>
-        <button type="button" className="btn submit-btn mr-1" onClick={handleInsertTimestamp}>Insert Timestamp</button>
+        <button type="button" className="btn submit-btn mr-1" onClick={handleInsertTimestamp}>Save Timestamp</button>
         <button type="button" className="btn submit-btn-secondary" onClick={props.handleDeleteTimestamp}>Delete Timestamp</button></div>
         </div>
     )
