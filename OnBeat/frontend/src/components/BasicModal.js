@@ -28,10 +28,10 @@ export default function BasicModal(props) {
           return(
             <div>
             <div className='d-inline'>
-            <button className='btn submit-btn-secondary my-1 mr-1'>Keep Notes</button>
+            <button className='btn submit-btn-secondary my-1 mr-1' onClick={props.handleKeepTimestampsNotes}>Keep Notes</button>
             </div>
             <div className='d-inline'>
-              <button className='btn submit-btn-secondary'>Delete Notes</button>
+              <button className='btn submit-btn-secondary' onClick={props.handleDeleteAllTimestamps}>Delete Notes</button>
             </div>
             </div>
           )
@@ -43,10 +43,10 @@ export default function BasicModal(props) {
     });
     return(
       <div className='modal-buttons'>
+        {RenderButton()}
         <div className='d-inline'>
         <button className='btn submit-btn' onClick={handleClose}>Close</button>
         </div>
-        {RenderButton()}
       </div>
     )
   }

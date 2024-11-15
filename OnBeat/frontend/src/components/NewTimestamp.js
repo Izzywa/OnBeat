@@ -94,8 +94,6 @@ export default function NewTimestamp(props) {
             }
 
             if (props.edit) {
-
-                console.log('edit')
                 const index = props.noteList.findIndex((item) => item.id === props.id)
                 let templist = props.noteList
                 templist[index] = timestampObject

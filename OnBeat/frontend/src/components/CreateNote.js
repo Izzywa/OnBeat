@@ -57,6 +57,43 @@ export default function CreateNote(props) {
         }
     }
 
+    function handleKeepTimestampsNotes() {
+
+        let templist = noteList;
+        let newObject = {}
+
+        for (let i = 0; i < templist.length; i++) {
+            if (templist[i].type == 'timestamp') {
+                newObject = {
+                    id: templist[i].id,
+                    type: 'note',
+                    content: {
+                        heading: '',
+                        text: templist[i].content.text
+                    }
+                }
+                templist[i] = newObject
+            }
+        }
+
+        setNoteList(templist)
+        setInsertYoutubeLink(false)
+        setTimestampInput(false)
+        setInsertTimestamp(false)
+        setOpenModal(false)
+
+    }
+
+    function handleDeleteAllTimestamps() {
+        setInsertYoutubeLink(false)
+        setTimestampInput(false)
+        setInsertTimestamp(false)
+        setOpenModal(false)
+
+        var templist = noteList.filter(item => item.type != "timestamp")
+        setNoteList(templist)
+    }
+
     function handleDeleteNote(id) {
         var templist = noteList.filter(item => item.id != id)
         setNoteList(templist)
@@ -109,7 +146,11 @@ export default function CreateNote(props) {
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
             {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/> : null }
 
-            <BasicModal openModal={openModal} setOpenModal={setOpenModal} messageHeading={messageHeading} messageText={messageText} buttons={"removeTimestamps"}/>
+            <BasicModal openModal={openModal} setOpenModal={setOpenModal} 
+            messageHeading={messageHeading} messageText={messageText} 
+            buttons={"removeTimestamps"}
+            handleDeleteAllTimestamps={handleDeleteAllTimestamps}
+            handleKeepTimestampsNotes={handleKeepTimestampsNotes}/>
 
             <div className="my-1">
                 <ExpandMenu 
