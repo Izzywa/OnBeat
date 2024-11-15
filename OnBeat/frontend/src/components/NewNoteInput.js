@@ -61,8 +61,8 @@ export default function NewNoteInput(props) {
     return( <div className="my-1">
         <TextInputField field="" type="text" placeholder="Insert Heading" ref={subheading} />
         <NoteInputField ref={content} setError={setError} error={error}/>
-        <button className="btn submit-btn" disabled={error ? true : false} onClick={handleSaveNote}>Save Note</button>
-        <button className="btn submit-btn-secondary my-1" onClick={props.edit ? handleCancelEdit : handleDeleteNote}>
+        <button className="btn submit-btn mx-1" disabled={error ? true : false} onClick={handleSaveNote}>Save Note</button>
+        <button className="btn submit-btn-secondary mx-1" onClick={props.edit ? handleCancelEdit : handleDeleteNote}>
             {props.edit ? "Cancel Edit" : "Cancel"}</button>
     </div>)
 }

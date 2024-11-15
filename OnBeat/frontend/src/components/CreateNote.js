@@ -26,11 +26,10 @@ export default function CreateNote(props) {
     const [openModal, setOpenModal] = useState(false)
 
     const messageHeading = "Remove Youtube Video?"
-    const messageText = "Timestamps will be removed if the Youtube video is removed. Are you certain?"
+    const messageText = "Timestamps will be removed if the Youtube video is removed. Would you like keep the notes from the timestamps?"
 
     function handleYoutubeBtnClicked() {
         if (insertYoutubeLink === true) {
-            setInsertTimestamp(false)
             const timestampNoteCount = noteList.filter(item => item.type == 'timestamp').length
             if (timestampNoteCount === 0) {
                 setInsertYoutubeLink(false)

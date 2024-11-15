@@ -135,9 +135,8 @@ export default function NewTimestamp(props) {
 
             <NoteInputField ref={TimestampNote} error={noteError} setError={setNoteError}/>
 
-        <div>
-        <button type="button" className="btn submit-btn mr-1" disabled={noteError ? true : false} onClick={handleInsertTimestamp}>Save Timestamp</button>
-        <button type="button" className="btn submit-btn-secondary" onClick={props.edit ? handleCancelEdit : handleDeleteTimestamp}>Cancel</button></div>
-        </div>
+
+        <button type="button" className="btn submit-btn mx-1" disabled={noteError ? true : false} onClick={handleInsertTimestamp}>Save Timestamp</button>
+        <button type="button" className="btn submit-btn-secondary mx-1" onClick={props.edit ? handleCancelEdit : handleDeleteTimestamp}>Cancel</button></div>
     )
 }

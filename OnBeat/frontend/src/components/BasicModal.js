@@ -26,11 +26,14 @@ export default function BasicModal(props) {
       switch (true) {
         case props.buttons === "removeTimestamps":
           return(
-            <>
-            <div className='col-6'>
-            <button className='btn submit-btn-secondary'>Delete</button>
+            <div>
+            <div className='d-inline'>
+            <button className='btn submit-btn-secondary my-1 mr-1'>Keep Notes</button>
             </div>
-            </>
+            <div className='d-inline'>
+              <button className='btn submit-btn-secondary'>Delete Notes</button>
+            </div>
+            </div>
           )
         default:
             return(
@@ -39,8 +42,8 @@ export default function BasicModal(props) {
       }
     });
     return(
-      <div className='row g-2'>
-        <div className='col-6'>
+      <div className='modal-buttons'>
+        <div className='d-inline'>
         <button className='btn submit-btn' onClick={handleClose}>Close</button>
         </div>
         {RenderButton()}
