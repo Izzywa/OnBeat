@@ -7,6 +7,7 @@ import NewNoteInput from "./NewNoteInput";
 import NewTimestamp from "./NewTimestamp";
 import DisplayNoteComponent from "./DisplayNoteComponent";
 import DisplayTimestamp from "./DisplayTimestamp";
+import BasicModal from "./BasicModal";
 
 
 export default function CreateNote(props) {
@@ -21,12 +22,32 @@ export default function CreateNote(props) {
     const [insertTimestamp, setInsertTimestamp] = useState(false)
     const [insertNote, setInsertNote] = useState(false)
     const [timestampInput, setTimestampInput] = useState(false)
+    const [noteList, setNoteList] = useState([]);
+    const [openModal, setOpenModal] = useState(false)
 
     function handleYoutubeBtnClicked() {
         if (insertYoutubeLink === true) {
             setInsertTimestamp(false)
+            const timestampNoteCount = noteList.filter(item => item.type == 'timestamp').length
+            if (timestampNoteCount === 0) {
+                setInsertYoutubeLink(false)
+                setTimestampInput(false)
+            } else {
+                setOpenModal(true)
+                console.log('pop up modal here to warn all timestamp will be removed')
+            }
+        } else {
+            setInsertYoutubeLink(true)
         }
-        setInsertYoutubeLink(!insertYoutubeLink)
+        //setInsertYoutubeLink(!insertYoutubeLink)
+    }
+
+    function ModalButtons() {
+        return(
+            <div>
+                <button className="btn submit-btn">Close</button>
+            </div>
+        )
     }
 
     function handleNoteBtnClicked() {
@@ -43,8 +64,6 @@ export default function CreateNote(props) {
              transform: `translateY(${Y}em) translateX(${X}em)`,
         }
     }
-
-    const [noteList, setNoteList] = useState([]);
 
     function handleDeleteNote(id) {
         var templist = noteList.filter(item => item.id != id)
@@ -97,6 +116,8 @@ export default function CreateNote(props) {
 
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
             {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/> : null }
+
+            <BasicModal openModal={openModal} setOpenModal={setOpenModal}/>
 
             <div className="my-1">
                 <ExpandMenu 

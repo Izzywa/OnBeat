@@ -140,3 +140,20 @@ pre {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.spinner-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10em;
+  color: $orange-light;
+}
+
+.show {
+  display: flex;
+}
+
+.no-show {
+  display: none;
+}

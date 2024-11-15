@@ -108,4 +108,21 @@ pre {
   cursor: pointer;
 }
 
+.spinner-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10em;
+  color: #ffd54f;
+}
+
+.show {
+  display: flex;
+}
+
+.no-show {
+  display: none;
+}
+
 /*# sourceMappingURL=index.css.map */

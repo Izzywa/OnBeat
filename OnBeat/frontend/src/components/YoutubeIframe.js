@@ -25,8 +25,11 @@ export default function YoutubeIframe(props) {
         message: ''
     })
 
+    const [show, setShow] = useState(false)
+
     function onReady(event) {
         event.target.pauseVideo();
+        setShow(true)
         setReady(true);
         props.setInsertTimestamp(true)
     }
@@ -79,15 +82,30 @@ export default function YoutubeIframe(props) {
         )
     }
 
+    function LoadingSpinner() {
+        //{show ? "spinner-div no-show": "spinner-div show"}
+        return(
+            <div className={ show ? "spinner-div no-show" : "spinner-div show"}>
+                <div className="d-inline">
+                <span>Loading...</span>
+                </div>
+            <div className="spinner-grow" role="status">
+            </div>
+            </div>
+        )
+    }
+
     return (
     <div className="my-2">
         {error.error ? <ErrorAlert/> : null}
+
+        <LoadingSpinner />
+
         <YouTube className="ratio ratio-16x9"
          ref={props.IframeRef} videoId={props.id} 
          opts={opts} onReady={onReady} 
          onError={handleError}
          onPlay={handlePlay}/>
-
 
          { ready ? <RenderAfterReady/>:null}
     </div>
