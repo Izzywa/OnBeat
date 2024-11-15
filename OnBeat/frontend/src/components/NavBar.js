@@ -29,9 +29,9 @@ export default function NavBar(props) {
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <DropdownItem label='Create Note' link="/create-note"/>
-          <DropdownItem label="world" />
+          <DropdownItem label="Open Note" />
           <div className="dropdown-divider"></div>
-          <DropdownItem label="other" />
+          <DropdownItem label="Search" />
         </div>
       </li>
         )

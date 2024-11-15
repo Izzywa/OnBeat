@@ -5,6 +5,9 @@ from requests import post
 from dotenv import load_dotenv
 load_dotenv()
 
+# import uuid
+# str(uuid.uuid4())
+
 def validateUsername(username):
     if not username:
         return {
