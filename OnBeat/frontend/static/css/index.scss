@@ -122,12 +122,8 @@ html, body {
 }
 
 .markdown-display {
-  border: 0.5px solid $light;
-  border-radius: 5px;
   margin-top: 0.2em;
   margin-bottom: 0.2em;
-  padding-left: 10px;
-  padding-right: 5px;
   word-wrap: break-all;
 }
 
@@ -156,4 +152,9 @@ pre {
 
 .no-show {
   display: none;
+}
+
+.note-subheading {
+  border-left: 5px solid $purple-light;
+  padding-left: 0.5em;
 }
