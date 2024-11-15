@@ -37,7 +37,6 @@ export default function CreateNote(props) {
                 setTimestampInput(false)
             } else {
                 setOpenModal(true)
-                console.log('pop up modal here to warn all timestamp will be removed')
             }
         } else {
             setInsertYoutubeLink(true)
@@ -111,7 +110,7 @@ export default function CreateNote(props) {
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
             {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/> : null }
 
-            <BasicModal openModal={openModal} setOpenModal={setOpenModal} messageHeading={messageHeading} messageText={messageText}/>
+            <BasicModal openModal={openModal} setOpenModal={setOpenModal} messageHeading={messageHeading} messageText={messageText} buttons={"removeTimestamps"}/>
 
             <div className="my-1">
                 <ExpandMenu 

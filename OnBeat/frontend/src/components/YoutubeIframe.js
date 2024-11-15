@@ -100,12 +100,13 @@ export default function YoutubeIframe(props) {
         {error.error ? <ErrorAlert/> : null}
 
         <LoadingSpinner />
-
+        <div className={show ? "": "no-show"}>
         <YouTube className="ratio ratio-16x9"
          ref={props.IframeRef} videoId={props.id} 
          opts={opts} onReady={onReady} 
          onError={handleError}
          onPlay={handlePlay}/>
+         </div>
 
          { ready ? <RenderAfterReady/>:null}
     </div>

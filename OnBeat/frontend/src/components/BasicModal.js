@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -22,9 +22,28 @@ export default function BasicModal(props) {
   }
 
   function ModalButtons() {
+    const RenderButton = useCallback(() => {
+      switch (true) {
+        case props.buttons === "removeTimestamps":
+          return(
+            <>
+            <div className='col-6'>
+            <button className='btn submit-btn-secondary'>Delete</button>
+            </div>
+            </>
+          )
+        default:
+            return(
+              <></>
+            )
+      }
+    });
     return(
-      <div>
+      <div className='row g-2'>
+        <div className='col-6'>
         <button className='btn submit-btn' onClick={handleClose}>Close</button>
+        </div>
+        {RenderButton()}
       </div>
     )
   }
