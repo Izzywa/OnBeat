@@ -17,8 +17,6 @@ const style = {
 };
 
 export default function BasicModal(props) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   function handleClose() {
     props.setOpenModal(false)
   }
@@ -26,7 +24,7 @@ export default function BasicModal(props) {
   function ModalButtons() {
     return(
       <div>
-        <button className='btn submit-btn'>Close</button>
+        <button className='btn submit-btn' onClick={handleClose}>Close</button>
       </div>
     )
   }
@@ -41,10 +39,10 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {props.messageHeading}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            {props.messageText}
           </Typography>
           <ModalButtons />
         </Box>

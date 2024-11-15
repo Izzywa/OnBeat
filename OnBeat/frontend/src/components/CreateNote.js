@@ -25,6 +25,9 @@ export default function CreateNote(props) {
     const [noteList, setNoteList] = useState([]);
     const [openModal, setOpenModal] = useState(false)
 
+    const messageHeading = "Remove Youtube Video?"
+    const messageText = "Timestamps will be removed if the Youtube video is removed. Are you certain?"
+
     function handleYoutubeBtnClicked() {
         if (insertYoutubeLink === true) {
             setInsertTimestamp(false)
@@ -39,15 +42,6 @@ export default function CreateNote(props) {
         } else {
             setInsertYoutubeLink(true)
         }
-        //setInsertYoutubeLink(!insertYoutubeLink)
-    }
-
-    function ModalButtons() {
-        return(
-            <div>
-                <button className="btn submit-btn">Close</button>
-            </div>
-        )
     }
 
     function handleNoteBtnClicked() {
@@ -117,7 +111,7 @@ export default function CreateNote(props) {
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
             {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/> : null }
 
-            <BasicModal openModal={openModal} setOpenModal={setOpenModal}/>
+            <BasicModal openModal={openModal} setOpenModal={setOpenModal} messageHeading={messageHeading} messageText={messageText}/>
 
             <div className="my-1">
                 <ExpandMenu 

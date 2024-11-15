@@ -85,7 +85,7 @@ export default function YoutubeIframe(props) {
     function LoadingSpinner() {
         //{show ? "spinner-div no-show": "spinner-div show"}
         return(
-            <div className={ show ? "spinner-div no-show" : "spinner-div show"}>
+            <div className={ show ? "spinner-div no-show" : "spinner-div show-flex"}>
                 <div className="d-inline">
                 <span>Loading...</span>
                 </div>

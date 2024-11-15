@@ -1,4 +1,4 @@
-//sass --watch input.scss output.css
+//sass --watch static/css/index.scss static/css/index.css
 
 $orange-primary: #ffab00;
 $orange-light: #ffd54f;
@@ -150,7 +150,7 @@ pre {
   color: $orange-light;
 }
 
-.show {
+.show-flex {
   display: flex;
 }
 
