@@ -32,8 +32,7 @@ export default function CreateNote(props) {
         if (insertYoutubeLink === true) {
             const timestampNoteCount = noteList.filter(item => item.type == 'timestamp').length
             if (timestampNoteCount === 0) {
-                setInsertYoutubeLink(false)
-                setTimestampInput(false)
+                removeYoutubeVideo()
             } else {
                 setOpenModal(true)
             }
@@ -57,6 +56,13 @@ export default function CreateNote(props) {
         }
     }
 
+    function removeYoutubeVideo() {
+        setInsertYoutubeLink(false)
+        setTimestampInput(false)
+        setInsertTimestamp(false)
+        setOpenModal(false)
+    }
+
     function handleKeepTimestampsNotes() {
 
         let templist = noteList;
@@ -77,21 +83,15 @@ export default function CreateNote(props) {
         }
 
         setNoteList(templist)
-        setInsertYoutubeLink(false)
-        setTimestampInput(false)
-        setInsertTimestamp(false)
-        setOpenModal(false)
-
+        removeYoutubeVideo()
     }
 
     function handleDeleteAllTimestamps() {
-        setInsertYoutubeLink(false)
-        setTimestampInput(false)
-        setInsertTimestamp(false)
-        setOpenModal(false)
 
         var templist = noteList.filter(item => item.type != "timestamp")
         setNoteList(templist)
+
+        removeYoutubeVideo()
     }
 
     function handleDeleteNote(id) {
