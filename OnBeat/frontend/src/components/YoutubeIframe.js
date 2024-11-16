@@ -25,36 +25,24 @@ export default function YoutubeIframe(props) {
         message: ''
     })
 
+    useEffect(() => {
+        if (!error.error && ready) {
+            props.setInsertTimestamp(true)
+            props.setYoutubeError(false)
+        } else {
+            props.setInsertTimestamp(false)
+            props.setYoutubeError(true)
+        }
+    }, [error, ready])
+
     const [show, setShow] = useState(false)
 
     function onReady(event) {
         event.target.pauseVideo();
         setShow(true)
         setReady(true);
-        props.setInsertTimestamp(true)
     }
 
-    function handlePlay(event) {
-       /* const interval = setInterval(() => {
-            setCurrentTime(event.target.getCurrentTime())
-        }, 100);
-
-        return () => clearInterval(interval);*/
-    }
-
-    const [x, setX] = useState(null)
-    function click() {
-       // ref.current.internalPlayer.getDuration().then(response => setX(response))
-    }
-
-    const [t, setT] = useState(null);
-    function time(){
-       // ref.current.internalPlayer.getCurrentTime().then(response => setT(response))
-    }
-
-    function seek() {
-       // ref.current.internalPlayer.seekTo(30);
-    }
 
     function handleChangeVideo() {
         props.setVideoID(null)
@@ -62,6 +50,7 @@ export default function YoutubeIframe(props) {
     }
 
     function RenderAfterReady() {
+
        return (
         <button className="btn submit-btn" onClick={handleChangeVideo}>Change Video</button>
        )
@@ -104,8 +93,7 @@ export default function YoutubeIframe(props) {
         <YouTube className="ratio ratio-16x9"
          ref={props.IframeRef} videoId={props.id} 
          opts={opts} onReady={onReady} 
-         onError={handleError}
-         onPlay={handlePlay}/>
+         onError={handleError}/>
          </div>
 
          { ready ? <RenderAfterReady/>:null}

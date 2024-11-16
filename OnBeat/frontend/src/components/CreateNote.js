@@ -24,13 +24,24 @@ export default function CreateNote(props) {
     const [timestampInput, setTimestampInput] = useState(false)
     const [noteList, setNoteList] = useState([]);
     const [openModal, setOpenModal] = useState(false)
+    const [youtubeError, setYoutubeError] = useState(false);
 
-    const messageHeading = "Remove Youtube Video?"
-    const messageText = "Timestamps will be removed if the Youtube video is removed. Would you like keep the notes from the timestamps?"
+    const [modalMessage, setModalMessage] = useState({
+        heading: '',
+        text: '',
+        buttons: null,
+    })
+
 
     function handleYoutubeBtnClicked() {
         if (insertYoutubeLink === true) {
             const timestampNoteCount = noteList.filter(item => item.type == 'timestamp').length
+            setModalMessage({
+                heading: "Remove Youtube Video?",
+                text: "Timestamps will be removed if the Youtube Video is removed. Are you certain?",
+                buttons: "removeTimestamps"
+            })
+
             if (timestampNoteCount === 0) {
                 removeYoutubeVideo()
             } else {
@@ -114,7 +125,8 @@ export default function CreateNote(props) {
             return (<>
                 <DisplayTimestamp index={index} id={value.id}
                 noteList={noteList} setNoteList={setNoteList} setTimestampInput={setTimestampInput}
-                IframeRef={IframeRef}/>
+                IframeRef={IframeRef} youtubeError={youtubeError}
+                setOpenModal={setOpenModal} setModalMessage={setModalMessage}/>
                 <button className="btn submit-btn-secondary" onClick={() => {handleDeleteNote(value.id)}}>Delete Timestamp</button>
                 </>
             )
@@ -130,7 +142,10 @@ export default function CreateNote(props) {
                 <input type="text" className="form-control" aria-label="Title Input" aria-describedby="title"></input>
             </div>
             
-            {insertYoutubeLink ? <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}/></div>: null}
+            {insertYoutubeLink ? 
+            <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}
+            setYoutubeError={setYoutubeError}/></div>
+            : null}
 
             {   noteList.length > 0 ?
                 noteList.map((value, key) => {
@@ -147,8 +162,8 @@ export default function CreateNote(props) {
             {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/> : null }
 
             <BasicModal openModal={openModal} setOpenModal={setOpenModal} 
-            messageHeading={messageHeading} messageText={messageText} 
-            buttons={"removeTimestamps"}
+            messageHeading={modalMessage.heading} messageText={modalMessage.text} 
+            buttons={modalMessage.buttons}
             handleDeleteAllTimestamps={handleDeleteAllTimestamps}
             handleKeepTimestampsNotes={handleKeepTimestampsNotes}/>
 

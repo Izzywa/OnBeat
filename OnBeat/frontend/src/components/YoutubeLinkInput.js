@@ -48,7 +48,11 @@ export default function YoutubeLinkInput(props) {
     return (
         <>
 
-        { videoID != null ? <YoutubeIframe id={videoID} IframeRef={props.IframeRef} setVideoID={setVideoID} setInsertTimestamp={props.setInsertTimestamp}/> : <VideoUrlInput/>}
+        { videoID != null ? 
+        <YoutubeIframe id={videoID} IframeRef={props.IframeRef} 
+        setVideoID={setVideoID} setInsertTimestamp={props.setInsertTimestamp}
+        setYoutubeError={props.setYoutubeError}/> 
+        : <VideoUrlInput/>}
         </>
     )
 }
