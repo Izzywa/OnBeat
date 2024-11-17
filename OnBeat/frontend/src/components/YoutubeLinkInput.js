@@ -1,4 +1,4 @@
-import React, {useRef, useState, useCallback} from "react";
+import React, {useRef, useState, useCallback, useEffect} from "react";
 import TextInputField from "./TextInputField";
 import YoutubeIframe from "./YoutubeIframe";
 
@@ -26,6 +26,8 @@ export default function YoutubeLinkInput(props) {
             } else {
                 setVideoID(url.split('.be/')[1].split('?')[0])
             }
+
+            props.setYoutubeUrl(url)
 
         } else {
             setUrlValidation({

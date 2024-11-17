@@ -50,7 +50,6 @@ export default function YoutubeIframe(props) {
     }
 
     function RenderAfterReady() {
-
        return (
         <button className="btn submit-btn" onClick={handleChangeVideo}>Change Video</button>
        )

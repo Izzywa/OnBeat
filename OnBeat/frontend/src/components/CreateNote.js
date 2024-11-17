@@ -13,6 +13,7 @@ import BasicModal from "./BasicModal";
 export default function CreateNote(props) {
     const { setPageName } = useAuth();
     const IframeRef = useRef();
+    const titleRef = useRef();
 
     useEffect(() => {
         setPageName('Create Note')
@@ -31,6 +32,13 @@ export default function CreateNote(props) {
         text: '',
         buttons: null,
     })
+
+    const [titleError, setTitleError] = useState({
+        error: false,
+        message: ''
+    })
+
+    const [youtubeUrl, setYoutubeUrl] = useState(null)
 
 
     function handleYoutubeBtnClicked() {
@@ -72,6 +80,7 @@ export default function CreateNote(props) {
         setTimestampInput(false)
         setInsertTimestamp(false)
         setOpenModal(false)
+        setYoutubeUrl(null)
     }
 
     function handleKeepTimestampsNotes() {
@@ -133,18 +142,51 @@ export default function CreateNote(props) {
         }
     }
 
+    function handleSaveBtnClicked() {
+        const title = titleRef.current.value.trim()
+        let noteContentObject = {}
+
+        if (title.length <= 0) {
+            setTitleError({
+                error: true,
+                message: "Please fill in the title of the note."
+            })
+        } else if (title.length > 100) {
+            setTitleError({
+                error: true,
+                message: "Title must not be more than 100 characters."
+            })
+        } else {
+            setTitleError({
+                error: false,
+                message: ''
+            })
+            noteContentObject = {
+                title: title,
+                youtubeUrl: youtubeUrl,
+                noteList: noteList
+            }
+            console.log(noteContentObject)
+            
+        }
+
+    }
+
     return(
         <>
         <NavBar />
         <div className="container mt-2 mb-3">
             <div className="input-group input-group-lg my-3">
                 <span className="input-group-text" id="title">Title</span>
-                <input type="text" className="form-control" aria-label="Title Input" aria-describedby="title"></input>
+                <input type="text" className={titleError.error ? "form-control title-input is-invalid" :"form-control title-input"}  
+                aria-label="Title Input" aria-describedby="title"
+                ref={titleRef}></input>
+                <div className="invalid-feedback">{titleError.message}</div>
             </div>
             
             {insertYoutubeLink ? 
             <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}
-            setYoutubeError={setYoutubeError}/></div>
+            setYoutubeError={setYoutubeError} setYoutubeUrl={setYoutubeUrl}/></div>
             : null}
 
             {   noteList.length > 0 ?
@@ -174,6 +216,7 @@ export default function CreateNote(props) {
                 handleNoteBtnClicked={handleNoteBtnClicked}
                 insertTimestamp={insertTimestamp}
                 handleTimestampBtnClicked={handleTimestampBtnClicked}
+                handleSaveBtnClicked={handleSaveBtnClicked}
                 NoteIconStyle={IconStyle("2.5")}
                 YouTubeIconStyle={IconStyle("5")} 
                 TimeIconStyle={IconStyle("7.5")}/>
