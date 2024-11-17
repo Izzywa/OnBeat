@@ -19,10 +19,6 @@ export default function ExpandMenu(props) {
         }
     }
 
-    /*<span id="expand-1" style={props.NoteIconStyle}>
-    <a><EditNoteIcon/></a>
-    </span>*/
-
     return(
         <nav id="expand-menu" className={navClassName} style={props.ExpandMenuStyle}>
             <div className="add-content-menu">
