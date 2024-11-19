@@ -76,3 +76,6 @@ class NoteTestCase(TestCase):
         # test timestamp
         self.assertEqual(note1.timestamp.all().count(), 1, "timestamp count wrong for note1")
         self.assertEqual(note2.timestamp.all().count(), 0, "timestamp count wrong for note2")
+        
+        t = note1.timestamp.first()
+        self.assertEqual(t.timestamp, timedelta(seconds=60), f"timestamp is {t.timestamp} instead of {timedelta(seconds=60)}")
