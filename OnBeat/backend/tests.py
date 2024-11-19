@@ -1,6 +1,10 @@
 from django.db import IntegrityError
 from django.test import TestCase
 from .models import User, Note, NoteContent
+import uuid
+
+def generate_uuid():
+    return str(uuid.uuid4())
 
 # Create your tests here.
 class NoteTestCase(TestCase):
@@ -13,13 +17,9 @@ class NoteTestCase(TestCase):
         note1 = Note.objects.create(user=user1, title="Note1")
         note2 = Note.objects.create(user=user1, title="Note2")
         
-        # create note content
-        content1 = NoteContent.objects.create(subheading="", content="This is content1")
-        content2 = NoteContent.objects.create(subheading="subheading2", content="This is content2")
-        
-        # add note content to note
-        note1.content.add(content1)
-        note1.content.add(content2)
+        #create note content
+        notecontent1 = NoteContent(uuid=generate_uuid, note=note1, subheading="", content="This is content 1.")
+        notecontent1.save()
         
     def test_user_note(self):
         try:
@@ -51,18 +51,13 @@ class NoteTestCase(TestCase):
         except IntegrityError:
             self.assertTrue(True, "Note title must be unique")
             
-            
+           
     def test_note_content(self):
         # test Note content
         user1 = User.objects.get(username="user1")
         note1 = Note.objects.get(user=user1, title="Note1")
         note2 = Note.objects.get(user=user1, title="Note2")
         
-        self.assertEqual(note1.content.all().count(),2, "Content count wrong")
-        note1_content1 = note1.content.first()
-        
-        note2.content.add(note1_content1)
-        self.assertEqual(note2.content.all().count(),1 , "Content count wrong for note 2")
-        note2_content1 = note2.content.first()
-        
-        self.assertEqual(note1_content1, note2_content1, "Not same content")
+        self.assertEqual(note1.content.all().count(),1, "Content count wrong")
+
+        self.assertEqual(note2.content.all().count(),0 , "Content count wrong for note 2")

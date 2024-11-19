@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
+import uuid
 
 # Create your models here.
 
@@ -31,7 +32,8 @@ class Note(models.Model):
         }
 
 class NoteContent(models.Model):
-    note = models.ManyToManyField(Note, related_name="content")
+    uuid = models.TextField(unique=True)
+    note = models.ForeignKey(Note, related_name="content", on_delete=models.CASCADE)
     subheading = models.CharField(blank=True, max_length=100)
     content = models.TextField(blank=False)
     date_created = models.DateField(auto_now_add=True)
@@ -40,9 +42,26 @@ class NoteContent(models.Model):
     def serialize(self):
         return {
             "note_id": self.note.id,
-            "content_id": self.id,
+            "content_uuid": self.uuid,
             "subheading": self.subheading,
             "content": self.content,
             "date_created": self.date_created,
             "date_modified": self.date_modified
         }
+        
+class YoutubeUrl(models.Model):
+    note = models.ForeignKey(Note, related_name="youtubeURL", on_delete=models.CASCADE)
+    url = models.URLField(blank=False)
+    
+    class Meta:
+        unique_together = ("note", "url")
+        
+        
+class NoteTimestamp(models.Model):
+    uuid = models.TextField(unique=True)
+    note = models.ForeignKey(Note, related_name="timestamp", on_delete=models.CASCADE)
+    timestamp = models.DurationField(blank=False)
+    text = models.TextField(blank=False)
+    date_created = models.DateField(auto_now_add=True)
+    date_modified = models.DateField(auto_now=True)
+    
