@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 import uuid
 
@@ -63,3 +64,24 @@ class NoteTimestamp(models.Model):
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
     
+class NoteList(models.Model):
+    NOTE = "note"
+    TIMESTAMP = "timestamp"
+    
+    TYPE_CHOICES = {
+        (NOTE, "note"),
+        (TIMESTAMP, "timestamp")
+    }
+    
+    type = models.CharField(choices=TYPE_CHOICES, max_length=9)
+    index = models.IntegerField(blank=False)
+    note = models.ForeignKey(NoteContent, on_delete=models.CASCADE,blank=True, null=True)
+    timestamp = models.ForeignKey(NoteTimestamp, on_delete=models.CASCADE, blank=True, null=True)
+    
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=Q(type="note", timestamp=None, note__isnull=False) | Q(type="timestamp", note=None, timestamp__isnull=False),
+                name="type and note object does not match"
+            )
+        ]
