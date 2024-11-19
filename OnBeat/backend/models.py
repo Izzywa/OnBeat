@@ -64,6 +64,7 @@ class NoteTimestamp(models.Model):
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
     
+
 class NoteList(models.Model):
     NOTE = "note"
     TIMESTAMP = "timestamp"
@@ -75,13 +76,14 @@ class NoteList(models.Model):
     
     type = models.CharField(choices=TYPE_CHOICES, max_length=9)
     index = models.IntegerField(blank=False)
-    note = models.ForeignKey(NoteContent, on_delete=models.CASCADE,blank=True, null=True)
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name="noteList")
+    content = models.ForeignKey(NoteContent, on_delete=models.CASCADE,blank=True, null=True)
     timestamp = models.ForeignKey(NoteTimestamp, on_delete=models.CASCADE, blank=True, null=True)
     
     class Meta:
         constraints = [
             models.CheckConstraint(
-                check=Q(type="note", timestamp=None, note__isnull=False) | Q(type="timestamp", note=None, timestamp__isnull=False),
+                check=Q(type="note", timestamp=None, content__isnull=False) | Q(type="timestamp", content=None, timestamp__isnull=False),
                 name="type and note object does not match"
             )
-        ]
+        ] 
