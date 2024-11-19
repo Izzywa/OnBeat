@@ -41,7 +41,7 @@ class NoteTestCase(TestCase):
             note1user1 = Note.objects.create(user=user2, title="Note1")
             note1user1.save()
         except IntegrityError:
-            self.fail("Different user not allowe the same note title")
+            self.fail("Different user not allowed the same note title")
         
         # test if note title not unique
         try:
@@ -50,6 +50,7 @@ class NoteTestCase(TestCase):
             self.fail("Notes could have the same title")
         except IntegrityError:
             self.assertTrue(True, "Note title must be unique")
+            
             
     def test_note_content(self):
         # test Note content

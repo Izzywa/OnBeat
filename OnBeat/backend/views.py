@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from rest_framework import status
 
-from .models import User
+from .models import User, Note
 from .helpers import validateUsername, validatePassword, validateEmail
 
 # Create your views here.
@@ -82,5 +82,27 @@ def getCurrentUser(request):
             return JsonResponse({'message': 'user authenticated'}, status=status.HTTP_200_OK)
         else:
             return JsonResponse({'message': 'NOT AUTHENTICATED'}, status=status.HTTP_403_FORBIDDEN)
+    else:
+        return HttpResponseRedirect(reverse("frontend:index"))
+    
+@login_required(login_url='/login')
+def create_note(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        title = data.get("title")
+        youtubeUrl = data.get("youtubeUrl")
+        noteList = data.get("noteList")
+        user = request.user
+        
+        titleMatch = Note.objects.filter(user=user, title__iexact=title)
+        if len(titleMatch) > 0:
+            return JsonResponse({
+                    'heading': f'Note title already exists.',
+                    'text': 'Please choose a unique title.',
+                    'buttons': None
+                }, status=status.HTTP_226_IM_USED)
+        else:
+            return JsonResponse({'message': 'UNIQUE'}, status=status.HTTP_200_OK)
+
     else:
         return HttpResponseRedirect(reverse("frontend:index"))

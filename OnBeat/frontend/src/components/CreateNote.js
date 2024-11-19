@@ -8,6 +8,7 @@ import NewTimestamp from "./NewTimestamp";
 import DisplayNoteComponent from "./DisplayNoteComponent";
 import DisplayTimestamp from "./DisplayTimestamp";
 import BasicModal from "./BasicModal";
+import csrftoken from "./CSRFCookie";
 
 
 export default function CreateNote(props) {
@@ -166,7 +167,35 @@ export default function CreateNote(props) {
                 youtubeUrl: youtubeUrl,
                 noteList: noteList
             }
-            console.log(noteContentObject)
+
+            const requestOptions = {
+                method: ('POST'),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken()
+                },
+                mode: 'same-origin',
+                body: JSON.stringify(noteContentObject)
+            }
+
+            let status;
+
+            fetch('backend/create_note', requestOptions)
+            .then(response => {
+                status = response.status
+                if (response.ok) {
+                    return response.json()
+                }
+            }).then(result => {
+               if (status === 200) {
+                    console.log(result.message)
+               } else {
+                    setOpenModal(true)
+                    setModalMessage(result)
+               }
+            }).catch(error => {
+                console.log(error)
+            })
             
         }
 
