@@ -4,7 +4,11 @@ from .models import User, Note, NoteContent
 import uuid
 
 def generate_uuid():
-    return str(uuid.uuid4())
+    while True:
+        new_uuid = str(uuid.uuid4())
+        if NoteContent.objects.filter(uuid=new_uuid).count() == 0:
+            break
+    return new_uuid
 
 # Create your tests here.
 class NoteTestCase(TestCase):
@@ -18,8 +22,10 @@ class NoteTestCase(TestCase):
         note2 = Note.objects.create(user=user1, title="Note2")
         
         #create note content
-        notecontent1 = NoteContent(uuid=generate_uuid, note=note1, subheading="", content="This is content 1.")
+        notecontent1 = NoteContent(note=note1, subheading="", content="This is content 1.")
         notecontent1.save()
+        notecontent2 = NoteContent(note=note1, subheading="heading", content="content2")
+        notecontent2.save()
         
     def test_user_note(self):
         try:
@@ -58,6 +64,8 @@ class NoteTestCase(TestCase):
         note1 = Note.objects.get(user=user1, title="Note1")
         note2 = Note.objects.get(user=user1, title="Note2")
         
-        self.assertEqual(note1.content.all().count(),1, "Content count wrong")
+        self.assertEqual(note1.content.all().count(),2, "Content count wrong")
 
         self.assertEqual(note2.content.all().count(),0 , "Content count wrong for note 2")
+        
+        print(generate_uuid)

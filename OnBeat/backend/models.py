@@ -32,7 +32,6 @@ class Note(models.Model):
         }
 
 class NoteContent(models.Model):
-    uuid = models.TextField(unique=True)
     note = models.ForeignKey(Note, related_name="content", on_delete=models.CASCADE)
     subheading = models.CharField(blank=True, max_length=100)
     content = models.TextField(blank=False)
@@ -58,7 +57,6 @@ class YoutubeUrl(models.Model):
         
         
 class NoteTimestamp(models.Model):
-    uuid = models.TextField(unique=True)
     note = models.ForeignKey(Note, related_name="timestamp", on_delete=models.CASCADE)
     timestamp = models.DurationField(blank=False)
     text = models.TextField(blank=False)
