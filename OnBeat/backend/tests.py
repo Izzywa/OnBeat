@@ -1,14 +1,7 @@
 from django.db import IntegrityError
 from django.test import TestCase
-from .models import User, Note, NoteContent
-import uuid
-
-def generate_uuid():
-    while True:
-        new_uuid = str(uuid.uuid4())
-        if NoteContent.objects.filter(uuid=new_uuid).count() == 0:
-            break
-    return new_uuid
+from .models import User, Note, NoteContent, YoutubeUrl, NoteTimestamp
+from datetime import timedelta
 
 # Create your tests here.
 class NoteTestCase(TestCase):
@@ -27,6 +20,14 @@ class NoteTestCase(TestCase):
         notecontent2 = NoteContent(note=note1, subheading="heading", content="content2")
         notecontent2.save()
         
+        # create YoutubeUrl
+        url = YoutubeUrl.objects.create(note=note1, url="https://www.youtube.com/watch?v=3dzBlSeCJNg&list=RDMM3dzBlSeCJNg&start_radio=1")
+        
+        # create timestamps
+        d = timedelta(seconds=60)
+        timestamp = NoteTimestamp(note=note1, timestamp=d, text="timestamp note")
+        timestamp.save()    
+    
     def test_user_note(self):
         try:
             user1 = User.objects.get(username="user1")
@@ -68,4 +69,10 @@ class NoteTestCase(TestCase):
 
         self.assertEqual(note2.content.all().count(),0 , "Content count wrong for note 2")
         
-        print(generate_uuid)
+        # test youtube url
+        self.assertEqual(note1.youtubeURL.all().count(), 1 , "Youtube url count wrong for note 1")
+        self.assertEqual(note2.youtubeURL.all().count(), 0, "Youtube url count wrong for note 2")
+        
+        # test timestamp
+        self.assertEqual(note1.timestamp.all().count(), 1, "timestamp count wrong for note1")
+        self.assertEqual(note2.timestamp.all().count(), 0, "timestamp count wrong for note2")
