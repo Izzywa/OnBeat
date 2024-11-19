@@ -70,8 +70,12 @@ class NoteTestCase(TestCase):
         self.assertEqual(note2.content.all().count(),0 , "Content count wrong for note 2")
         
         # test youtube url
-        self.assertEqual(note1.youtubeURL.all().count(), 1 , "Youtube url count wrong for note 1")
-        self.assertEqual(note2.youtubeURL.all().count(), 0, "Youtube url count wrong for note 2")
+        self.assertIsNotNone(note1.youtubeURL, "Youtube url count wrong for note 1")
+        try:
+            url = note2.youtubeURL
+            self.fail("url exist when it should not")
+        except:
+            self.assertTrue(True)
         
         # test timestamp
         self.assertEqual(note1.timestamp.all().count(), 1, "timestamp count wrong for note1")

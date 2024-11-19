@@ -50,11 +50,8 @@ class NoteContent(models.Model):
         }
         
 class YoutubeUrl(models.Model):
-    note = models.ForeignKey(Note, related_name="youtubeURL", on_delete=models.CASCADE)
+    note = models.OneToOneField(Note, related_name="youtubeURL", on_delete=models.CASCADE, unique=True)
     url = models.URLField(blank=False)
-    
-    class Meta:
-        unique_together = ("note", "url")
         
         
 class NoteTimestamp(models.Model):
@@ -81,6 +78,8 @@ class NoteList(models.Model):
     timestamp = models.ForeignKey(NoteTimestamp, on_delete=models.CASCADE, blank=True, null=True)
     
     class Meta:
+        unique_together = ("note", "index")
+        
         constraints = [
             models.CheckConstraint(
                 check=Q(type="note", timestamp=None, content__isnull=False) | Q(type="timestamp", content=None, timestamp__isnull=False),
