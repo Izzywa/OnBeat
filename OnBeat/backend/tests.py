@@ -1,6 +1,6 @@
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from django.test import TestCase
-from .models import User, Note, NoteContent, YoutubeUrl, NoteTimestamp
+from .models import User, Note, NoteContent, YoutubeUrl, NoteTimestamp, NoteList
 from datetime import timedelta
 
 # Create your tests here.
@@ -83,3 +83,47 @@ class NoteTestCase(TestCase):
         
         t = note1.timestamp.first()
         self.assertEqual(t.timestamp, timedelta(seconds=60), f"timestamp is {t.timestamp} instead of {timedelta(seconds=60)}")
+        
+    def test_noteList(self):
+        user1 = User.objects.get(username="user1")
+        note1 = Note.objects.get(user=user1, title="Note1")
+        notecontent1 = note1.content.first()
+        timestamp1 = note1.timestamp.first()
+        
+        # test if can have both foreignkey
+        try:
+            with transaction.atomic():
+                notelist1 = NoteList(type=NoteList.NOTE, index=0, note=note1, content=notecontent1, timestamp=timestamp1)
+                notelist1.save()
+            self.fail("should not be able to put both note and timestamp")
+        except IntegrityError:
+            pass
+        
+        # test if can have mismatching type
+        try:
+            with transaction.atomic():
+                notelist1 = NoteList(type=NoteList.NOTE, index=0, note=note1, timestamp=timestamp1)
+                notelist1.save()
+            self.fail("if type is note, should not be able to insert timestamp")
+        except IntegrityError:
+            pass
+        
+        notelist1 = NoteList(type=NoteList.NOTE, index=0, note=note1, content=notecontent1)
+        notelist1.save()
+        # test if can have same index
+        try:
+            with transaction.atomic():
+                notelist2 = NoteList(type=NoteList.TIMESTAMP, index=0, note=note1, timestamp=timestamp1)
+                notelist2.save()
+            self.fail("index should be different")
+        except IntegrityError:
+            pass
+        
+        notelist2 = NoteList(type=NoteList.TIMESTAMP, index=1, note=note1, timestamp=timestamp1)
+        notelist2.save()
+        
+        # test list
+        list = NoteList.objects.filter(note=note1).order_by('index')
+        self.assertEqual(len(list), 2, "not right notelist length")
+        self.assertEqual(list[0].content, notecontent1, "not the right content" )
+        self.assertEqual(list[1].timestamp, timestamp1, "not the right timestamp")

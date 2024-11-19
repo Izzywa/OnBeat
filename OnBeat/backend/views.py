@@ -106,3 +106,8 @@ def create_note(request):
 
     else:
         return HttpResponseRedirect(reverse("frontend:index"))
+    
+'''
+for index, item in enumerate(list):
+    print(index, item)
+'''
