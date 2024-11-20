@@ -1,5 +1,6 @@
-import React, {useRef, useState, useEffect, forwardRef} from "react";
+import React, { useState, useEffect} from "react";
 import YouTube from 'react-youtube';
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function YoutubeIframe(props) {
 
@@ -70,24 +71,12 @@ export default function YoutubeIframe(props) {
         )
     }
 
-    function LoadingSpinner() {
-        //{show ? "spinner-div no-show": "spinner-div show"}
-        return(
-            <div className={ show ? "spinner-div no-show" : "spinner-div show-flex"}>
-                <div className="d-inline">
-                <span>Loading...</span>
-                </div>
-            <div className="spinner-grow" role="status">
-            </div>
-            </div>
-        )
-    }
 
     return (
     <div className="my-2">
         {error.error ? <ErrorAlert/> : null}
 
-        <LoadingSpinner />
+        <LoadingSpinner hide={show}/>
         <div className={show ? "": "no-show"}>
         <YouTube className="ratio ratio-16x9"
          ref={props.IframeRef} videoId={props.id} 

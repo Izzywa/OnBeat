@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from rest_framework import status
 
-from .models import User, Note
+from .models import User, Note, NoteList
 from .helpers import validateUsername, validatePassword, validateEmail
 
 # Create your views here.
@@ -113,7 +113,27 @@ def view_note(request, noteID):
     if len(note) == 0:
         return JsonResponse({'message': f'Not found note'}, status=status.HTTP_404_NOT_FOUND)
     else:
-         return JsonResponse(note[0].serialize(), status=status.HTTP_200_OK)
+        note = note[0]
+        
+        try:
+            youtubeURL = note.youtubeURL.serialize()
+        except:
+            youtubeURL = None
+            
+        list = NoteList.objects.filter(note=note).order_by('index')
+        noteList = []
+        if len(list) != 0:
+            for item in list:
+                if item.content is not None:
+                    noteList.append(item.content.serialize())
+                else:
+                    noteList.append(item.timestamp.serialize())
+            
+        return JsonResponse({
+            "note": note.serialize(),
+            "youtubeURL": youtubeURL,
+            "noteList": noteList
+            }, status=status.HTTP_200_OK)
     
 '''
 for index, item in enumerate(list):
