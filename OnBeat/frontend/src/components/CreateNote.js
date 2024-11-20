@@ -189,6 +189,7 @@ export default function CreateNote(props) {
             }).then(result => {
                if (status === 200) {
                     console.log(result.message)
+                    console.log(noteContentObject)
                } else {
                     setOpenModal(true)
                     setModalMessage(result)

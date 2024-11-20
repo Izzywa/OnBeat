@@ -107,6 +107,16 @@ def create_note(request):
     else:
         return HttpResponseRedirect(reverse("frontend:index"))
     
+@login_required(login_url='/login')
+def view_note(request, title):
+    title = title.replace("-", " ")
+    note = Note.objects.filter(user=request.user, title__iexact=title)
+    print(note[0].title)
+    if len(note) == 0:
+        return JsonResponse({'message': f'Not found title: {title}'}, status=status.HTTP_404_NOT_FOUND)
+    else:
+         return JsonResponse(note[0].serialize(), status=status.HTTP_200_OK)
+    
 '''
 for index, item in enumerate(list):
     print(index, item)

@@ -27,7 +27,7 @@ class Note(models.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user": self.user,
+            "user": self.user.username,
             "title": self.title,
             "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p")
         }
@@ -42,7 +42,7 @@ class NoteContent(models.Model):
     def serialize(self):
         return {
             "note_id": self.note.id,
-            "content_uuid": self.uuid,
+            "content_uuid": self.id,
             "subheading": self.subheading,
             "content": self.content,
             "date_created": self.date_created,
@@ -52,6 +52,13 @@ class NoteContent(models.Model):
 class YoutubeUrl(models.Model):
     note = models.OneToOneField(Note, related_name="youtubeURL", on_delete=models.CASCADE, unique=True)
     url = models.URLField(blank=False)
+    
+    def serialize(self):
+        return {
+            "note_id": self.note.id,
+            "url_id": self.id,
+            "url": self.url
+        }
         
         
 class NoteTimestamp(models.Model):
@@ -60,6 +67,16 @@ class NoteTimestamp(models.Model):
     text = models.TextField(blank=False)
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
+    
+    def serialize(self):
+        return {
+            "note_id": self.note.id,
+            "timestamp_id": self.id,
+            "timestamp": self.timestamp,
+            "text": self.text,
+            "date_created": self.date_created,
+            "date_modified": self.date_modified
+        }
     
 
 class NoteList(models.Model):
