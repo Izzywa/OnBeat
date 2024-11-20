@@ -16,7 +16,7 @@ export default function App(props) {
                 {" "}
                 <Route path="/" element={<Homepage />}/>
                 <Route path="/create-note" element={<CreateNote />}/>
-                <Route path="/note/:title" element={<Note />}/>
+                <Route path="/note/:noteID" element={<Note />}/>
                 </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

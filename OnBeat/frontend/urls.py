@@ -8,5 +8,5 @@ urlpatterns = [
     path("login", views.index, name="login"),
     path("register", views.index, name="register"),
     path("create-note", views.index, name="create-note"),
-    path("note/<str:title>", views.index, name="room")
+    path("note/<int:noteID>", views.index, name="room")
 ]

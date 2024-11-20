@@ -5,12 +5,12 @@ import { useAuth } from "./AuthContext";
 import csrftoken from "./CSRFCookie";
 
 export default function Note(props) {
-    const { title } = useParams()
+    const { noteID } = useParams()
     const { setPageName } = useAuth()
     useEffect(() => {
         setPageName('')
 
-        fetch(`/backend/view_note/${title}`)
+        fetch(`/backend/view_note/${noteID}`)
         .then(response => response.json())
         .then(result => {
             console.log(result)
@@ -23,7 +23,7 @@ export default function Note(props) {
     <>
     <NavBar />
         <h1>Note</h1>
-        <p>{title}</p>
+        <p>{noteID}</p>
     </>
     )
 }
