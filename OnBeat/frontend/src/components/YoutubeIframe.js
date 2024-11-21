@@ -59,6 +59,7 @@ export default function YoutubeIframe(props) {
     }
 
     function handleError(event){
+        console.log('error in loading video')
         setError({
             error: true,
             message: errorMessage[event.data]
