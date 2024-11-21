@@ -73,13 +73,15 @@ export default function Note(props) {
                 )
             }
        }
+       console.log('AVAILABLE NOTE')
+
 
         return (
             <>
             <h1 className="title-display">{noteObject.note.title}</h1>
 
             { noteObject.youtubeURL ?
-            <YoutubeIframe id={videoID} IframeRef={IframeRef} setYoutubeError={setYoutubeError} viewOnly={viewOnly}/>
+            <YoutubeIframe id={videoID} IframeRef={IframeRef} viewOnly={viewOnly}/>
             :null }
 
             {
@@ -97,11 +99,13 @@ export default function Note(props) {
         )
     }
 
+    console.log('note')
     return(
     <>
     <NavBar />
     <div className="container view-note-div">
     { noteAvailable ? <AvailableNoteDisplay /> : null }
+
     { noteAvailable === false ? <Alert severity="error">Note not available</Alert> : null}
 
         <BasicModal openModal={openModal} setOpenModal={setOpenModal} messageHeading={modalMessage.heading}

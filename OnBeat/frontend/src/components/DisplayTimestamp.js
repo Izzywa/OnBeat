@@ -9,8 +9,14 @@ export default function DisplayTimestamp(props) {
         console.log(props.youtubeError)
         console.log(!(props.IframeRef.current === undefined))
         if (!props.youtubeError && !(props.IframeRef.current === undefined)) {
-            let time = parseInt(props.noteList[props.index].content.timestamp)
-            props.IframeRef.current.internalPlayer.seekTo(time)
+            //let time = parseInt(props.noteList[props.index].content.timestamp)
+            //props.IframeRef.current.internalPlayer.seekTo(time)
+            props.setModalMessage({
+                heading: 'Video Error',
+                text: "Video Unavailable.",
+                buttons: null
+            })
+            props.setOpenModal(true)
         } else {
             props.setModalMessage({
                 heading: 'Video Error',

@@ -4,6 +4,7 @@ import LoadingSpinner from "./LoadingSpinner";
 
 export default function YoutubeIframe(props) {
 
+    console.log('iframe')
     const opts = {
       width: '100%',
       playerVars: {
@@ -64,6 +65,7 @@ export default function YoutubeIframe(props) {
             error: true,
             message: errorMessage[event.data]
         })
+
     }
 
     function ErrorAlert(){
