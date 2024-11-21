@@ -27,12 +27,14 @@ export default function YoutubeIframe(props) {
     })
 
     useEffect(() => {
-        if (!error.error && ready) {
-            props.setInsertTimestamp(true)
-            props.setYoutubeError(false)
-        } else {
-            props.setInsertTimestamp(false)
-            props.setYoutubeError(true)
+        if (!props.viewOnly) {
+            if (!error.error && ready) {
+                props.setInsertTimestamp(true)
+                props.setYoutubeError(false)
+            } else {
+                props.setInsertTimestamp(false)
+                props.setYoutubeError(true)
+            }
         }
     }, [error, ready])
 
@@ -84,7 +86,7 @@ export default function YoutubeIframe(props) {
          onError={handleError}/>
          </div>
 
-         { ready ? <RenderAfterReady/>:null}
+         { ready && !props.viewOnly ? <RenderAfterReady/>:null}
     </div>
     )
 }

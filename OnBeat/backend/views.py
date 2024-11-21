@@ -120,14 +120,11 @@ def view_note(request, noteID):
         except:
             youtubeURL = None
             
-        list = NoteList.objects.filter(note=note).order_by('index')
-        noteList = []
-        if len(list) != 0:
-            for item in list:
-                if item.content is not None:
-                    noteList.append(item.content.serialize())
-                else:
-                    noteList.append(item.timestamp.serialize())
+        noteList = NoteList.objects.filter(note=note).order_by('index')
+        if len(noteList) != 0:
+            noteList = [item.serialize() for item in noteList]
+        else: 
+            noteList = []
             
         return JsonResponse({
             "note": note.serialize(),

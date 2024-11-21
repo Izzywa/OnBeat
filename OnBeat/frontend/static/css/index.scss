@@ -21,6 +21,12 @@ $light: #ede7f6;
   color: $dark;
 }
 
+%center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 
 html, body {
@@ -138,10 +144,8 @@ pre {
 }
 
 .spinner-div {
-  display: flex;
+  @extend %center-flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 10em;
   color: $orange-light;
 }
@@ -159,7 +163,25 @@ pre {
   padding-left: 0.5em;
 }
 
-.title-input {
+.title-input, .title-display{
   font-weight: bolder;
   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.title-display {
+  background-color: $purple-light;
+  color: $light;
+  @extend %center-flex;
+}
+
+.view-note-div {
+  padding-top: 1em;
+}
+
+#nav-page-name {
+  color: $orange-light;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 5px 10px 0px;
+  text-transform: uppercase;
+  border-bottom: 2px double $orange-primary;
 }

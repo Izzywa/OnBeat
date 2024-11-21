@@ -8,6 +8,12 @@
   color: #212121;
 }
 
+.title-display, .spinner-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -105,10 +111,7 @@ pre {
 }
 
 .spinner-div {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 10em;
   color: #ffd54f;
 }
@@ -126,9 +129,26 @@ pre {
   padding-left: 0.5em;
 }
 
-.title-input {
+.title-input, .title-display {
   font-weight: bolder;
   font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.title-display {
+  background-color: #7e57c2;
+  color: #ede7f6;
+}
+
+.view-note-div {
+  padding-top: 1em;
+}
+
+#nav-page-name {
+  color: #ffd54f;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding: 5px 10px 0px;
+  text-transform: uppercase;
+  border-bottom: 2px double #ffab00;
 }
 
 /*# sourceMappingURL=index.css.map */

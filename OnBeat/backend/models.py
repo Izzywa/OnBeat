@@ -35,16 +35,16 @@ class Note(models.Model):
 class NoteContent(models.Model):
     note = models.ForeignKey(Note, related_name="content", on_delete=models.CASCADE)
     subheading = models.CharField(blank=True, max_length=100)
-    content = models.TextField(blank=False)
+    text = models.TextField(blank=False)
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
     
     def serialize(self):
         return {
             "note_id": self.note.id,
-            "content_uuid": self.id,
+            "content_id": self.id,
             "subheading": self.subheading,
-            "content": self.content,
+            "content": self.text,
             "date_created": self.date_created,
             "date_modified": self.date_modified
         }
@@ -103,3 +103,21 @@ class NoteList(models.Model):
                 name="type and note object does not match"
             )
         ] 
+        
+    def serialize(self):
+        if self.type == "note":
+            content = {
+                "heading": self.content.subheading,
+                "text": self.content.text
+            }
+        else:
+            content = {
+                "timestamp": self.timestamp.timestamp.seconds,
+                "text": self.timestamp.text
+            }
+        
+        return {
+            "id": self.id,
+            "type": self.type,
+            "content": content
+        }

@@ -5,9 +5,12 @@ import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import SaveIcon from '@mui/icons-material/Save';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { Icon } from "@mui/material";
 
 export default function ExpandMenu(props) {
-
     const [navClassName, setNavClassName] = useState("hide")
 
     function toggleOpen() {
@@ -18,31 +21,54 @@ export default function ExpandMenu(props) {
         }
     }
 
+    function HideIconStyle() {
+        return {
+            transform : 'translateY(-2.5em)'
+        }
+    }
+
+    function handleDeleteBtnClicked() {
+        console.log('delete btn clicked')
+    }
+
+    function handleEditBtnClicked() {
+        console.log('edit btn clicked')
+    }
+
     return(
         <nav id="expand-menu" className={navClassName} style={props.ExpandMenuStyle}>
             <div className="add-content-menu">
                 <div className="content-menu-toggle" onClick={toggleOpen}>
-                    <a><AddCircleIcon /></a>
+                    <a>{ props.viewOnly ? <SettingsIcon /> : <AddCircleIcon />}</a>
                 </div>
-                <span style={props.NoteIconStyle}>
-                <a><EditNoteIcon onClick={props.handleNoteBtnClicked}/></a>
+                <span style={props.NoteIconStyle ? props.NoteIconStyle : HideIconStyle()}>
+                <a><TextSnippetIcon onClick={props.handleNoteBtnClicked}/></a>
                 </span>
-                <span style={props.YouTubeIconStyle}>
+                <span style={props.YouTubeIconStyle ? props.YouTubeIconStyle : HideIconStyle()}>
                     <a>
                         {props.insertYoutubeLink ? <DoDisturbIcon onClick={props.handleYoutubeBtnClicked} className="cancel-icon" style={{fontSize: 28}}/> : null }
                         <YouTubeIcon onClick={props.handleYoutubeBtnClicked}/></a>
                 </span>
 
                 {props.insertTimestamp ? 
-                <span style={props.TimeIconStyle}>
+                <span style={props.TimeIconStyle ? props.TimeIconStyle : HideIconStyle()}>
                 <a><MoreTimeIcon onClick={props.handleTimestampBtnClicked}/></a>
                 </span>
                 : null
                 }
 
-                <span style={props.SaveIconStyle}>
+                <span style={props.viewOnly ? HideIconStyle() : null}>
                     <a><SaveIcon onClick={props.handleSaveBtnClicked}/></a>
                 </span>
+
+                <span style={props.viewOnly ? {transform : 'translateY(-2.5em) translateX(2.5em)'}
+                : HideIconStyle()}>
+                    <a><DeleteForeverIcon onClick={handleDeleteBtnClicked}/></a>
+                </span>
+                <span style={props.viewOnly ? {transform : 'translateY(-2.5em) translateX(5em)'} : HideIconStyle()}>
+                    <a><EditNoteIcon onClick={handleEditBtnClicked}/></a>
+                </span>
+
             </div>
         </nav>
     ) 
