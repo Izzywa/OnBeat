@@ -35,6 +35,13 @@ export default function BasicModal(props) {
             </div>
             </div>
           )
+
+        case props.buttons === "deleteNote":
+          return(
+            <div className='d-inline'>
+            <button className='btn submit-btn-secondary m-1' onClick={props.handleDeleteNote}>Yes</button>
+            </div>
+          )
         default:
             return(
               <></>

@@ -201,6 +201,7 @@ export default function CreateNote(props) {
         }
 
     }
+    console.log('create note')
 
     return(
         <>

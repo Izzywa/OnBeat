@@ -63,7 +63,7 @@ export default function ExpandMenu(props) {
 
                 <span style={props.viewOnly ? {transform : 'translateY(-2.5em) translateX(2.5em)'}
                 : HideIconStyle()}>
-                    <a><DeleteForeverIcon onClick={handleDeleteBtnClicked}/></a>
+                    <a><DeleteForeverIcon onClick={props.handleDeleteBtnClicked}/></a>
                 </span>
                 <span style={props.viewOnly ? {transform : 'translateY(-2.5em) translateX(5em)'} : HideIconStyle()}>
                     <a><EditNoteIcon onClick={handleEditBtnClicked}/></a>

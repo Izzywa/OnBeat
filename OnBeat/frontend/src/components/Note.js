@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import { useAuth } from "./AuthContext";
@@ -8,25 +8,14 @@ import DisplayNoteComponent from "./DisplayNoteComponent";
 import DisplayTimestamp from "./DisplayTimestamp";
 import ExpandMenu from "./ExpandMenu";
 import BasicModal from "./BasicModal";
+import csrftoken from "./CSRFCookie";
 
 export default function Note(props) {
     const { noteID } = useParams()
     const { setPageName } = useAuth()
 
-    const [edit, setEdit] = useState(false)
     const [noteAvailable, setNoteAvailable] = useState(null)
     const [noteObject, setNoteObject] = useState(null)
-    const [youtubeError, setYoutubeError] = useState(false)
-    const [viewOnly, setViewOnly] = useState(true)
-
-    const [openModal, setOpenModal] = useState(false)
-    const [modalMessage, setModalMessage] = useState({
-        heading: '',
-        text: '',
-        buttons: null
-    })
-
-    const IframeRef = useRef();
 
     useEffect(() => {
         setPageName('View Note')
@@ -49,70 +38,122 @@ export default function Note(props) {
         })
     },[])
 
-    function AvailableNoteDisplay() {
-        let videoID;
-        if (noteObject.youtubeURL) {
-            if (noteObject.youtubeURL.url.startsWith('https://www.youtube.com')) {
-                videoID = noteObject.youtubeURL.url.split('v=')[1].split('&')[0]
-            } else {
-                videoID = noteObject.youtubeURL.url.split('.be/')[1].split('?')[0]
-            }
-        }
+    
+   function AvailableNote(props) {
+    const [openModal, setOpenModal] = useState(false)
+    const [modalMessage, setModalMessage] = useState({
+        heading: '',
+        text: '',
+        buttons: null
+    })
 
-       function DisplayNote({ value, index }) {
-            if (value.type === "note") {
-                return(
-                    <DisplayNoteComponent index={index} id={value.id} 
-                    noteList={noteObject.noteList} viewOnly={viewOnly}/>
-                )
-            } else {
-                return(
-                    <DisplayTimestamp index={index} id={value.id}
-                    noteList={noteObject.noteList} viewOnly={viewOnly} IframeRef={IframeRef}
-                    youtubeError={youtubeError} setOpenModal={setOpenModal} setModalMessage={setModalMessage}/>
-                )
-            }
-       }
-       console.log('AVAILABLE NOTE')
+    const [youtubeError, setYoutubeError] = useState(false)
+    const [viewOnly, setViewOnly] = useState(true)
 
+    const [edit, setEdit] = useState(false);
 
-        return (
-            <>
-            <h1 className="title-display">{noteObject.note.title}</h1>
+    const IframeRef = useRef();
 
-            { noteObject.youtubeURL ?
-            <YoutubeIframe id={videoID} IframeRef={IframeRef} viewOnly={viewOnly}/>
-            :null }
-
-            {
-                noteObject.noteList.length > 0 ?
-                noteObject.noteList.map((value, key) => {
-                    return(
-                        <div key={key}>
-                            <DisplayNote value={value} index={key}/>
-                        </div>
-                    )
-                })
-                : null
-            }
-            </>
-        )
+    function handleDeleteBtnClicked() {
+        console.log('delete btn clicked')
+        setOpenModal(true)
+        setModalMessage({
+            heading: 'Delete note.',
+            text: 'Are you certain?',
+            buttons: 'deleteNote'
+        })
     }
 
-    console.log('note')
+    function handleDeleteNote() {
+        console.log(`delete note with id ${noteID}`)
+        setOpenModal(false)
+
+        const requestOptions = {
+            method: ('POST'),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken()
+                },
+                mode: 'same-origin'
+        }
+
+        fetch(`/backend/delete_note/${noteID}`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    function NoteListDisplay(props) {
+        if (props.value.type === 'note') {
+            return(
+                <DisplayNoteComponent index={props.index} id={props.value.id} 
+                    noteList={props.noteObject.noteList} viewOnly={props.viewOnly}/>
+            )
+        } else {
+            return(
+                <DisplayTimestamp index={props.index} id={props.value.id}
+                    noteList={props.noteObject.noteList} viewOnly={props.viewOnly} IframeRef={props.IframeRef}
+                    youtubeError={props.youtubeError} 
+                    setOpenModal={props.setOpenModal} setModalMessage={props.setModalMessage}/>
+            )
+        }
+    }
+
+    function getVideoID() {
+        let videoID;
+            if (noteObject.youtubeURL) {
+                if (noteObject.youtubeURL.url.startsWith('https://www.youtube.com')) {
+                    videoID = noteObject.youtubeURL.url.split('v=')[1].split('&')[0]
+                } else {
+                    videoID = noteObject.youtubeURL.url.split('.be/')[1].split('?')[0]
+                }
+            }
+        return videoID
+    }
+
+    return (<div>
+        <h2 className="title-display">{props.noteObject.note.title}</h2>
+
+        {props.noteObject.youtubeURL ? 
+            <YoutubeIframe id={getVideoID()} IframeRef={IframeRef}
+            viewOnly={viewOnly} setYoutubeError={setYoutubeError} />
+         : null}
+
+        {props.noteObject.noteList.length > 0 ?
+        props.noteObject.noteList.map((value, index) => {
+            return(
+                <div key={index}>
+                    <NoteListDisplay value={value} index={index} 
+                    noteObject={props.noteObject} viewOnly={viewOnly}
+                    IframeRef={IframeRef} youtubeError={youtubeError}
+                    setOpenModal={setOpenModal} setModalMessage={setModalMessage}/>
+                </div>
+            )
+        })
+        : null}
+
+        <BasicModal openModal={openModal} setOpenModal={setOpenModal}
+        messageHeading={modalMessage.heading} messageText={modalMessage.text}
+        buttons={modalMessage.buttons} handleDeleteNote={handleDeleteNote}/>
+
+        <ExpandMenu viewOnly={viewOnly} handleDeleteBtnClicked={handleDeleteBtnClicked}/>
+        </div>
+    )
+   }
+
     return(
     <>
     <NavBar />
     <div className="container view-note-div">
-    { noteAvailable ? <AvailableNoteDisplay /> : null }
+    { noteAvailable ? 
+        <AvailableNote noteObject={noteObject}/>
+     : null }
+
 
     { noteAvailable === false ? <Alert severity="error">Note not available</Alert> : null}
-
-        <BasicModal openModal={openModal} setOpenModal={setOpenModal} messageHeading={modalMessage.heading}
-        messageText={modalMessage.text} buttons={modalMessage.buttons} />
-        <div className="my-1">
-            <ExpandMenu viewOnly={viewOnly}/>
-        </div>
     </div>
     <footer style={{height: "5em"}}></footer>
 

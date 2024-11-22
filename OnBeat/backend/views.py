@@ -131,7 +131,14 @@ def view_note(request, noteID):
             "youtubeURL": youtubeURL,
             "noteList": noteList
             }, status=status.HTTP_200_OK)
-    
+        
+@login_required(login_url='/login')
+def delete_note(request, noteID):
+    if request.method == 'POST':
+        # delete note here
+        return JsonResponse({'message': 'SUCCESS'})
+    else:
+        return HttpResponseRedirect(reverse("frontend:view_note", args=(noteID,)))
 '''
 for index, item in enumerate(list):
     print(index, item)

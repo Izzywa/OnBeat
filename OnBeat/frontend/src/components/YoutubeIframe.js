@@ -3,8 +3,6 @@ import YouTube from 'react-youtube';
 import LoadingSpinner from "./LoadingSpinner";
 
 export default function YoutubeIframe(props) {
-
-    console.log('iframe')
     const opts = {
       width: '100%',
       playerVars: {
@@ -31,10 +29,10 @@ export default function YoutubeIframe(props) {
         if (!props.viewOnly) {
             if (!error.error && ready) {
                 props.setInsertTimestamp(true)
-                props.setYoutubeError(false)
+                //props.setYoutubeError(false)
             } else {
                 props.setInsertTimestamp(false)
-                props.setYoutubeError(true)
+                //props.setYoutubeError(true)
             }
         }
     }, [error, ready])
@@ -65,7 +63,7 @@ export default function YoutubeIframe(props) {
             error: true,
             message: errorMessage[event.data]
         })
-
+        props.setYoutubeError(true)
     }
 
     function ErrorAlert(){
