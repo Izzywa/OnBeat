@@ -7,6 +7,7 @@ import { AuthProvider } from "./AuthContext";
 import PrivateRoutes from "./PrivateRoutes";
 import CreateNote from "./CreateNote";
 import Note from "./Note";
+import ListOfNotes from "./ListOfNotes";
 
 export default function App(props) {
     return(
@@ -17,6 +18,7 @@ export default function App(props) {
                 <Route path="/" element={<Homepage />}/>
                 <Route path="/create-note" element={<CreateNote />}/>
                 <Route path="/note/:noteID" element={<Note />}/>
+                <Route path="/list" element={<ListOfNotes />} />
                 </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

@@ -9,6 +9,7 @@ export default function YoutubeIframe(props) {
         autoplay: 0
       },
     }
+    console.log(props.id)
 
     const errorMessage = {
         2: 'Invalid Video Id.',

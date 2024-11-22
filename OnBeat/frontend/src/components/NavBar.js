@@ -29,7 +29,7 @@ export default function NavBar(props) {
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <DropdownItem label='Create Note' link="/create-note"/>
-          <DropdownItem label="Open Note" />
+          <DropdownItem label="View Note" link="/list"/>
           <div className="dropdown-divider"></div>
           <DropdownItem label="Search" />
         </div>

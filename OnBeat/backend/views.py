@@ -135,10 +135,29 @@ def view_note(request, noteID):
 @login_required(login_url='/login')
 def delete_note(request, noteID):
     if request.method == 'POST':
-        # delete note here
-        return JsonResponse({'message': 'SUCCESS'})
+        note = Note.objects.filter(user=request.user, id=noteID)
+        if len(note) != 1:
+            return JsonResponse({'message': 'Note not found'}, status=status.HTTP_404_NOT_FOUND)
+        else: # delete note here
+            return JsonResponse({'message': 'SUCCESS'})
     else:
         return HttpResponseRedirect(reverse("frontend:view_note", args=(noteID,)))
+    
+@login_required(login_url="/login")
+def list_notes(request):
+    notes = Note.objects.filter(user=request.user).order_by('-date_created')
+    
+    list = [note.serialize() for note in notes]
+    for index, note in enumerate(notes):
+        try:
+            youtubeURL = note.youtubeURL.url
+        except:
+            youtubeURL = None
+        list[index]['youtubeURL'] = youtubeURL
+            
+    return JsonResponse({
+        'notes': list
+        }, status=status.HTTP_200_OK)
 '''
 for index, item in enumerate(list):
     print(index, item)
