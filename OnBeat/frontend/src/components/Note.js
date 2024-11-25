@@ -104,7 +104,7 @@ export default function Note(props) {
     }
 
     return (<div>
-        <h2 className="title-display">{props.noteObject.note.title}</h2>
+        <h3 className="title-display">{props.noteObject.note.title}</h3>
 
         {props.noteObject.youtubeURL ? 
             <YoutubeIframe id={getVideoID(noteObject.youtubeURL.url)} IframeRef={IframeRef}

@@ -137,6 +137,14 @@ pre {
 .title-display {
   background-color: #7e57c2;
   color: #ede7f6;
+  width: 100%;
+  display: inline-block;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: normal;
+  line-break: strict;
+  hyphens: none;
+  padding: 5px;
 }
 
 .view-note-div {

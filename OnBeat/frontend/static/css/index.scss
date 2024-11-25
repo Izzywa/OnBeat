@@ -172,6 +172,14 @@ pre {
   background-color: $purple-light;
   color: $light;
   @extend %center-flex;
+  width: 100%;
+  display: inline-block;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: normal;
+  line-break: strict;
+  hyphens: none;
+  padding: 5px;
 }
 
 .view-note-div {

@@ -14,7 +14,7 @@ class User(AbstractUser):
 
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="note")
-    title = models.CharField(blank=False, max_length=250)
+    title = models.CharField(blank=False, max_length=200)
     date_created = models.DateField(auto_now_add=True)
     
     class Meta:

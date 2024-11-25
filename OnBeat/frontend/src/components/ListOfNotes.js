@@ -9,7 +9,7 @@ export default function ListOfNotes(props) {
     const [list, setList] = useState([])
 
     useEffect(() => {
-        setPageName("Note List")
+        setPageName("Notes List")
 
         fetch('/backend/list')
         .then(response => response.json())
@@ -26,33 +26,34 @@ export default function ListOfNotes(props) {
             switch(true) {
                 case (props.value.youtubeURL != null):
                     return(
-                        <div className="card my-2">
-                            <div className="row">
-                                <div className="col-sm-8 col-12">
-                                    <div className="card-body">
-                                    <h5 className="card-title">{props.value.title}</h5>
-                                    </div>
-                                </div>
-                                <div className="col-sm-4 col-12">
-                                <img src={`https://img.youtube.com/vi/${getVideoID(props.value.youtubeURL)}/0.jpg`} className="img-fluid rounded" alt={props.value.title}/>
+                        <div className="row">
+                            <div className="col-sm-8 col-12">
+                                <div className="card-body">
+                                <h5 className="card-title">{props.value.title}</h5>
                                 </div>
                             </div>
+                            <div className="col-sm-4 col-12">
+                            <img src={`https://img.youtube.com/vi/${getVideoID(props.value.youtubeURL)}/0.jpg`} className="img-fluid rounded" alt={props.value.title}/>
+                            </div>
                         </div>
-
                     )
                 default:
                     return(
-                        <div className="card my-2">
-                            <div className="card-body">
-                                <h5 className="card-title">{props.value.title}</h5>
-                            </div>
+                        <div className="card-body">
+                            <h5 className="card-title">{props.value.title}</h5>
                         </div>
                     )
             }
         })
+        function handleNoteCardClicked() {
+            window.location.href = `/note/${props.value.id}`
+        }
+
         return(
             <>
-            {card()}
+            <div className="card my-2" onClick={handleNoteCardClicked}>
+                {card()}
+            </div>
             </>
         )
     }
@@ -60,9 +61,6 @@ export default function ListOfNotes(props) {
     return (<>
     <NavBar />
         <div className="container">
-            <div>
-            <h1>list of notes</h1>
-            </div>
             <div>
                 {
                     list.map((value, index) => {
