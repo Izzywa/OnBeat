@@ -152,10 +152,10 @@ export default function CreateNote(props) {
                 error: true,
                 message: "Please fill in the title of the note."
             })
-        } else if (title.length > 100) {
+        } else if (title.length > 200) {
             setTitleError({
                 error: true,
-                message: "Title must not be more than 100 characters."
+                message: "Title must not be more than 200 characters."
             })
         } else {
             setTitleError({

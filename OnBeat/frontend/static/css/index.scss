@@ -185,3 +185,9 @@ pre {
   text-transform: uppercase;
   border-bottom: 2px double $orange-primary;
 }
+
+.card {
+  background-color: $dark;
+  color: $light;
+  border: 1px solid $light;
+}

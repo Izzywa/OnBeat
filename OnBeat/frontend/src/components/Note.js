@@ -9,6 +9,7 @@ import DisplayTimestamp from "./DisplayTimestamp";
 import ExpandMenu from "./ExpandMenu";
 import BasicModal from "./BasicModal";
 import csrftoken from "./CSRFCookie";
+import getVideoID from "./getVideoID";
 
 export default function Note(props) {
     const { noteID } = useParams()
@@ -102,23 +103,11 @@ export default function Note(props) {
         }
     }
 
-    function getVideoID() {
-        let videoID;
-            if (noteObject.youtubeURL) {
-                if (noteObject.youtubeURL.url.startsWith('https://www.youtube.com')) {
-                    videoID = noteObject.youtubeURL.url.split('v=')[1].split('&')[0]
-                } else {
-                    videoID = noteObject.youtubeURL.url.split('.be/')[1].split('?')[0]
-                }
-            }
-        return videoID
-    }
-
     return (<div>
         <h2 className="title-display">{props.noteObject.note.title}</h2>
 
         {props.noteObject.youtubeURL ? 
-            <YoutubeIframe id={getVideoID()} IframeRef={IframeRef}
+            <YoutubeIframe id={getVideoID(noteObject.youtubeURL.url)} IframeRef={IframeRef}
             viewOnly={viewOnly} setYoutubeError={setYoutubeError} />
          : null}
 

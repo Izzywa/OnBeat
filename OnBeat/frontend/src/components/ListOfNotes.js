@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import NavBar from "./NavBar";
+import getVideoID from "./getVideoID";
 
 export default function ListOfNotes(props) {
     const { setPageName } = useAuth()
@@ -8,7 +9,7 @@ export default function ListOfNotes(props) {
     const [list, setList] = useState([])
 
     useEffect(() => {
-        setPageName("View Note")
+        setPageName("Note List")
 
         fetch('/backend/list')
         .then(response => response.json())
@@ -18,17 +19,41 @@ export default function ListOfNotes(props) {
         })
     }, [])
 
-    //https://img.youtube.com/vi/<insert-youtube-video-id-here>/0.jpg
 
     function NoteCard(props) {
         
+        const card = useCallback(() => {
+            switch(true) {
+                case (props.value.youtubeURL != null):
+                    return(
+                        <div className="card my-2">
+                            <div className="row">
+                                <div className="col-sm-8 col-12">
+                                    <div className="card-body">
+                                    <h5 className="card-title">{props.value.title}</h5>
+                                    </div>
+                                </div>
+                                <div className="col-sm-4 col-12">
+                                <img src={`https://img.youtube.com/vi/${getVideoID(props.value.youtubeURL)}/0.jpg`} className="img-fluid rounded" alt={props.value.title}/>
+                                </div>
+                            </div>
+                        </div>
+
+                    )
+                default:
+                    return(
+                        <div className="card my-2">
+                            <div className="card-body">
+                                <h5 className="card-title">{props.value.title}</h5>
+                            </div>
+                        </div>
+                    )
+            }
+        })
         return(
-            <div className="card">
-        <img src="https://img.youtube.com/vi/bWIgy-Ls-SU/0.jpg" className="card-img-top" alt="..."/>
-        <div className="card-body">
-            <p className="card-text">{props.value.title}</p>
-        </div>
-        </div>
+            <>
+            {card()}
+            </>
         )
     }
 
