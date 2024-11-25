@@ -2,21 +2,35 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import NavBar from "./NavBar";
 import getVideoID from "./getVideoID";
+import { useParams } from "react-router-dom";
 
 export default function ListOfNotes(props) {
     const { setPageName } = useAuth()
+    const [page, setpage] = useState(null)
 
     const [list, setList] = useState([])
+
 
     useEffect(() => {
         setPageName("Notes List")
 
-        fetch('/backend/list')
-        .then(response => response.json())
-        .then(result => {
-            console.log(result)
-            setList(result.notes)
+        let url = (page ? `/backend/list/${page}`: 'backend/list')
+        let okStatus;
+        
+        fetch(url)
+        .then(response => {
+            okStatus = response.ok
+            return response.json()
         })
+        .then(result => {
+            if (okStatus) {
+                setList(result.notes)
+                console.log(result.num_pages)
+            }
+            else {
+                console.log(result)
+            }
+        }).catch(error => {console.log(error)})
     }, [])
 
 
@@ -30,6 +44,7 @@ export default function ListOfNotes(props) {
                             <div className="col-sm-8 col-12">
                                 <div className="card-body">
                                 <h5 className="card-title">{props.value.title}</h5>
+                                <p className="card-text"><small className="text-secondary">{props.value.date_created}</small></p>
                                 </div>
                             </div>
                             <div className="col-sm-4 col-12">
@@ -41,6 +56,7 @@ export default function ListOfNotes(props) {
                     return(
                         <div className="card-body">
                             <h5 className="card-title">{props.value.title}</h5>
+                            <p className="card-text"><small className="text-secondary">{props.value.date_created}</small></p>
                         </div>
                     )
             }

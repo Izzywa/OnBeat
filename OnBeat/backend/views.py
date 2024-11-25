@@ -1,7 +1,8 @@
 import json
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -144,11 +145,23 @@ def delete_note(request, noteID):
         return HttpResponseRedirect(reverse("frontend:view_note", args=(noteID,)))
     
 @login_required(login_url="/login")
-def list_notes(request):
+def list_notes(request, page=None):
     notes = Note.objects.filter(user=request.user).order_by('-date_created')
     
-    list = [note.serialize() for note in notes]
-    for index, note in enumerate(notes):
+    if page is None:
+        page = 1
+        
+    try:
+        notes_pagination = Paginator(notes,2).page(page)
+    except PageNotAnInteger:
+        notes_pagination = Paginator(notes, 2).page(1)
+    except EmptyPage:
+        return JsonResponse({
+            'message': 'page does not exist'
+        }, status=404)
+    
+    list = [note.serialize() for note in notes_pagination]
+    for index, note in enumerate(notes_pagination):
         try:
             youtubeURL = note.youtubeURL.url
         except:
@@ -156,7 +169,8 @@ def list_notes(request):
         list[index]['youtubeURL'] = youtubeURL
             
     return JsonResponse({
-        'notes': list
+        'notes': list,
+        'num_pages': Paginator(notes,2).num_pages
         }, status=status.HTTP_200_OK)
 '''
 for index, item in enumerate(list):

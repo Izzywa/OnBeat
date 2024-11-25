@@ -15,7 +15,7 @@ class User(AbstractUser):
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="note")
     title = models.CharField(blank=False, max_length=200)
-    date_created = models.DateField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         unique_together = ("user", "title")
@@ -36,8 +36,8 @@ class NoteContent(models.Model):
     note = models.ForeignKey(Note, related_name="content", on_delete=models.CASCADE)
     subheading = models.CharField(blank=True, max_length=100)
     text = models.TextField(blank=False)
-    date_created = models.DateField(auto_now_add=True)
-    date_modified = models.DateField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
     
     def serialize(self):
         return {
@@ -65,8 +65,8 @@ class NoteTimestamp(models.Model):
     note = models.ForeignKey(Note, related_name="timestamp", on_delete=models.CASCADE)
     timestamp = models.DurationField(blank=False)
     text = models.TextField(blank=False)
-    date_created = models.DateField(auto_now_add=True)
-    date_modified = models.DateField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
     
     def serialize(self):
         return {
