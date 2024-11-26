@@ -42,60 +42,32 @@ export default function Paginator(props) {
         </li>
        )
     }
-    let paginationList = Array(props.numPages).fill().map((_, index) => index + 1)
-
-    /**
-     * 
-     * function DropdownItem(props) {
-      if (props.link) {
-        return (
-          <Link className="dropdown-item" to={props.link}>{props.label}</Link>
-        )
-      } else {
-        return (
-            <a className="dropdown-item" href="#">{props.label}</a>
-        )
-      }
-    }
-
-    function Dropdown() {
-        return (
-            <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          More
-        </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <DropdownItem label='Create Note' link="/create-note"/>
-          <DropdownItem label="Notes List" link="/list"/>
-          <div className="dropdown-divider"></div>
-          <DropdownItem label="Search" />
-        </div>
-      </li>
+    function handlePreviousBtnClicked() {
+        const page = (props.page ? props.page : 1)
+        console.log(page - 1)
+        props.setPage(page - 1
         )
     }
 
-     *     {
-        paginationList.map((item, key) => {
-            return(
-                <li className="page-item" key={key}>
-                    <PageItem item={item} page={props.page}/>
-                </li>
-            )
-        })
+    function handleNextBtnClicked() {
+        const page = (props.page ? props.page : 1)
+       console.log(page + 1)
+       props.setPage(page + 1)
     }
-     */
 
     return(<>
     <nav aria-label="Page navigation">
   <ul className="pagination">
     <li className="page-item">
-        <a className={props.page === null || props.page === 1 ? "page-link disabled" : "page-link"} >Previous</a>
+        <a className={props.page === null || props.page === 1 ? "page-link disabled" : "page-link"} 
+        onClick={props.page === null || props.page === 1 ? null : handlePreviousBtnClicked}>Previous</a>
         </li>
 
         <PageItem page={props.page} numPages={props.numPages} setPage={props.setPage}/>
 
     <li className="page-item">
-        <a className={props.page == props.numPages ? "page-link disabled": "page-link"}>Next</a>
+        <a className={props.page == props.numPages ? "page-link disabled": "page-link"}
+        onClick={props.page == props.numPages ? null : handleNextBtnClicked}>Next</a>
         </li>
   </ul>
 </nav>
