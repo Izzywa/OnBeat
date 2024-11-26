@@ -12,8 +12,8 @@ $light: #ede7f6;
 }
 
 %primary-btn-hover{
-  background: $light;
-  color: $purple-light;
+  background: $light !important;
+  color: $purple-light !important;
 }
 
 %secondary-btn {
@@ -199,3 +199,14 @@ pre {
   color: $light;
   border: 1px solid $light;
 }
+
+.page-link {
+  @extend %primary-btn;
+  border: 2px solid $dark;
+
+  &.current, &:hover, &.disabled {
+    @extend %primary-btn-hover;
+  }
+}
+
+

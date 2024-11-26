@@ -2,11 +2,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import NavBar from "./NavBar";
 import getVideoID from "./getVideoID";
-import { useParams } from "react-router-dom";
+import Paginator from "./Paginator";
 
 export default function ListOfNotes(props) {
     const { setPageName } = useAuth()
-    const [page, setpage] = useState(null)
+    const [page, setPage] = useState(null)
+    const [numPages, setNumPages] = useState(null)
 
     const [list, setList] = useState([])
 
@@ -25,7 +26,7 @@ export default function ListOfNotes(props) {
         .then(result => {
             if (okStatus) {
                 setList(result.notes)
-                console.log(result.num_pages)
+                setNumPages(result.num_pages)
             }
             else {
                 console.log(result)
@@ -88,6 +89,8 @@ export default function ListOfNotes(props) {
                     })
                 }
             </div>
+
+            { numPages ? <Paginator page={page} setPage={setPage} numPages={numPages}/>: null}
             
         </div>
         </>

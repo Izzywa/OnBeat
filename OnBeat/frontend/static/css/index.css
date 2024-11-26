@@ -1,6 +1,11 @@
-.submit-btn {
+.page-link, .submit-btn {
   background: #7e57c2;
   color: #ede7f6;
+}
+
+.page-link.current, .page-link:hover, .page-link.disabled {
+  background: #ede7f6 !important;
+  color: #7e57c2 !important;
 }
 
 .submit-btn-secondary {
@@ -163,6 +168,10 @@ pre {
   background-color: #212121;
   color: #ede7f6;
   border: 1px solid #ede7f6;
+}
+
+.page-link {
+  border: 2px solid #212121;
 }
 
 /*# sourceMappingURL=index.css.map */
