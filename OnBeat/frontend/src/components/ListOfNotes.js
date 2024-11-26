@@ -32,7 +32,7 @@ export default function ListOfNotes(props) {
                 console.log(result)
             }
         }).catch(error => {console.log(error)})
-    }, [])
+    }, [page])
 
 
     function NoteCard(props) {

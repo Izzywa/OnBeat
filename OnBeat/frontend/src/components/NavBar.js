@@ -24,7 +24,7 @@ export default function NavBar(props) {
     function Dropdown() {
         return (
             <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           More
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">

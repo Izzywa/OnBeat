@@ -3,7 +3,7 @@
   color: #ede7f6;
 }
 
-.page-link.current, .page-link:hover, .page-link.disabled {
+.paginator-dropdown-menu, .page-link.current, .page-link:hover, .page-link.disabled {
   background: #ede7f6 !important;
   color: #7e57c2 !important;
 }
@@ -167,11 +167,38 @@ pre {
 .card {
   background-color: #212121;
   color: #ede7f6;
-  border: 1px solid #ede7f6;
+  border: none;
+  border-bottom: 2px solid #ede7f6;
 }
 
 .page-link {
   border: 2px solid #212121;
 }
+.paginator-dropdown-menu {
+  max-height: 10em;
+  overflow-y: scroll;
+  width: 1em;
+  max-width: 1em;
+}
+.paginator-dropdown-menu .dropdown-input {
+  position: sticky;
+  top: 0;
+  padding: 0 5px 0;
+}
+.paginator-dropdown-menu .dropdown-input input {
+  max-width: 100%;
+  background-color: #7e57c2;
+  color: #ede7f6;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*input[type=number] {
+  -moz-appearance: textfield;
+}*/
 
 /*# sourceMappingURL=index.css.map */

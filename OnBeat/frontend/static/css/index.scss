@@ -197,7 +197,9 @@ pre {
 .card {
   background-color: $dark;
   color: $light;
-  border: 1px solid $light;
+  border: none;
+  border-bottom: 2px solid $light;
+
 }
 
 .page-link {
@@ -210,3 +212,32 @@ pre {
 }
 
 
+.paginator-dropdown-menu {
+  max-height: 10em;
+  overflow-y: scroll;
+  width: 1em;
+  max-width: 1em;
+  @extend %primary-btn-hover;
+
+  .dropdown-input {
+    position: sticky;
+    top: 0;
+    padding: 0 5px 0;
+
+    input {
+      max-width: 100%;
+      background-color: $purple-light;
+      color: $light;
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*input[type=number] {
+  -moz-appearance: textfield;
+}*/
