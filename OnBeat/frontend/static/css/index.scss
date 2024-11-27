@@ -198,7 +198,7 @@ pre {
   background-color: $dark;
   color: $light;
   border: none;
-  border-bottom: 2px solid $light;
+  border: 2px solid $light;
 
 }
 
@@ -252,4 +252,52 @@ a {
   small {
     color: $purple-light;
   }
+}
+
+.checkbox-container {
+    input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked ~ label {
+      color: $light;
+    }
+    &:checked ~ label:after {
+      transition: all 1s ease;
+      content: '';
+      transform: translateY(0);
+      background: $purple-light;
+      
+    }
+  }
+
+  label {
+    margin: 0 1em 0;
+    color: $orange-light;
+    width: 100%;
+    font-size: small;
+
+    &:after {
+      transition: all 0.5s ease;
+      content: '';
+      transform: translateY(-0.9em);
+      position: absolute;
+      height: 2px;
+      width: 80%;
+      left: 10%;
+      bottom: -2px;
+      background: $orange-light;
+    }
+  }
+}
+
+.filter-container{
+  &>label {
+    background-color: $purple-light;
+    @extend %center-flex
+  }
+  margin: 1em 0 2em
 }

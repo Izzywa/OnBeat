@@ -13,7 +13,7 @@
   color: #212121;
 }
 
-.title-display, .spinner-div {
+.filter-container > label, .title-display, .spinner-div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,7 +168,7 @@ pre {
   background-color: #212121;
   color: #ede7f6;
   border: none;
-  border-bottom: 2px solid #ede7f6;
+  border: 2px solid #ede7f6;
 }
 
 .page-link {
@@ -209,6 +209,47 @@ a {
 }
 a small {
   color: #7e57c2;
+}
+
+.checkbox-container input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkbox-container input[type=checkbox]:checked ~ label {
+  color: #ede7f6;
+}
+.checkbox-container input[type=checkbox]:checked ~ label:after {
+  transition: all 1s ease;
+  content: "";
+  transform: translateY(0);
+  background: #7e57c2;
+}
+.checkbox-container label {
+  margin: 0 1em 0;
+  color: #ffd54f;
+  width: 100%;
+  font-size: small;
+}
+.checkbox-container label:after {
+  transition: all 0.5s ease;
+  content: "";
+  transform: translateY(-0.9em);
+  position: absolute;
+  height: 2px;
+  width: 80%;
+  left: 10%;
+  bottom: -2px;
+  background: #ffd54f;
+}
+
+.filter-container {
+  margin: 1em 0 2em;
+}
+.filter-container > label {
+  background-color: #7e57c2;
 }
 
 /*# sourceMappingURL=index.css.map */

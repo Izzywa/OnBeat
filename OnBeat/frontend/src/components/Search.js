@@ -87,13 +87,13 @@ export default function Search(props) {
          }
 
         return (
-            <>
-            <input className="form-check-input" type="checkbox" id={`${props.keyName}-checkbox`} 
+            <div className="checkbox-container">
+            <input type="checkbox" id={`${props.keyName}-checkbox`} 
             value={props.keyName} defaultChecked={props.filter[props.keyName]} onChange={handleCheckboxChange}/>
             <label className="form-check-label" htmlFor={`${props.keyName}-checkbox`}>
                 {props.keyName}
             </label>
-            </>
+            </div>
         )
     }
 
@@ -141,6 +141,7 @@ export default function Search(props) {
         <div className="container">
             <div>
             <TextInputField field="Search" type="text" placeholder="" ref={searchRef} onChange={handleSearchInputChange}/>
+            <div className="filter-container">
             <label htmlFor="filter-checkbox">Filters</label>
                 <div className="filter-checkbox" id="filter-checkbox">
                     {
@@ -152,6 +153,7 @@ export default function Search(props) {
                             )
                         })
                     }
+                </div>
                 </div>
             </div>
 
