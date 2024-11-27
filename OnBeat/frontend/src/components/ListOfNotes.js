@@ -46,7 +46,7 @@ export default function ListOfNotes(props) {
                         <div className="row">
                             <div className="col-sm-8 col-12">
                                 <div className="card-body">
-                                <h5 className="card-title">{props.value.title}</h5>
+                                <h5 className="card-title title-display">{props.value.title}</h5>
                                 <p className="card-text"><small className="text-secondary">{props.value.date_created}</small></p>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@ export default function ListOfNotes(props) {
                 default:
                     return(
                         <div className="card-body">
-                            <h5 className="card-title">{props.value.title}</h5>
+                            <h5 className="card-title title-display">{props.value.title}</h5>
                             <p className="card-text"><small className="text-secondary">{props.value.date_created}</small></p>
                         </div>
                     )

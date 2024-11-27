@@ -245,3 +245,11 @@ input::-webkit-inner-spin-button {
 label::first-letter {
   text-transform: capitalize;
 }
+
+a {
+  cursor: pointer;
+
+  small {
+    color: $purple-light;
+  }
+}

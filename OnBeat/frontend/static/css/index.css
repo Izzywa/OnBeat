@@ -204,4 +204,11 @@ label::first-letter {
   text-transform: capitalize;
 }
 
+a {
+  cursor: pointer;
+}
+a small {
+  color: #7e57c2;
+}
+
 /*# sourceMappingURL=index.css.map */

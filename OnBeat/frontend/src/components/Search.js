@@ -5,6 +5,7 @@ import TextInputField from "./TextInputField";
 import csrftoken from "./CSRFCookie";
 import Paginator from "./Paginator";
 import { Alert } from "@mui/material";
+import LaunchIcon from '@mui/icons-material/Launch';
 
 export default function Search(props) {
     const { setPageName } = useAuth();
@@ -101,7 +102,7 @@ export default function Search(props) {
             switch(true) {
                 case (props.item.title !== undefined):
                     return(
-                        <p>title</p>
+                        <h5 className="card-title title-display">{props.item.title}</h5>
                     )
                 case (props.item.content !== undefined):
                     return(
@@ -118,9 +119,20 @@ export default function Search(props) {
             }
         }, [])
 
-        return(<>
-        {type()}
-        </>)
+        function handleGoToNote() {
+            const id = (props.item.title !== undefined ? props.item.id : props.item.note_id)
+
+             window.location.href = `/note/${id}`
+        }
+
+        return(<div className="card my-2">
+            <div className="card-body">
+                {type()}
+                <a onClick={handleGoToNote} className="search-link">
+                    <small>go to note <LaunchIcon sx={{ fontSize: 10 }}/></small>
+                    </a>
+            </div>
+        </div>)
     }
 
     return(
