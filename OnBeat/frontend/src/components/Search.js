@@ -16,6 +16,9 @@ export default function Search(props) {
         timestamp: true
     })
 
+    const [page, setPage] = useState(null)
+    const [numPages, setNumPages] = useState(null)
+
     useEffect(() => {
         setPageName("Search")
     }, [])
@@ -30,7 +33,8 @@ export default function Search(props) {
                 mode: 'same-origin',
                 body: JSON.stringify({
                     text: searchText,
-                    filter: filter
+                    filter: filter,
+                    page: page
                 })
         }
 

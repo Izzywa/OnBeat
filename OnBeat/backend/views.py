@@ -179,32 +179,49 @@ def search(request):
         data = json.loads(request.body)
         text = data.get("text")
         filter = data.get("filter")
+        if data.get("page") is None:
+            page = 1
+        else:
+            page= data.get("page")
         
         notes = []
-        
         if filter['title']:
             title_list = Note.objects.filter(user=request.user, title__contains=text)
             if len(title_list) != 0:
                 for title in title_list:
-                    notes.append(title.serialize())
+                    notes.append(title)
         
         if filter['note']:
             note_list = NoteContent.objects.filter(Q(note__user=request.user, text__contains=text) | Q(note__user=request.user, heading__contains=text))
             if len(note_list)!= 0:
                 for note in note_list:
-                    notes.append(note.serialize())
+                    notes.append(note)
                     
         if filter['timestamp']:
             timestamp_list = NoteTimestamp.objects.filter(note__user=request.user, text__contains=text)
             if len(timestamp_list) != 0:
                 for timestamp in timestamp_list:
-                    notes.append(timestamp.serialize())
-             
+                    notes.append(timestamp)
+        
+        notes_list = []
+        num_pages = None
         if len(notes) != 0:       
-            notes = sorted(notes, key=lambda obj: obj['datetime_format_created'])
+            notes_list = sorted(notes, key=lambda obj: obj.date_created)
+            try:
+                notes_pagination = Paginator(notes_list,2).page(page)
+            except PageNotAnInteger:
+                notes_pagination = Paginator(notes_list, 2).page(1)
+            except EmptyPage:
+                return JsonResponse({
+                    'message': 'page does not exist'
+                }, status=404)
+            
+            notes_list = [note.serialize() for note in notes_pagination]
+            num_pages = Paginator(notes,2).num_pages
         
         return JsonResponse({
-            'notes': notes
+            'notes': notes_list,
+            'num_page': num_pages
             }, status=status.HTTP_200_OK)
     else:
         return HttpResponseRedirect(reverse("frontend:search"))
