@@ -52,7 +52,6 @@ export default function Paginator(props) {
        props.setPage(page + 1)
     }
 
-    console.log(props.page == props.numPages)
     function nextBtnDisabled() {
         const page = (props.page ? props.page : 1)
         if (page != props.numPages) {

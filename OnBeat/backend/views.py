@@ -213,15 +213,21 @@ def search(request):
                 notes_pagination = Paginator(notes_list, 2).page(1)
             except EmptyPage:
                 return JsonResponse({
-                    'message': 'page does not exist'
+                    'error': True,
+                    'message': 'Page not found'
                 }, status=404)
             
             notes_list = [note.serialize() for note in notes_pagination]
             num_pages = Paginator(notes,2).num_pages
         
-        return JsonResponse({
-            'notes': notes_list,
-            'num_pages': num_pages
-            }, status=status.HTTP_200_OK)
+            return JsonResponse({
+                'notes': notes_list,
+                'num_pages': num_pages
+                }, status=status.HTTP_200_OK)
+        else:
+            return JsonResponse({
+                'error': True,
+                'message': 'No notes found.'
+            }, status=404)
     else:
         return HttpResponseRedirect(reverse("frontend:search"))

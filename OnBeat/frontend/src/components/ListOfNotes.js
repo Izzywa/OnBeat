@@ -63,7 +63,7 @@ export default function ListOfNotes(props) {
                         </div>
                     )
             }
-        })
+        },[])
         function handleNoteCardClicked() {
             window.location.href = `/note/${props.value.id}`
         }

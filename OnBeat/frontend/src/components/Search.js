@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import NavBar from "./NavBar";
 import { useAuth } from "./AuthContext";
 import TextInputField from "./TextInputField";
@@ -20,6 +20,10 @@ export default function Search(props) {
     const [page, setPage] = useState(null)
     const [numPages, setNumPages] = useState(null)
     const [noteList, setNoteList] = useState([])
+    const [error, setError] = useState({
+        error: false,
+        message: ''
+    })
 
     useEffect(() => {
         setPageName("Search")
@@ -40,12 +44,25 @@ export default function Search(props) {
                 })
         }
 
+        let status;
         fetch('/backend/search', requestOptions)
-        .then(response => response.json())
+        .then(response => {
+            status = response.status
+            return response.json()
+        })
         .then(result => {
-            setNoteList(result.notes)
-            setNumPages(result.num_pages)
-            console.log(numPages)
+            if (status === 200) {
+                setNoteList(result.notes)
+                setNumPages(result.num_pages)
+                setError({
+                    error: false,
+                    message: ''
+                })
+            } else {
+                setNoteList([])
+                setNumPages(null)
+                setError(result)
+            }
         }).catch(error => {
             console.log(error)
         })
@@ -79,6 +96,32 @@ export default function Search(props) {
         )
     }
 
+    function SearchDisplay(props) {
+        const type = useCallback(() => {
+            switch(true) {
+                case (props.item.title !== undefined):
+                    return(
+                        <p>title</p>
+                    )
+                case (props.item.content !== undefined):
+                    return(
+                        <p>content</p>
+                    )
+                case (props.item.timestamp !== undefined):
+                    return(
+                        <p>timestamp</p>
+                    )
+                default:
+                    return(
+                        <></>
+                    )
+            }
+        }, [])
+
+        return(<>
+        {type()}
+        </>)
+    }
 
     return(
         <>
@@ -99,11 +142,20 @@ export default function Search(props) {
                     }
                 </div>
             </div>
+
+            {
+                error.error ?
+                <Alert className="my-3" variant="outlined" severity="warning">{error.message}</Alert>
+                : null
+            }
+
             <div>
                 {
                     noteList.map((item, index) => {
                         return(
-                            <p key={index}>{item.id}</p>
+                            <div key={index}>
+                                <SearchDisplay item={item}/>
+                            </div>
                         )
                     })
                 }
@@ -111,9 +163,7 @@ export default function Search(props) {
             <div className="my-2">
                 {numPages ? 
                 <Paginator page={page} setPage={setPage} numPages={numPages} />
-                 : <Alert variant="outlined" severity="warning">
-                 No notes found.
-               </Alert> }
+                 : null }
                
             </div>
         </div>
