@@ -1,5 +1,5 @@
 import json
-from django.db import IntegrityError
+from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from rest_framework import status
 
-from .models import User, Note, NoteList
+from .models import User, Note, NoteList, NoteContent, NoteTimestamp
 from .helpers import validateUsername, validatePassword, validateEmail
 
 # Create your views here.
@@ -179,9 +179,32 @@ def search(request):
         data = json.loads(request.body)
         text = data.get("text")
         filter = data.get("filter")
+        
+        notes = []
+        
+        if filter['title']:
+            title_list = Note.objects.filter(user=request.user, title__contains=text)
+            if len(title_list) != 0:
+                for title in title_list:
+                    notes.append(title.serialize())
+        
+        if filter['note']:
+            note_list = NoteContent.objects.filter(Q(note__user=request.user, text__contains=text) | Q(note__user=request.user, heading__contains=text))
+            if len(note_list)!= 0:
+                for note in note_list:
+                    notes.append(note.serialize())
+                    
+        if filter['timestamp']:
+            timestamp_list = NoteTimestamp.objects.filter(note__user=request.user, text__contains=text)
+            if len(timestamp_list) != 0:
+                for timestamp in timestamp_list:
+                    notes.append(timestamp.serialize())
+             
+        if len(notes) != 0:       
+            notes = sorted(notes, key=lambda obj: obj['datetime_format_created'])
+        
         return JsonResponse({
-            'text': text,
-            'filter': filter
+            'notes': notes
             }, status=status.HTTP_200_OK)
     else:
         return HttpResponseRedirect(reverse("frontend:search"))

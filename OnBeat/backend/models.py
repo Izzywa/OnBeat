@@ -29,12 +29,14 @@ class Note(models.Model):
             "id": self.id,
             "user": self.user.username,
             "title": self.title,
-            "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p")
+            "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p"),
+            "datetime_format_created": self.date_created
+        
         }
 
 class NoteContent(models.Model):
     note = models.ForeignKey(Note, related_name="content", on_delete=models.CASCADE)
-    subheading = models.CharField(blank=True, max_length=100)
+    heading = models.CharField(blank=True, max_length=100)
     text = models.TextField(blank=False)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
@@ -43,9 +45,10 @@ class NoteContent(models.Model):
         return {
             "note_id": self.note.id,
             "content_id": self.id,
-            "subheading": self.subheading,
+            "heading": self.heading,
             "content": self.text,
-            "date_created": self.date_created,
+            "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p"),
+            "datetime_format_created": self.date_created,
             "date_modified": self.date_modified
         }
         
@@ -74,7 +77,8 @@ class NoteTimestamp(models.Model):
             "timestamp_id": self.id,
             "timestamp": self.timestamp,
             "text": self.text,
-            "date_created": self.date_created,
+            "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p"),
+            "datetime_format_created": self.date_created,
             "date_modified": self.date_modified
         }
     
@@ -107,7 +111,7 @@ class NoteList(models.Model):
     def serialize(self):
         if self.type == "note":
             content = {
-                "heading": self.content.subheading,
+                "heading": self.content.heading,
                 "text": self.content.text
             }
         else:

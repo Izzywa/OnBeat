@@ -9,7 +9,7 @@ class NoteListAdmin(admin.ModelAdmin):
     
 class NoteContentAdmin(admin.ModelAdmin):
     list_display = [
-        "id", "note__id", "subheading", "date_created", "date_modified"
+        "id", "note__id", "heading", "date_created", "date_modified"
     ]
 
 class NoteAdmin(admin.ModelAdmin):

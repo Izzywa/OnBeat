@@ -4,6 +4,8 @@ import NavBar from "./NavBar";
 import getVideoID from "./getVideoID";
 import Paginator from "./Paginator";
 
+/// MIGHT BE REDUNDANT WITH THE SEARCH FUNCTION
+
 export default function ListOfNotes(props) {
     const { setPageName } = useAuth()
     const [page, setPage] = useState(null)

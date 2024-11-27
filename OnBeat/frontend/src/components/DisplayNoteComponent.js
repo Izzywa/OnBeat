@@ -20,7 +20,7 @@ export default function DisplayNoteComponent(props) {
 
     } else {
         return (<>
-            <h3 className="note-subheading">{props.noteList[props.index].content.heading}</h3>
+            <h3 className="note-heading">{props.noteList[props.index].content.heading}</h3>
             <MarkdownDisplay markdownText={props.noteList[props.index].content.text} className={"col-12"}/>
             {props.viewOnly ? null : <button className="btn submit-btn mr-1" onClick={handleEdit}>Edit</button>}
         </>)
