@@ -9,5 +9,6 @@ urlpatterns = [
     path("register", views.index, name="register"),
     path("create-note", views.index, name="create-_ote"),
     path("note/<int:noteID>", views.index, name="view_note"),
-    path("list", views.index, name="list")
+    path("list", views.index, name="list"),
+    path("search", views.index, name="search")
 ]

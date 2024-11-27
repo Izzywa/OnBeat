@@ -190,6 +190,7 @@ export default function CreateNote(props) {
                if (status === 200) {
                     console.log(result.message)
                     console.log(noteContentObject)
+                    console.log('redirect to note page if successfully created')
                } else {
                     setOpenModal(true)
                     setModalMessage(result)
@@ -201,7 +202,6 @@ export default function CreateNote(props) {
         }
 
     }
-    console.log('create note')
 
     return(
         <>

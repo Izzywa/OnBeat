@@ -44,14 +44,11 @@ export default function Paginator(props) {
     }
     function handlePreviousBtnClicked() {
         const page = (props.page ? props.page : 1)
-        console.log(page - 1)
-        props.setPage(page - 1
-        )
+        props.setPage(page - 1)
     }
 
     function handleNextBtnClicked() {
         const page = (props.page ? props.page : 1)
-       console.log(page + 1)
        props.setPage(page + 1)
     }
 

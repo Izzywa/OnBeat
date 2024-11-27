@@ -8,6 +8,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import CreateNote from "./CreateNote";
 import Note from "./Note";
 import ListOfNotes from "./ListOfNotes";
+import Search from "./Search";
 
 export default function App(props) {
     return(
@@ -19,6 +20,7 @@ export default function App(props) {
                 <Route path="/create-note" element={<CreateNote />}/>
                 <Route path="/note/:noteID" element={<Note />}/>
                 <Route path="/list" element={<ListOfNotes />} />
+                <Route path="/search" element={<Search />} />
                 </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

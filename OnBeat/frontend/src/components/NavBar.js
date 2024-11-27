@@ -31,7 +31,7 @@ export default function NavBar(props) {
             <DropdownItem label='Create Note' link="/create-note"/>
           <DropdownItem label="Notes List" link="/list"/>
           <div className="dropdown-divider"></div>
-          <DropdownItem label="Search" />
+          <DropdownItem label="Search" link="/search"/>
         </div>
       </li>
         )
