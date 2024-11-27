@@ -6,6 +6,7 @@ import csrftoken from "./CSRFCookie";
 import Paginator from "./Paginator";
 import { Alert } from "@mui/material";
 import LaunchIcon from '@mui/icons-material/Launch';
+import MarkdownDisplay from "./MarkdownDisplay";
 
 export default function Search(props) {
     const { setPageName } = useAuth();
@@ -106,7 +107,10 @@ export default function Search(props) {
                     )
                 case (props.item.content !== undefined):
                     return(
-                        <p>content</p>
+                        <div className="card-text">
+                            <h3 className="note-heading">{props.item.heading}</h3>
+                            <MarkdownDisplay markdownText={props.item.content} className={"col-12"}/>
+                        </div>
                     )
                 case (props.item.timestamp !== undefined):
                     return(
@@ -138,9 +142,9 @@ export default function Search(props) {
     return(
         <>
         <NavBar />
-        <div className="container">
+        <div className="container my-2">
             <div>
-            <TextInputField field="Search" type="text" placeholder="" ref={searchRef} onChange={handleSearchInputChange}/>
+            <TextInputField field="" type="text" placeholder="Search" ref={searchRef} onChange={handleSearchInputChange}/>
             <div className="filter-container">
             <label htmlFor="filter-checkbox">Filters</label>
                 <div className="filter-checkbox" id="filter-checkbox">
@@ -168,7 +172,7 @@ export default function Search(props) {
                     noteList.map((item, index) => {
                         return(
                             <div key={index}>
-                                <SearchDisplay item={item}/>
+                                <SearchDisplay item={item} index={index}/>
                             </div>
                         )
                     })
