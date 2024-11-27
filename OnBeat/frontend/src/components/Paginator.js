@@ -52,6 +52,16 @@ export default function Paginator(props) {
        props.setPage(page + 1)
     }
 
+    console.log(props.page == props.numPages)
+    function nextBtnDisabled() {
+        const page = (props.page ? props.page : 1)
+        if (page != props.numPages) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     return(<>
     <nav aria-label="Page navigation">
   <ul className="pagination">
@@ -63,8 +73,8 @@ export default function Paginator(props) {
         <PageItem page={props.page} numPages={props.numPages} setPage={props.setPage}/>
 
     <li className="page-item">
-        <a className={props.page == props.numPages ? "page-link disabled": "page-link"}
-        onClick={props.page == props.numPages ? null : handleNextBtnClicked}>Next</a>
+        <a className={nextBtnDisabled() ? "page-link disabled": "page-link"}
+        onClick={nextBtnDisabled() ? null : handleNextBtnClicked}>Next</a>
         </li>
   </ul>
 </nav>

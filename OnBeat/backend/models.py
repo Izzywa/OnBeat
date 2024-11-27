@@ -30,7 +30,6 @@ class Note(models.Model):
             "user": self.user.username,
             "title": self.title,
             "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p"),
-            "datetime_format_created": self.date_created
         
         }
 
@@ -43,12 +42,12 @@ class NoteContent(models.Model):
     
     def serialize(self):
         return {
+            "id": self.id,
             "note_id": self.note.id,
             "content_id": self.id,
             "heading": self.heading,
             "content": self.text,
             "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p"),
-            "datetime_format_created": self.date_created,
             "date_modified": self.date_modified
         }
         
@@ -58,6 +57,7 @@ class YoutubeUrl(models.Model):
     
     def serialize(self):
         return {
+            "id": self.id,
             "note_id": self.note.id,
             "url_id": self.id,
             "url": self.url
@@ -73,12 +73,12 @@ class NoteTimestamp(models.Model):
     
     def serialize(self):
         return {
+            "id": self.id,
             "note_id": self.note.id,
             "timestamp_id": self.id,
             "timestamp": self.timestamp,
             "text": self.text,
             "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p"),
-            "datetime_format_created": self.date_created,
             "date_modified": self.date_modified
         }
     

@@ -4,6 +4,7 @@ import { useAuth } from "./AuthContext";
 import TextInputField from "./TextInputField";
 import csrftoken from "./CSRFCookie";
 import Paginator from "./Paginator";
+import { Alert } from "@mui/material";
 
 export default function Search(props) {
     const { setPageName } = useAuth();
@@ -18,6 +19,7 @@ export default function Search(props) {
 
     const [page, setPage] = useState(null)
     const [numPages, setNumPages] = useState(null)
+    const [noteList, setNoteList] = useState([])
 
     useEffect(() => {
         setPageName("Search")
@@ -41,8 +43,9 @@ export default function Search(props) {
         fetch('/backend/search', requestOptions)
         .then(response => response.json())
         .then(result => {
-            console.log(result)
+            setNoteList(result.notes)
             setNumPages(result.num_pages)
+            console.log(numPages)
         }).catch(error => {
             console.log(error)
         })
@@ -97,9 +100,20 @@ export default function Search(props) {
                 </div>
             </div>
             <div>
+                {
+                    noteList.map((item, index) => {
+                        return(
+                            <p key={index}>{item.id}</p>
+                        )
+                    })
+                }
+            </div>
+            <div className="my-2">
                 {numPages ? 
                 <Paginator page={page} setPage={setPage} numPages={numPages} />
-                 : <p>no pages</p> }
+                 : <Alert variant="outlined" severity="warning">
+                 No notes found.
+               </Alert> }
                
             </div>
         </div>
