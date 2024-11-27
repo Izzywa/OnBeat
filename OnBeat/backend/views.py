@@ -221,7 +221,7 @@ def search(request):
         
         return JsonResponse({
             'notes': notes_list,
-            'num_page': num_pages
+            'num_pages': num_pages
             }, status=status.HTTP_200_OK)
     else:
         return HttpResponseRedirect(reverse("frontend:search"))

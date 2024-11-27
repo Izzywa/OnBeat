@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import { useAuth } from "./AuthContext";
 import TextInputField from "./TextInputField";
 import csrftoken from "./CSRFCookie";
-import { checkboxClasses } from "@mui/material";
+import Paginator from "./Paginator";
 
 export default function Search(props) {
     const { setPageName } = useAuth();
@@ -42,15 +42,17 @@ export default function Search(props) {
         .then(response => response.json())
         .then(result => {
             console.log(result)
+            setNumPages(result.num_pages)
         }).catch(error => {
             console.log(error)
         })
 
-    }, [filter, searchText])
+    }, [filter, searchText, page])
 
 
     function handleSearchInputChange() {
         setSearchText(searchRef.current.value)
+        setPage(null)
     }
 
 
@@ -60,6 +62,7 @@ export default function Search(props) {
                 ...props.filter,
                 [event.target.value]: event.target.checked
             })
+            props.setPage(null)
          }
 
         return (
@@ -86,7 +89,7 @@ export default function Search(props) {
                         Object.keys(filter).map((item, index) => {
                             return (
                                 <div key={index} className="form-check form-check-inline">
-                            <FilterCheckbox keyName={item} setFilter={setFilter} filter={filter}/>
+                            <FilterCheckbox keyName={item} setFilter={setFilter} filter={filter} setPage={setPage}/>
                             </div>
                             )
                         })
@@ -94,6 +97,9 @@ export default function Search(props) {
                 </div>
             </div>
             <div>
+                {numPages ? 
+                <Paginator page={page} setPage={setPage} numPages={numPages} />
+                 : <p>no pages</p> }
                
             </div>
         </div>
