@@ -140,6 +140,7 @@ def delete_note(request, noteID):
         if len(note) != 1:
             return JsonResponse({'message': 'Note not found'}, status=status.HTTP_404_NOT_FOUND)
         else: # delete note here
+            note[0].delete()
             return JsonResponse({'message': 'SUCCESS'})
     else:
         return HttpResponseRedirect(reverse("frontend:view_note", args=(noteID,)))

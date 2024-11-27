@@ -56,7 +56,6 @@ export default function Note(props) {
     const IframeRef = useRef();
 
     function handleDeleteBtnClicked() {
-        console.log('delete btn clicked')
         setOpenModal(true)
         setModalMessage({
             heading: 'Delete note.',
@@ -66,7 +65,6 @@ export default function Note(props) {
     }
 
     function handleDeleteNote() {
-        console.log(`delete note with id ${noteID}`)
         setOpenModal(false)
 
         const requestOptions = {
@@ -85,6 +83,8 @@ export default function Note(props) {
         }).catch(error => {
             console.log(error)
         })
+
+        window.location.href = '/'
     }
 
     function NoteListDisplay(props) {
