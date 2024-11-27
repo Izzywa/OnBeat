@@ -176,6 +176,12 @@ def list_notes(request, page=None):
 @login_required(login_url="/login")
 def search(request):
     if request.method == 'POST':
-        return JsonResponse({'message': 'SUCCESS'}, status=status.HTTP_200_OK)
+        data = json.loads(request.body)
+        text = data.get("text")
+        filter = data.get("filter")
+        return JsonResponse({
+            'text': text,
+            'filter': filter
+            }, status=status.HTTP_200_OK)
     else:
         return HttpResponseRedirect(reverse("frontend:search"))

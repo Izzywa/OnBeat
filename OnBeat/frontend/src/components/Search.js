@@ -21,8 +21,26 @@ export default function Search(props) {
     }, [])
 
     useEffect(() => {
-        console.log(searchText)
-        console.log(filter)
+        const requestOptions = {
+            method: ('POST'),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken()
+                },
+                mode: 'same-origin',
+                body: JSON.stringify({
+                    text: searchText,
+                    filter: filter
+                })
+        }
+
+        fetch('/backend/search', requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+        }).catch(error => {
+            console.log(error)
+        })
 
     }, [filter, searchText])
 
@@ -72,7 +90,7 @@ export default function Search(props) {
                 </div>
             </div>
             <div>
-                <p> title ? {filter.title ? "true": "false"}</p>
+               
             </div>
         </div>
         </>
