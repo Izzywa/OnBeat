@@ -15,9 +15,9 @@ class NoteTestCase(TestCase):
         note2 = Note.objects.create(user=user1, title="Note2")
         
         #create note content
-        notecontent1 = NoteContent(note=note1, subheading="", text="This is content 1.")
+        notecontent1 = NoteContent(note=note1, heading="", text="This is content 1.")
         notecontent1.save()
-        notecontent2 = NoteContent(note=note1, subheading="heading", text="content2")
+        notecontent2 = NoteContent(note=note1, heading="heading", text="content2")
         notecontent2.save()
         
         # create YoutubeUrl
