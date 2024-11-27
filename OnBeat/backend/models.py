@@ -76,8 +76,9 @@ class NoteTimestamp(models.Model):
             "id": self.id,
             "note_id": self.note.id,
             "timestamp_id": self.id,
-            "timestamp": self.timestamp,
+            "timestamp": self.timestamp.seconds,
             "text": self.text,
+            "url": self.note.youtubeURL.url,
             "date_created": self.date_created.strftime("%b %d %Y, %I:%M %p"),
             "date_modified": self.date_modified
         }

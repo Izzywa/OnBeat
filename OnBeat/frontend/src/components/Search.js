@@ -7,6 +7,8 @@ import Paginator from "./Paginator";
 import { Alert } from "@mui/material";
 import LaunchIcon from '@mui/icons-material/Launch';
 import MarkdownDisplay from "./MarkdownDisplay";
+import YouTube from "react-youtube";
+import getVideoID from "./getVideoID";
 
 export default function Search(props) {
     const { setPageName } = useAuth();
@@ -113,8 +115,35 @@ export default function Search(props) {
                         </div>
                     )
                 case (props.item.timestamp !== undefined):
+                    const timestamp = parseInt([props.item.timestamp])
+                    const IframeRef = useRef()
+
+                    const opts = {
+                        width: '100%',
+                        playerVars: {
+                          autoplay: 0
+                        },
+                      }
+
+                    function onReady(event) {
+                        event.target.seekTo(timestamp);
+                        event.target.pauseVideo();
+                    }
+
+                    function handleError() {
+                        console.log('error')
+                    }
+
                     return(
-                        <p>timestamp</p>
+                        <div className="row">
+                            <div className="col-12 col-sm-6">
+                                <YouTube className="ratio ratio-16x9" ref={IframeRef} videoId={getVideoID(props.item.url)}
+                                onReady={onReady} onError={handleError} opts={opts}/>
+                            </div>
+                            <div className="col-12 col-sm-6">
+                            <MarkdownDisplay markdownText={props.item.text} className={"col-12"}/>
+                            </div>
+                            </div>
                     )
                 default:
                     return(
