@@ -200,5 +200,8 @@ input::-webkit-inner-spin-button {
 /*input[type=number] {
   -moz-appearance: textfield;
 }*/
+label::first-letter {
+  text-transform: capitalize;
+}
 
 /*# sourceMappingURL=index.css.map */

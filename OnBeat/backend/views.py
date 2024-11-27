@@ -172,7 +172,10 @@ def list_notes(request, page=None):
         'notes': list,
         'num_pages': Paginator(notes,2).num_pages
         }, status=status.HTTP_200_OK)
-'''
-for index, item in enumerate(list):
-    print(index, item)
-'''
+
+@login_required(login_url="/login")
+def search(request):
+    if request.method == 'POST':
+        return JsonResponse({'message': 'SUCCESS'}, status=status.HTTP_200_OK)
+    else:
+        return HttpResponseRedirect(reverse("frontend:search"))
