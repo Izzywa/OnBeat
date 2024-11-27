@@ -21,7 +21,8 @@ const TextInputField =  forwardRef(function TextInputField(props, ref) {
         className={props.error ? "form-control is-invalid": "form-control"}
         id={id}
         aria-describedby={describedby} 
-        placeholder={props.placeholder}>
+        placeholder={props.placeholder}
+        onChange={props.onChange ? props.onChange: null}>
 
         </input>
         <div className="invalid-feedback">
