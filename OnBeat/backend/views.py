@@ -275,3 +275,10 @@ def search(request):
             }, status=404)
     else:
         return HttpResponseRedirect(reverse("frontend:search"))
+    
+@login_required(login_url="/login")
+def edit_note(request, noteID):
+    if request.method == 'POST':
+        return JsonResponse({'message': 'SUCCESS'}, status=status.HTTP_200_OK)
+    else:
+        return HttpResponseRedirect(reverse("frontend:view_note", args=(noteID,)))

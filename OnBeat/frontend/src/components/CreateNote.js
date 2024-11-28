@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import YoutubeLinkInput from "./YoutubeLinkInput";
 import NavBar from "./NavBar";
 import ExpandMenu from "./ExpandMenu";
@@ -56,7 +56,6 @@ export default function CreateNote(props) {
             setInsertYoutubeLink(true)
         }
     }
-    console.log(youtubeUrl)
 
     useEffect(() => {
         if (props.edit) {
@@ -64,16 +63,17 @@ export default function CreateNote(props) {
             titleRef.current.value = props.noteObject.note.title
             if (!!props.noteObject.youtubeURL) {
                 setYoutubeUrl(props.noteObject.youtubeURL.url)
+                setInsertYoutubeLink(true)
             }
-            console.log(props.noteObject)
+            setNoteList(props.noteObject.noteList)
         } else {
             setPageName('Create Note')
         }
     }, [])
 
-    function handleNoteBtnClicked() {
+    const handleNoteBtnClicked = useCallback(() => {
         setInsertNote(true)
-    }
+    },[])
 
     function handleTimestampBtnClicked() {
         setTimestampInput(true)
@@ -169,9 +169,6 @@ export default function CreateNote(props) {
                     message: "Title must not be more than 200 characters."
                 })
             } else {
-                if (props.edit) {
-                    console.log('create new view to edit note')
-                } else {
                 setTitleError({
                     error: false,
                     message: ''
@@ -195,23 +192,35 @@ export default function CreateNote(props) {
                 let status;
                 console.log(noteContentObject)
 
-                fetch('backend/create_note', requestOptions)
-                .then(response => {
-                    status = response.status
-                    return response.json()
-                }).then(result => {
-                if (status === 200) {
+                if (props.edit) {
+                    fetch(`/backend/edit/${props.noteObject.note.id}`, requestOptions)
+                    .then(response => {
+                        status = response.ok
+                        return response.json()
+                    })
+                    .then(result => {
                         console.log(result)
-                        window.location.href = `/note/${result.id}`
+                    }).catch(error => {
+                        console.log(error)
+                    })
                 } else {
-                        setOpenModal(true)
-                        setModalMessage(result)
+                    fetch('backend/create_note', requestOptions)
+                    .then(response => {
+                        status = response.ok
+                        return response.json()
+                    }).then(result => {
+                    if (status) {
+                            console.log(result)
+                            window.location.href = `/note/${result.id}`
+                    } else {
+                            setOpenModal(true)
+                            setModalMessage(result)
+                    }
+                    }).catch(error => {
+                        console.log(error)
+                    })
                 }
-                }).catch(error => {
-                    console.log(error)
-                })
             }
-        }
 
     }
 
@@ -229,7 +238,7 @@ export default function CreateNote(props) {
             
             {insertYoutubeLink ? 
             <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}
-            setYoutubeError={setYoutubeError} setYoutubeUrl={setYoutubeUrl}/></div>
+            setYoutubeError={setYoutubeError} setYoutubeUrl={setYoutubeUrl} youtubeUrl={youtubeUrl}/></div>
             : null}
 
             {   noteList.length > 0 ?

@@ -1,6 +1,7 @@
-import React, {useRef, useState, useCallback, useEffect} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import TextInputField from "./TextInputField";
 import YoutubeIframe from "./YoutubeIframe";
+import getVideoID from "./getVideoID";
 
 export default function YoutubeLinkInput(props) {
     const videoUrl = useRef()
@@ -9,6 +10,12 @@ export default function YoutubeLinkInput(props) {
         'error': false,
         'message': ''
     })
+
+    useEffect(() => {
+        if (!!props.youtubeUrl) {
+            setVideoID(getVideoID(props.youtubeUrl))
+        }
+    },[])
 
     function handleVideUrlSubmit(event) {
         event.preventDefault();
