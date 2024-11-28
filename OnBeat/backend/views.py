@@ -105,12 +105,12 @@ def create_note(request):
         else:
             
             try:
-                note_title = Note(user=request.user, title=title)
+                note_title = Note(user=user, title=title)
                 note_title.save()
             except:
                 return JsonResponse({
                     'heading': 'Error with note title',
-                    'text': 'Title must be 0-200 characters and unique from other notes title.',
+                    'text': 'Title must be 1-200 characters and unique from other notes title.',
                     'buttons': None
                 }, status=409)
                 
@@ -250,7 +250,7 @@ def search(request):
         notes_list = []
         num_pages = None
         if len(notes) != 0:       
-            notes_list = sorted(notes, key=lambda obj: obj.date_created)
+            notes_list = sorted(notes, reverse=True, key=lambda obj: obj.date_created)
             try:
                 notes_pagination = Paginator(notes_list,5).page(page)
             except PageNotAnInteger:
@@ -279,6 +279,116 @@ def search(request):
 @login_required(login_url="/login")
 def edit_note(request, noteID):
     if request.method == 'POST':
-        return JsonResponse({'message': 'SUCCESS'}, status=status.HTTP_200_OK)
+        data = json.loads(request.body)
+        title = data.get("title")
+        youtubeUrl = data.get("youtubeUrl")
+        noteList = data.get("noteList")
+        user = request.user
+        
+        
+        try:
+            note = Note.objects.get(user=user, id=noteID)
+        except Note.DoesNotExist:
+            return JsonResponse({
+                'heading': 'ERROR',
+                'text': 'Note not found.',
+                'buttons': None
+            }, status=404)
+            
+        if note.title != title:
+            if len(Note.objects.filter(user=user, title__iexact=title)) != 0:
+                return JsonResponse({
+                    'heading': 'Error with note title',
+                    'text': 'Title must be 1-200 characters and unique from other notes title.',
+                    'buttons': None
+                }, status=409)
+            
+            try:
+                note.title = title
+                note.save()
+            except:
+                return JsonResponse({
+                    'heading': 'Error with note title',
+                    'text': 'Title must be 1-200 characters and unique from other notes title.',
+                    'buttons': None
+                }, status=409)
+            
+        url = YoutubeUrl.objects.filter(note=note)
+        if len(url) == 0:
+            if youtubeUrl is not None:
+                try:
+                    url = YoutubeUrl(note=note, url=youtubeUrl)
+                    url.save()
+                except:
+                    return JsonResponse({
+                        'heading': 'Error with Youtube URL',
+                        'text': 'Please make sure the youtube URL is valid.',
+                        'buttons': None
+                    }, status=409)
+                    
+        else:
+            url = url[0]
+            if youtubeUrl is not None and url.url != youtubeUrl:
+                try:
+                    url.url = youtubeUrl
+                    url.save()
+                except:
+                    return JsonResponse({
+                        'heading': 'Error with Youtube URL',
+                        'text': 'Please make sure the youtube URL is valid.',
+                        'buttons': None
+                    }, status=409)
+            elif youtubeUrl is None:
+                url.delete()
+                
+        original_noteList = NoteList.objects.filter(note=note).order_by('index')
+        if len(original_noteList) != 0:
+            original_noteList = [item.serialize() for item in original_noteList]
+        else: 
+            original_noteList = []
+            
+        if original_noteList != noteList:
+            if len(original_noteList) == 0 and len(noteList) !=0 :
+                error_message = save_noteList_item(noteList, note)
+                if error_message is not None:
+                    return JsonResponse(error_message, status=409)
+            elif len(original_noteList) != 0 and len(noteList) == 0 :
+                original_noteList = NoteList.objects.filter(note=note).order_by('index')
+                for note in original_noteList:
+                    if note.type == 'note':
+                        note.content.delete()
+                    else:
+                        note.timestamp.delete()
+            else:
+                print('edit the notes in the noteList')
+            '''
+            if the note already have content, need to edit the existing content. this can be achieved by testing the notelist item id
+            if item with the right note title and id exist, edit the note
+            it is not possible to change the order of the items, if a user put the same thing on index 1 when it was originally index 0
+            it is a new item
+            so the item in index 0 can be deleted, and create new item for index 1
+            
+            iterate over each item in the original noteList, if its the same, skip
+            if its different:
+            1) edit the note content or timestamp
+            2) but what if its a timestamp converted into a note?
+                then the original timestamp should be deleted.
+                could not check the with the id, could be possible have timestamp id 1 and note id 1
+                then if its changed to note, will be looking for the same note id 1 as the original note
+            then, shouldnt it be easier to just delete all the originals and make a new one?
+            but want to keep the date created, but change the date modified
+            this is not possible for timestamp converted to note
+            1) iterate over the original notelist, compare as a whole with the new notelist
+            2) if different check if have the same type and id, if it is, then can edit the content/timestamp
+            3) if different type and id as the original, will assume it has a newly generated uuid or converted type
+            4) delete the original item in the original notelist, create new item, add them in the notelist object
+            
+            how to handle new notelist that have more item than the original one.
+            if original is empty and new have something, use the helper function
+            if original is not empty and new is, just delete all the notes
+            else : handle it
+            '''
+            
+        return JsonResponse(note.serialize(), status=status.HTTP_200_OK)
     else:
         return HttpResponseRedirect(reverse("frontend:view_note", args=(noteID,)))

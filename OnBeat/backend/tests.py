@@ -52,11 +52,23 @@ class NoteTestCase(TestCase):
         
         # test if note title not unique
         try:
-            note2 = Note.objects.create(user=user1, title="Note1")
-            note2.save()
+            with transaction.atomic():
+                note2 = Note.objects.create(user=user1, title="Note1")
+                note2.save()
             self.fail("Notes could have the same title")
         except IntegrityError:
             self.assertTrue(True, "Note title must be unique")
+            
+        # test updating the note title
+        note2 = Note.objects.create(user=user1, title="something")
+        note2.save()
+        try:
+            with transaction.atomic():
+                note2.title = "Note1"
+                note2.save()
+            self.fail("Updated note can have same title")
+        except IntegrityError:
+            pass
             
            
     def test_note_content(self):

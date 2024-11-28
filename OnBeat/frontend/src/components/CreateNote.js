@@ -154,7 +154,7 @@ export default function CreateNote(props) {
     }
 
     function handleSaveBtnClicked() {
-        console.log(props.edit)
+
             const title = titleRef.current.value.trim()
             let noteContentObject = {}
 
@@ -190,19 +190,26 @@ export default function CreateNote(props) {
                 }
 
                 let status;
-                console.log(noteContentObject)
 
                 if (props.edit) {
+
                     fetch(`/backend/edit/${props.noteObject.note.id}`, requestOptions)
                     .then(response => {
                         status = response.ok
                         return response.json()
                     })
                     .then(result => {
-                        console.log(result)
+                        if (status) {
+                            console.log(result)
+                             window.location.href = `/note/${props.noteObject.note.id}`
+                        } else {
+                            setOpenModal(true)
+                            setModalMessage(result)
+                        }
                     }).catch(error => {
                         console.log(error)
                     })
+                    
                 } else {
                     fetch('backend/create_note', requestOptions)
                     .then(response => {
