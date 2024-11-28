@@ -179,6 +179,7 @@ export default function CreateNote(props) {
             }
 
             let status;
+            console.log(noteContentObject)
 
             fetch('backend/create_note', requestOptions)
             .then(response => {
@@ -186,9 +187,8 @@ export default function CreateNote(props) {
                 return response.json()
             }).then(result => {
                if (status === 200) {
-                    console.log(result.message)
-                    console.log(noteContentObject)
-                    console.log('redirect to note page if successfully created')
+                    console.log(result)
+                    window.location.href = `/note/${result.id}`
                } else {
                     setOpenModal(true)
                     setModalMessage(result)

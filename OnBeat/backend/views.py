@@ -8,8 +8,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from rest_framework import status
 
-from .models import User, Note, NoteList, NoteContent, NoteTimestamp
-from .helpers import validateUsername, validatePassword, validateEmail
+from .models import User, Note, NoteList, NoteContent, NoteTimestamp, YoutubeUrl
+from .helpers import validateUsername, validatePassword, validateEmail, save_noteList_item
 
 # Create your views here.
 def index(request):
@@ -114,16 +114,39 @@ def create_note(request):
                     'buttons': None
                 }, status=409)
                 
-            
                 
-            if len(noteList) != 0:
-                for note in noteList:
-                    if note.type == 'timestamp':
-                        print('timestamp')
-                    else:
-                        print('note')
-                    
-            return JsonResponse({'message': 'UNIQUE'}, status=status.HTTP_200_OK)
+            if youtubeUrl is not None:
+                try:
+                    note_url = YoutubeUrl(note=note_title, url=youtubeUrl)
+                    note_url.save()
+                except:
+                    note_title.delete()
+                    return JsonResponse({
+                    'heading': 'Error with Youtube URL',
+                    'text': 'Please make sure the youtube URL is valid.',
+                    'buttons': None
+                }, status=409)
+            else:
+                # if no youtube url, should not have timestamps. convert the timestamps into normal notes
+                for index, note in enumerate(noteList):
+                    if note['type'] == 'timestamp':
+                        newnote = {
+                            'id': note['id'],
+                            'type': 'note',
+                            'content': {
+                                'heading': '',
+                                'text': note['content']['text']
+
+                            }
+                        }
+                        noteList[index] = newnote
+
+            error_message = save_noteList_item(noteList, note_title)
+            if error_message is not None:
+                note_title.delete()
+                return JsonResponse(error_message, status=409)
+            else:
+                return JsonResponse({'id': note_title.id}, status=status.HTTP_200_OK)
 
     else:
         return HttpResponseRedirect(reverse("frontend:index"))
@@ -173,9 +196,9 @@ def list_notes(request, page=None):
         page = 1
         
     try:
-        notes_pagination = Paginator(notes,2).page(page)
+        notes_pagination = Paginator(notes,5).page(page)
     except PageNotAnInteger:
-        notes_pagination = Paginator(notes, 2).page(1)
+        notes_pagination = Paginator(notes, 5).page(1)
     except EmptyPage:
         return JsonResponse({
             'message': 'page does not exist'
@@ -191,7 +214,7 @@ def list_notes(request, page=None):
             
     return JsonResponse({
         'notes': list,
-        'num_pages': Paginator(notes,2).num_pages
+        'num_pages': Paginator(notes,5).num_pages
         }, status=status.HTTP_200_OK)
 
 @login_required(login_url="/login")
@@ -229,9 +252,9 @@ def search(request):
         if len(notes) != 0:       
             notes_list = sorted(notes, key=lambda obj: obj.date_created)
             try:
-                notes_pagination = Paginator(notes_list,2).page(page)
+                notes_pagination = Paginator(notes_list,5).page(page)
             except PageNotAnInteger:
-                notes_pagination = Paginator(notes_list, 2).page(1)
+                notes_pagination = Paginator(notes_list, 5).page(1)
             except EmptyPage:
                 return JsonResponse({
                     'error': True,
@@ -239,7 +262,7 @@ def search(request):
                 }, status=404)
             
             notes_list = [note.serialize() for note in notes_pagination]
-            num_pages = Paginator(notes,2).num_pages
+            num_pages = Paginator(notes,5).num_pages
         
             return JsonResponse({
                 'notes': notes_list,
