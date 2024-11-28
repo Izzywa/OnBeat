@@ -10,6 +10,7 @@ import ExpandMenu from "./ExpandMenu";
 import BasicModal from "./BasicModal";
 import csrftoken from "./CSRFCookie";
 import getVideoID from "./getVideoID";
+import CreateNote from "./CreateNote";
 
 export default function Note(props) {
     const { noteID } = useParams()
@@ -39,6 +40,8 @@ export default function Note(props) {
         })
     },[])
 
+    const [edit, setEdit] = useState(false);
+
     
    function AvailableNote(props) {
     const [openModal, setOpenModal] = useState(false)
@@ -51,20 +54,23 @@ export default function Note(props) {
     const [youtubeError, setYoutubeError] = useState(false)
     const [viewOnly, setViewOnly] = useState(true)
 
-    const [edit, setEdit] = useState(false);
-
     const IframeRef = useRef();
 
-    function handleDeleteBtnClicked() {
+    const handleDeleteBtnClicked = useCallback(() => {
         setOpenModal(true)
         setModalMessage({
             heading: 'Delete note.',
             text: 'Are you certain?',
             buttons: 'deleteNote'
         })
-    }
+    },[openModal])
 
-    function handleDeleteNote() {
+
+    const handleEditBtnClicked = useCallback(() => {
+        props.setEdit(true)
+    },[edit])
+
+    const handleDeleteNote = useCallback(() => {
         setOpenModal(false)
 
         const requestOptions = {
@@ -85,7 +91,7 @@ export default function Note(props) {
         })
 
         window.location.href = '/'
-    }
+    }, [openModal])
 
     function NoteListDisplay(props) {
         if (props.value.type === 'note') {
@@ -103,46 +109,54 @@ export default function Note(props) {
         }
     }
 
-    return (<div>
-        <h3 className="title-display">{props.noteObject.note.title}</h3>
+    if (edit) {
+        return (
+            <CreateNote edit={props.edit} noteObject={props.noteObject}/>
+        )
 
-        {props.noteObject.youtubeURL ? 
-            <YoutubeIframe id={getVideoID(noteObject.youtubeURL.url)} IframeRef={IframeRef}
-            viewOnly={viewOnly} setYoutubeError={setYoutubeError} />
-         : null}
+    } else {
+        return (<div className="container">
+            <h3 className="title-display mt-2">{props.noteObject.note.title}</h3>
 
-        {props.noteObject.noteList.length > 0 ?
-        props.noteObject.noteList.map((value, index) => {
-            return(
-                <div key={index}>
-                    <NoteListDisplay value={value} index={index} 
-                    noteObject={props.noteObject} viewOnly={viewOnly}
-                    IframeRef={IframeRef} youtubeError={youtubeError}
-                    setOpenModal={setOpenModal} setModalMessage={setModalMessage}/>
-                </div>
-            )
-        })
-        : null}
+            {props.noteObject.youtubeURL ? 
+                <YoutubeIframe id={getVideoID(noteObject.youtubeURL.url)} IframeRef={IframeRef}
+                viewOnly={viewOnly} setYoutubeError={setYoutubeError} />
+            : null}
 
-        <BasicModal openModal={openModal} setOpenModal={setOpenModal}
-        messageHeading={modalMessage.heading} messageText={modalMessage.text}
-        buttons={modalMessage.buttons} handleDeleteNote={handleDeleteNote}/>
+            {props.noteObject.noteList.length > 0 ?
+            props.noteObject.noteList.map((value, index) => {
+                return(
+                    <div key={index}>
+                        <NoteListDisplay value={value} index={index} 
+                        noteObject={props.noteObject} viewOnly={viewOnly}
+                        IframeRef={IframeRef} youtubeError={youtubeError}
+                        setOpenModal={setOpenModal} setModalMessage={setModalMessage}/>
+                    </div>
+                )
+            })
+            : null}
 
-        <ExpandMenu viewOnly={viewOnly} handleDeleteBtnClicked={handleDeleteBtnClicked}/>
-        </div>
-    )
+            <BasicModal openModal={openModal} setOpenModal={setOpenModal}
+            messageHeading={modalMessage.heading} messageText={modalMessage.text}
+            buttons={modalMessage.buttons} handleDeleteNote={handleDeleteNote}/>
+
+            <ExpandMenu viewOnly={viewOnly} handleDeleteBtnClicked={handleDeleteBtnClicked}
+            handleEditBtnClicked={handleEditBtnClicked}/>
+            </div>
+        )
+    }
    }
 
     return(
     <>
     <NavBar />
-    <div className="container view-note-div">
+    <div className="view-note-div">
     { noteAvailable ? 
-        <AvailableNote noteObject={noteObject}/>
+        <AvailableNote noteObject={noteObject} edit={edit} setEdit={setEdit}/>
      : null }
 
 
-    { noteAvailable === false ? <Alert severity="error">Note not available</Alert> : null}
+    { noteAvailable === false ? <div className="container"><Alert severity="error">Note not available</Alert></div> : null}
     </div>
     <footer style={{height: "5em"}}></footer>
 

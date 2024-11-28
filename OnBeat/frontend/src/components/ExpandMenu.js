@@ -27,14 +27,6 @@ export default function ExpandMenu(props) {
         }
     }
 
-    function handleDeleteBtnClicked() {
-        console.log('delete btn clicked')
-    }
-
-    function handleEditBtnClicked() {
-        console.log('edit btn clicked')
-    }
-
     return(
         <nav id="expand-menu" className={navClassName} style={props.ExpandMenuStyle}>
             <div className="add-content-menu">
@@ -66,7 +58,7 @@ export default function ExpandMenu(props) {
                     <a><DeleteForeverIcon onClick={props.handleDeleteBtnClicked}/></a>
                 </span>
                 <span style={props.viewOnly ? {transform : 'translateY(-2.5em) translateX(5em)'} : HideIconStyle()}>
-                    <a><EditNoteIcon onClick={handleEditBtnClicked}/></a>
+                    <a><EditNoteIcon onClick={props.handleEditBtnClicked}/></a>
                 </span>
 
             </div>

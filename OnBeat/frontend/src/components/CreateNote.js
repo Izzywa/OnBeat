@@ -16,10 +16,6 @@ export default function CreateNote(props) {
     const IframeRef = useRef();
     const titleRef = useRef();
 
-    useEffect(() => {
-        setPageName('Create Note')
-    },[])
-
     const [insertYoutubeLink, setInsertYoutubeLink]  = useState(false)
     const [insertTimestamp, setInsertTimestamp] = useState(false)
     const [insertNote, setInsertNote] = useState(false)
@@ -60,6 +56,20 @@ export default function CreateNote(props) {
             setInsertYoutubeLink(true)
         }
     }
+    console.log(youtubeUrl)
+
+    useEffect(() => {
+        if (props.edit) {
+            setPageName('Edit Note')
+            titleRef.current.value = props.noteObject.note.title
+            if (!!props.noteObject.youtubeURL) {
+                setYoutubeUrl(props.noteObject.youtubeURL.url)
+            }
+            console.log(props.noteObject)
+        } else {
+            setPageName('Create Note')
+        }
+    }, [])
 
     function handleNoteBtnClicked() {
         setInsertNote(true)
@@ -144,66 +154,70 @@ export default function CreateNote(props) {
     }
 
     function handleSaveBtnClicked() {
-        const title = titleRef.current.value.trim()
-        let noteContentObject = {}
+        console.log(props.edit)
+            const title = titleRef.current.value.trim()
+            let noteContentObject = {}
 
-        if (title.length <= 0) {
-            setTitleError({
-                error: true,
-                message: "Please fill in the title of the note."
-            })
-        } else if (title.length > 200) {
-            setTitleError({
-                error: true,
-                message: "Title must not be more than 200 characters."
-            })
-        } else {
-            setTitleError({
-                error: false,
-                message: ''
-            })
-            noteContentObject = {
-                title: title,
-                youtubeUrl: youtubeUrl,
-                noteList: noteList
+            if (title.length <= 0) {
+                setTitleError({
+                    error: true,
+                    message: "Please fill in the title of the note."
+                })
+            } else if (title.length > 200) {
+                setTitleError({
+                    error: true,
+                    message: "Title must not be more than 200 characters."
+                })
+            } else {
+                if (props.edit) {
+                    console.log('create new view to edit note')
+                } else {
+                setTitleError({
+                    error: false,
+                    message: ''
+                })
+                noteContentObject = {
+                    title: title,
+                    youtubeUrl: youtubeUrl,
+                    noteList: noteList
+                }
+
+                const requestOptions = {
+                    method: ('POST'),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken()
+                    },
+                    mode: 'same-origin',
+                    body: JSON.stringify(noteContentObject)
+                }
+
+                let status;
+                console.log(noteContentObject)
+
+                fetch('backend/create_note', requestOptions)
+                .then(response => {
+                    status = response.status
+                    return response.json()
+                }).then(result => {
+                if (status === 200) {
+                        console.log(result)
+                        window.location.href = `/note/${result.id}`
+                } else {
+                        setOpenModal(true)
+                        setModalMessage(result)
+                }
+                }).catch(error => {
+                    console.log(error)
+                })
             }
-
-            const requestOptions = {
-                method: ('POST'),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken()
-                },
-                mode: 'same-origin',
-                body: JSON.stringify(noteContentObject)
-            }
-
-            let status;
-            console.log(noteContentObject)
-
-            fetch('backend/create_note', requestOptions)
-            .then(response => {
-                status = response.status
-                return response.json()
-            }).then(result => {
-               if (status === 200) {
-                    console.log(result)
-                    window.location.href = `/note/${result.id}`
-               } else {
-                    setOpenModal(true)
-                    setModalMessage(result)
-               }
-            }).catch(error => {
-                console.log(error)
-            })
-            
         }
 
     }
 
     return(
         <>
-        <NavBar />
+        { props.edit ? null: <NavBar />}
         <div className="container mt-2 mb-3">
             <div className="input-group input-group-lg my-3">
                 <span className="input-group-text" id="title">Title</span>
