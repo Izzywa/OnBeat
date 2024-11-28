@@ -1,10 +1,17 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import Q
-from django.utils import timezone
-import uuid
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
+
+def validate_youtube_url(value):
+    if not value.startswith('https://www.youtube.com/watch?v=') or not value.startswith('https://youtu.be/'):
+        raise ValidationError(
+            _('%(value)s is not valid youtube url.'),
+            params={'value': value},
+        )
 
 class User(AbstractUser):
     pass
@@ -53,7 +60,7 @@ class NoteContent(models.Model):
         
 class YoutubeUrl(models.Model):
     note = models.OneToOneField(Note, related_name="youtubeURL", on_delete=models.CASCADE, unique=True)
-    url = models.URLField(blank=False)
+    url = models.URLField(blank=False, validators=[validate_youtube_url])
     
     def serialize(self):
         return {

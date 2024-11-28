@@ -76,6 +76,32 @@ class NoteTestCase(TestCase):
             self.fail("url exist when it should not")
         except:
             self.assertTrue(True)
+            
+        # test youtube url validation
+        try:
+            with transaction.atomic():
+                test_url = YoutubeUrl(note=note1, url="https://stackoverflow.com/questions/7366363/adding-custom-django-model-validation")
+                test_url.save()
+            self.fail("Should not save invalid youtube url")
+        except:
+            pass
+        
+        try:
+            with transaction.atomic():
+                test_url = YoutubeUrl(note=note2, url="https://www.youtube.com/watch?v=n4DN7_IFjEo&t=1418s")
+                test_url.save()
+            pass
+        except:
+            self.fail("This should be a valid url")
+            
+        test_url.delete()
+        try:
+            with transaction.atomic():
+                test_url = YoutubeUrl(note=note2, url="https://youtu.be/n4DN7_IFjEo?si=pot68ZTzFptwIYHp")
+                test_url.save()
+            pass
+        except:
+            self.fail("This should be a valid url")
         
         # test timestamp
         self.assertEqual(note1.timestamp.all().count(), 1, "timestamp count wrong for note1")

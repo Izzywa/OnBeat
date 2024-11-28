@@ -183,9 +183,7 @@ export default function CreateNote(props) {
             fetch('backend/create_note', requestOptions)
             .then(response => {
                 status = response.status
-                if (response.ok) {
-                    return response.json()
-                }
+                return response.json()
             }).then(result => {
                if (status === 200) {
                     console.log(result.message)

@@ -98,11 +98,31 @@ def create_note(request):
         titleMatch = Note.objects.filter(user=user, title__iexact=title)
         if len(titleMatch) > 0:
             return JsonResponse({
-                    'heading': f'Note title already exists.',
+                    'heading': 'Note title already exists.',
                     'text': 'Please choose a unique title.',
                     'buttons': None
-                }, status=status.HTTP_226_IM_USED)
+                }, status=409)
         else:
+            
+            try:
+                note_title = Note(user=request.user, title=title)
+                note_title.save()
+            except:
+                return JsonResponse({
+                    'heading': 'Error with note title',
+                    'text': 'Title must be 0-200 characters and unique from other notes title.',
+                    'buttons': None
+                }, status=409)
+                
+            
+                
+            if len(noteList) != 0:
+                for note in noteList:
+                    if note.type == 'timestamp':
+                        print('timestamp')
+                    else:
+                        print('note')
+                    
             return JsonResponse({'message': 'UNIQUE'}, status=status.HTTP_200_OK)
 
     else:
