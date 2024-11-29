@@ -365,3 +365,14 @@ def edit_note(request, noteID):
         return JsonResponse(note.serialize(), status=status.HTTP_200_OK)
     else:
         return HttpResponseRedirect(reverse("frontend:view_note", args=(noteID,)))
+    
+@login_required(login_url="/login")
+def homepage(request, display):
+    if display == 'last-modified':
+        pass
+    elif display == 'last-created':
+        pass
+    elif display == 'bookmarks':
+        pass
+    else:
+        return JsonResponse(None, status=status.HTTP_200_OK)

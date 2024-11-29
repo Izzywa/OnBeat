@@ -15,5 +15,6 @@ urlpatterns = [
     path("list/<int:page>", views.list_notes, name="list_with_page"),
     path("list", views.list_notes, name="list"),
     path("search", views.search, name="search"),
-    path("edit/<int:noteID>", views.edit_note, name="edit")
+    path("edit/<int:noteID>", views.edit_note, name="edit"),
+    path("homepage/<str:display>", views.homepage, name="homepage")
 ]

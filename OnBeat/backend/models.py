@@ -24,6 +24,7 @@ class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="note")
     title = models.CharField(null=False, blank=False, max_length=200, validators=[MinLengthValidator(1, 'field must be minimum 1 character')])
     date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
     
     class Meta:
         unique_together = ("user", "title")

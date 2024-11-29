@@ -14,7 +14,7 @@ class NoteContentAdmin(admin.ModelAdmin):
 
 class NoteAdmin(admin.ModelAdmin):
     list_display = [
-        "id", "user__username", "title", "date_created"
+        "id", "user__username", "title", "date_created", "date_modified"
     ]
     
 class YoutubeUrlAdmin(admin.ModelAdmin):

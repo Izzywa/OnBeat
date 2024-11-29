@@ -12,6 +12,15 @@ export default function Homepage(props) {
     return(
     <div>
         <NavBar/>
+        <div className="container">
+            <h1>last modified</h1>
+        </div>
+        <div className="container">
+            <h1>last created</h1>
+        </div>
+        <div className="container">
+            <h1>bookmarks</h1>
+        </div>
     </div>
     )
 }

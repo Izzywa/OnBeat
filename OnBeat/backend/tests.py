@@ -1,7 +1,8 @@
 from django.db import IntegrityError, transaction
 from django.test import TestCase
 from .models import User, Note, NoteContent, YoutubeUrl, NoteTimestamp, NoteList
-from datetime import timedelta
+from datetime import timedelta, datetime
+from django.utils import timezone
 
 # Create your tests here.
 class NoteTestCase(TestCase):
@@ -99,7 +100,7 @@ class NoteTestCase(TestCase):
             self.fail("Updated note can have same title")
         except IntegrityError:
             pass
-            
+        
            
     def test_note_content(self):
         # test Note content
