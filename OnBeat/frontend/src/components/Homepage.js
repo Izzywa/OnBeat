@@ -3,6 +3,7 @@ import { useAuth } from "./AuthContext";
 import NavBar from "./NavBar";
 import NoteCard from "./NoteCard";
 import Paginator from "./Paginator";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export default function Homepage(props) {
     const { setPageName } = useAuth();
@@ -47,39 +48,26 @@ export default function Homepage(props) {
             console.log(error)
         })
     }, [page])
-
-    /**
-     * { bookmarks.map((item,index) => {
-                return (
-                <div key={index}>
-                    <NoteCard value={item} />
-                    </div>
-                )
-            })}
-     */
-
-        console.log(bookmarks)
     
     return(
     <div>
         <NavBar/>
-        <div className="container">
-            <h3>Last Created</h3>
+        <div className="container my-3">
+            <h3 className="homepage-title">Last Created</h3>
             { lastNotes.lastCreated ? <NoteCard value={lastNotes.lastCreated}/>
             : "no item"}
         </div>
-        <div className="container">
-            <h3>Last Modified</h3>
+        <div className="container my-3">
+            <h3 className="homepage-title">Last Modified</h3>
             { lastNotes.lastModified ? <NoteCard value={lastNotes.lastModified}/>
             : "no item"}
         </div>
-        <div className="container">
-            <h3>bookmarks</h3>
+        <div className="container my-3">
+            <h3 className="homepage-title"> <BookmarkIcon/>bookmarks</h3>
             {
                 bookmarks.map((item, index) => {
                     return(
                         <div key={index}>
-                            <p>{item.title}</p>
                             <NoteCard value={item} />
                         </div>
                     )

@@ -242,4 +242,9 @@ a small {
   background-color: #7e57c2;
 }
 
+.homepage-title {
+  text-transform: capitalize;
+  font-size: medium;
+}
+
 /*# sourceMappingURL=index.css.map */

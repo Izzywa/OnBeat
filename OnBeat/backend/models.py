@@ -138,7 +138,7 @@ class NoteList(models.Model):
         
 class Bookmark(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookmark")
-    note = models.ForeignKey(Note, on_delete=models.CASCADE)
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name="bookmark")
     
     class Meta:
         unique_together = ("user", "note")

@@ -41,7 +41,6 @@ export default function Note(props) {
     },[])
 
     const [edit, setEdit] = useState(false);
-
     
    function AvailableNote(props) {
     const [openModal, setOpenModal] = useState(false)
@@ -52,7 +51,7 @@ export default function Note(props) {
     })
 
     const [youtubeError, setYoutubeError] = useState(false)
-    const [viewOnly, setViewOnly] = useState(true)
+    const viewOnly = true;
 
     const IframeRef = useRef();
 
@@ -109,6 +108,50 @@ export default function Note(props) {
         }
     }
 
+    const [bookmarked, setBookmarked] = useState(false)
+    useEffect(() => {
+        const requestOptions = {
+            method: ('POST'),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken()
+                },
+                mode: 'same-origin'
+        }
+
+        let okStatus;
+        fetch(`/backend/bookmark/${props.noteObject.note.id}`, requestOptions)
+        .then(response => {
+            okStatus = response.ok
+            return response.json()
+        }).then(result => {
+            setBookmarked(result)
+        }).catch(error => {
+            console.log(error)
+        })
+    },[])
+    const handleBookmark = useCallback(() => {
+        const requestOptions = {
+            method: ('PUT'),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken()
+                },
+                mode: 'same-origin'
+        }
+        let okStatus;
+        fetch(`/backend/bookmark/${props.noteObject.note.id}`, requestOptions)
+        .then(response => {
+            okStatus = response.ok
+            return response.json()
+        }).then(result => {
+            console.log(result)
+        }).catch(error => {
+            console.log(error)
+        })
+        setBookmarked(!bookmarked)
+    },[bookmarked])
+
     if (edit) {
         return (
             <CreateNote edit={props.edit} noteObject={props.noteObject}/>
@@ -141,7 +184,7 @@ export default function Note(props) {
             buttons={modalMessage.buttons} handleDeleteNote={handleDeleteNote}/>
 
             <ExpandMenu viewOnly={viewOnly} handleDeleteBtnClicked={handleDeleteBtnClicked}
-            handleEditBtnClicked={handleEditBtnClicked}/>
+            handleEditBtnClicked={handleEditBtnClicked} bookmarked={bookmarked} handleBookmark={handleBookmark}/>
             </div>
         )
     }

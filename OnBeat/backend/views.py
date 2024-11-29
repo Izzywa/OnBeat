@@ -400,7 +400,20 @@ def homepage(request):
 @login_required(login_url="/login")
 def bookmarks(request, number=None):
     if request.method == 'POST':
-        return JsonResponse({'message': 'POST'}, status=status.HTTP_200_OK)
+        if number is None:
+            return JsonResponse({}, status=400)
+        
+        note = Note.objects.get(id=number)
+        try:
+            bookmark = Bookmark.objects.get(note=note)
+            print(bookmark)
+            return JsonResponse(True, status=status.HTTP_200_OK, safe=False)
+        except Bookmark.DoesNotExist:
+            return JsonResponse(False, status=status.HTTP_200_OK, safe=False)
+    elif request.method == 'PUT':
+        if number is None:
+            return JsonResponse({}, status=400)
+        return JsonResponse({'message': 'PUT = edit the bookmark status'}, status=status.HTTP_200_OK)
     else:
         if number is None:
             number = 1
