@@ -7,9 +7,10 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from rest_framework import status
+from datetime import timedelta
 
 from .models import User, Note, NoteList, NoteContent, NoteTimestamp, YoutubeUrl
-from .helpers import validateUsername, validatePassword, validateEmail, save_noteList_item
+from .helpers import validateUsername, validatePassword, validateEmail, save_noteList_item, edit_item
 
 # Create your views here.
 def index(request):
@@ -342,10 +343,6 @@ def edit_note(request, noteID):
                 url.delete()
                 
         original_noteList = NoteList.objects.filter(note=note).order_by('index')
-        if len(original_noteList) != 0:
-            original_noteList = [item.serialize() for item in original_noteList]
-        else: 
-            original_noteList = []
             
         if original_noteList != noteList:
             if len(original_noteList) == 0 and len(noteList) !=0 :
@@ -353,40 +350,87 @@ def edit_note(request, noteID):
                 if error_message is not None:
                     return JsonResponse(error_message, status=409)
             elif len(original_noteList) != 0 and len(noteList) == 0 :
-                original_noteList = NoteList.objects.filter(note=note).order_by('index')
                 for note in original_noteList:
                     if note.type == 'note':
                         note.content.delete()
                     else:
                         note.timestamp.delete()
             else:
-                print('edit the notes in the noteList')
+                # if the new notelist is shorter than the original notelist, delete the extra notes from the original notelist
+                if len(original_noteList) > len(noteList):
+                    temp_list = original_noteList[len(noteList):]
+                    original_noteList = original_noteList[:len(noteList)]
+                    for note in temp_list:
+                        if note.type == 'note':
+                            note.content.delete()
+                        else:
+                            note.timestamp.delete()
+                
+                for index, item in enumerate(noteList):
+                    find_item = NoteList.objects.filter(note=note, index=index)
+                    if len(find_item) != 0:
+                        # if item is the same type and id, edit it
+                        if find_item[0].type == item['type'] and find_item[0].id == item['id']:
+                            if find_item[0].type == 'note':
+                                id = find_item[0].content.id
+                            else:
+                                id = find_item[0].timestamp.id
+                                
+                            error_message = edit_item(item=item, id=id)
+                            if error_message is not None:
+                                return JsonResponse(error_message, status=409)
+                        else:
+                            if find_item[0].type == 'note':
+                                find_item[0].content.delete()
+                            else:
+                                find_item[0].timestamp.delete()
+
+                        # if item dont exist, create new item and new notelist
+
+                '''
+                # go over all of the item in the new notelist
+                for index, item in enumerate(noteList):
+                    # check if the item exist and have the same type and id
+                    temp_item = original_noteList[index]
+                    if temp_item.type == item['type'] and temp_item.id == item['id']:
+                        # edit note item without deleting
+                        pass
+                        # check the type and id
+                    else:
+                        if temp_item.type == 'note':
+                            temp_item.content.delete()
+                        else:
+                            temp_item.timestamp.delete()
+                        # if not the same delete the item
+
+                    temp_item = NoteList.objects.filter(note=note, index=index)
+                    if len(temp_item) == 0:
+                        pass
+                        '''
+                    
             '''
-            if the note already have content, need to edit the existing content. this can be achieved by testing the notelist item id
-            if item with the right note title and id exist, edit the note
-            it is not possible to change the order of the items, if a user put the same thing on index 1 when it was originally index 0
-            it is a new item
-            so the item in index 0 can be deleted, and create new item for index 1
             
-            iterate over each item in the original noteList, if its the same, skip
-            if its different:
-            1) edit the note content or timestamp
-            2) but what if its a timestamp converted into a note?
-                then the original timestamp should be deleted.
-                could not check the with the id, could be possible have timestamp id 1 and note id 1
-                then if its changed to note, will be looking for the same note id 1 as the original note
-            then, shouldnt it be easier to just delete all the originals and make a new one?
-            but want to keep the date created, but change the date modified
-            this is not possible for timestamp converted to note
-            1) iterate over the original notelist, compare as a whole with the new notelist
-            2) if different check if have the same type and id, if it is, then can edit the content/timestamp
-            3) if different type and id as the original, will assume it has a newly generated uuid or converted type
-            4) delete the original item in the original notelist, create new item, add them in the notelist object
+            isnt it easier to just delete all of the note content and just make a new one?
+            hmmmm
             
-            how to handle new notelist that have more item than the original one.
-            if original is empty and new have something, use the helper function
-            if original is not empty and new is, just delete all the notes
-            else : handle it
+            if the original list is longer than the new list, slice up the extra, delete them
+            iterate over the new list with index and value;
+            if original_list[i] produces key error, create a new object??
+            
+            use index, item in enumerate(new notelist)
+            search for notelist item with note=note, index = index
+            if item exist, check if its the same type and id
+            if exist, not same type and id, 
+                - delete the existing item
+                - create new item,
+                - create new notelist item, index = index
+            if exist
+                - get the item
+                - update the content
+            if not exist,
+                - that means the original notelist dont have item of that index, i.e: the new notelist is longer than the original notelist
+                - create new item, 
+                - create new notelist item, index=index
             '''
             
         return JsonResponse(note.serialize(), status=status.HTTP_200_OK)

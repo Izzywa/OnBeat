@@ -165,3 +165,19 @@ class NoteTestCase(TestCase):
         self.assertEqual(len(list), 2, "not right notelist length")
         self.assertEqual(list[0].content, notecontent1, "not the right content" )
         self.assertEqual(list[1].timestamp, timestamp1, "not the right timestamp")
+        
+    def try_making_invalid_note(self):
+        user1 = User.objects.get(username="user1")
+        note1 = Note.objects.get(user=user1, title="Note1")
+        try:
+            with transaction.atomic():
+                x = NoteContent(note=note1, heading='', text='')
+        except:
+            self.fail('could not make invalid note even before ssaving')
+            
+        try:
+            with transaction.atomic():
+                x.save()
+            self.fail("could save invalid note")
+        except:
+            pass

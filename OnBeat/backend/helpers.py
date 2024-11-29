@@ -63,48 +63,88 @@ def validateEmail(email):
             'message': 'Email not valid.'
         }
         
-def save_noteList_item(noteList, note):
-    for index, value in enumerate(noteList):
-        if value['type'] == 'note':
-             # 1) create the appropriate modal object from each item on the list
-            try:
-                item = NoteContent(note=note, heading=value['content']['heading'], text=value['content']['text'])
-                item.save()
-            except:
-                return {
+def create_item_and_noteList(item, note, index):
+    if item['type'] == 'note':
+        try:
+            obj = NoteContent(note=note, heading=item['content']['heading'], text=item['content']['text'])
+            obj.save()
+        except:
+            return {
                     'heading': 'Error in saving note content.',
                     'text': 'Note content invalid.',
                     'buttons': None
                 }
             
-              # 2) create noteList Object with the index it was given to make sure it is in the right order
-            try:
-                notelist_obj = NoteList(type=NoteList.NOTE, index=index, note=note, content=item)
-                notelist_obj.save()
-            except:
-                return {
+        try:
+            notelist_obj = NoteList(type=NoteList.NOTE, index=index, note=note, content=obj)
+            notelist_obj.save()
+        except:
+            return {
                     'heading': 'Error in saving note.',
                     'text': 'Note content in notelist invalid.',
                     'buttons': None
                 }
+    else:
+        try:
+            obj = NoteTimestamp(note=note, timestamp=timedelta(seconds=item['content']['timestamp']), text=item['content']['text'])
+            obj.save()
+        except:
+            print(item)
+            return {
+                'heading': 'Error in saving timestamp.',
+                'text': 'Timestamp invalid.',
+                'buttons': None
+            }
+            
+        try:
+            notelist_obj = NoteList(type=NoteList.TIMESTAMP, index=index, note=note, timestamp=obj)
+            notelist_obj.save()
+        except:
+            return {
+                'heading': 'Error in saving note.',
+                'text': 'Note timestamp in notelist invalid.',
+                'buttons': None
+            }
                 
-        else:
-            try:
-                item = NoteTimestamp(note=note, timestamp=timedelta(seconds=value['content']['timestamp']), text=value['content']['text'])
-                item.save()
-            except:
-                return {
-                    'heading': 'Error in saving timestamp.',
-                    'text': 'Timestamp invalid.',
-                    'buttons': None
-                }
-            try:    
-                notelist_obj = NoteList(type=NoteList.TIMESTAMP, index=index, note=note, timestamp=item)
-                notelist_obj.save()
-            except:
-                return {
-                    'heading': 'Error in saving note.',
-                    'text': 'Note timestamp in notelist invalid.',
-                    'buttons': None
-                }
+    return None
+        
+def save_noteList_item(noteList, note):
+    for index, value in enumerate(noteList):
+        create_item = create_item_and_noteList(item=value, note=note, index=index)
+        if create_item is not None:
+            return create_item
+    return None
+
+def edit_item(item, id):
+    if item['type'] == 'note':
+        try:
+            obj = NoteContent.objects.get(id=id)
+        except NoteContent.DoesNotExist:
+            return {
+                'heading': 'Error in editing note.',
+                'text': 'Note content does not exist',
+                'buttons': None
+            }
+        obj.heading = item['content']['heading']
+        obj.text = item['content']['text']
+    else:
+        try:
+            obj = NoteTimestamp.objects.get(id=id)
+        except NoteTimestamp.DoesNotExist:
+            return {
+                'heading': 'Error in editing timestamp.',
+                'text': 'Note timestamp does not exist',
+                'buttons': None
+            }
+        obj.timestamp = timedelta(seconds=item['content']['timestamp'])
+        obj.text = item['content']['text']
+    
+    try:
+        obj.save()
+    except:
+        return {
+            'heading': 'Error in editing note.',
+            'text': 'Note content or timestamp in invalid.',
+            'buttons': None
+        }
     return None
