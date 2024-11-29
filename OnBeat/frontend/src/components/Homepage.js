@@ -9,6 +9,7 @@ export default function Homepage(props) {
         lastCreated: null,
         lastModified: null
     })
+    const [bookmarks, setBookmarks] = useState([])
 
     useEffect(() => {
         setPageName('Homepage')
@@ -17,10 +18,12 @@ export default function Homepage(props) {
         .then(response => response.json())
         .then(result => {
             setLastNotes(result.lastNotes)
+            setBookmarks(result.bookmarks)
+            console.log(result)
         }).catch(error => {
             console.log(error)
         })
-    })
+    },[])
     
     return(
     <div>
@@ -36,7 +39,14 @@ export default function Homepage(props) {
             : "no item"}
         </div>
         <div className="container">
-            <h1>bookmarks</h1>
+            <h3>bookmarks</h3>
+            { bookmarks.map((item,index) => {
+                return (
+                <div key={index}>
+                    <NoteCard value={item} />
+                    </div>
+                )
+            })}
         </div>
     </div>
     )

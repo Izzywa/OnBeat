@@ -9,7 +9,7 @@ from django.urls import reverse
 from rest_framework import status
 from datetime import timedelta
 
-from .models import User, Note, NoteList, NoteContent, NoteTimestamp, YoutubeUrl
+from .models import User, Note, NoteList, NoteContent, NoteTimestamp, YoutubeUrl, Bookmark
 from .helpers import validateUsername, validatePassword, validateEmail, save_noteList_item, edit_item, create_item_and_noteList, delete_notelist_item, Error_message
 
 MESSAGE = Error_message()
@@ -369,7 +369,8 @@ def edit_note(request, noteID):
     
 @login_required(login_url="/login")
 def homepage(request):
-    last_created = Note.objects.filter(user=request.user).order_by("-date_created")
+    user = request.user
+    last_created = Note.objects.filter(user=user).order_by("-date_created")
     if len(last_created) != 0:
         try:
             youtubeURL = last_created[0].youtubeURL.url
@@ -378,7 +379,7 @@ def homepage(request):
         last_created = last_created[0].serialize()
         last_created['youtubeURL'] = youtubeURL
     
-    last_modified = Note.objects.filter(user=request.user).order_by("-date_modified")
+    last_modified = Note.objects.filter(user=user).order_by("-date_modified")
     if len(last_modified) != 0:
         try:
             youtubeURL = last_modified[0].youtubeURL.url
@@ -391,7 +392,13 @@ def homepage(request):
         'lastCreated': last_created,
         'lastModified': last_modified
     }
-
+    
+    bookmarks = Bookmark.objects.filter(user=user)
+    if len(bookmarks) != 0:
+        bookmarks = [bookmark.serialize() for bookmark in bookmarks]
+    else:
+        bookmarks = []
     return JsonResponse({
-        'lastNotes': lastNotes
+        'lastNotes': lastNotes,
+        'bookmarks': bookmarks
     }, status=status.HTTP_200_OK)

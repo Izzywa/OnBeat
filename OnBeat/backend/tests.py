@@ -1,6 +1,6 @@
 from django.db import IntegrityError, transaction
 from django.test import TestCase
-from .models import User, Note, NoteContent, YoutubeUrl, NoteTimestamp, NoteList
+from .models import User, Note, NoteContent, YoutubeUrl, NoteTimestamp, NoteList, Bookmark
 from datetime import timedelta, datetime
 from django.utils import timezone
 
@@ -210,5 +210,36 @@ class NoteTestCase(TestCase):
             with transaction.atomic():
                 x.save()
             self.fail("could save invalid note")
+        except:
+            pass
+        
+    def test_bookmark(self):
+        user1 = User.objects.get(username="user1")
+        user2 = User.objects.get(username="user2")
+        note1 = user1.note.all().first()
+        
+        bookmark = Bookmark(user=user1, note=note1)
+        try:
+            with transaction.atomic():
+                bookmark.full_clean()
+                bookmark.save()
+        except:
+            self.fail("failed in making a bookmark")
+        
+        bookmark2 = Bookmark(user=user1, note=note1)
+        try:
+            with transaction.atomic():
+                bookmark2.full_clean()
+                bookmark2.save()
+            self.fail("should not able to make bookmark with same user and note")
+        except:
+            pass
+        
+        bookmark2 = Bookmark(user=user2, note=note1)
+        try:
+            with transaction.atomic():
+                bookmark2.full_clean()
+                bookmark2.save()
+            self.fail("another user should not be able to save another user's note")
         except:
             pass

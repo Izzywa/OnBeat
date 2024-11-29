@@ -135,3 +135,25 @@ class NoteList(models.Model):
             "type": self.type,
             "content": content
         }
+        
+class Bookmark(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookmark")
+    note = models.ForeignKey(Note, on_delete=models.CASCADE)
+    
+    class Meta:
+        unique_together = ("user", "note")
+    
+    def clean(self):
+        if self.user != self.note.user:
+            raise ValidationError("User should not be able to bookmark another user's note")
+        return super().clean()        
+
+    def serialize(self):
+        try:
+            youtubeURL = self.note.youtubeURL.url
+        except:
+            youtubeURL = None
+            
+        serialized_item = self.note.serialize()
+        serialized_item['youtubeURL'] = youtubeURL
+        return serialized_item
