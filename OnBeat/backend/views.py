@@ -334,8 +334,8 @@ def edit_note(request, noteID):
                 if len(original_noteList) > len(noteList):
                     temp_list = original_noteList[len(noteList):]
                     original_noteList = original_noteList[:len(noteList)]
-                    for note in temp_list:
-                        delete_notelist_item(note)
+                    for temp_item in temp_list:
+                        delete_notelist_item(temp_item)
                 
                 for index, item in enumerate(noteList):
                     find_item = NoteList.objects.filter(note=note, index=index)

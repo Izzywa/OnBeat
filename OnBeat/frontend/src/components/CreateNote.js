@@ -247,6 +247,10 @@ export default function CreateNote(props) {
             <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}
             setYoutubeError={setYoutubeError} setYoutubeUrl={setYoutubeUrl} youtubeUrl={youtubeUrl}/></div>
             : null}
+            <div style={youtubeUrl ? {
+                overflow: 'scroll',
+                maxHeight: '50vh'
+            } : null}>
 
             {   noteList.length > 0 ?
                 noteList.map((value, key) => {
@@ -261,6 +265,7 @@ export default function CreateNote(props) {
 
             {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
             {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/> : null }
+            </div>
 
             <BasicModal openModal={openModal} setOpenModal={setOpenModal} 
             messageHeading={modalMessage.heading} messageText={modalMessage.text} 
