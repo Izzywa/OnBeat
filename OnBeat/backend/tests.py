@@ -26,7 +26,28 @@ class NoteTestCase(TestCase):
         # create timestamps
         d = timedelta(seconds=60)
         timestamp = NoteTimestamp(note=note1, timestamp=d, text="timestamp note")
-        timestamp.save()    
+        timestamp.save() 
+        
+    def test_user(self):
+        someone = User(username="", email="", password="")
+        try:
+            with transaction.atomic():
+                someone.full_clean()
+                someone.save()
+            self.fail("should not allow blank field")
+        except:
+            pass
+        
+        someone = User(username="someone", email="someone@example.com", password="12345")
+        try:
+            with transaction.atomic():
+                someone.full_clean()
+                someone.save()
+        except:
+            self.fail("should be able to create user")   
+        
+        note = Note(user=someone, title='Note1')
+        self.assertEqual(someone.username, "someone", "username is not as it should be")
     
     def test_user_note(self):
         try:
