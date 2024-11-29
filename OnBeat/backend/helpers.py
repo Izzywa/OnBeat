@@ -7,6 +7,24 @@ load_dotenv()
 
 from .models import NoteContent, NoteTimestamp, NoteList, User
 
+class Error_message:
+    def __init__(self):
+        self.TITLE_NOT_UNIQUE = {
+            'heading': 'Note title already exists.',
+            'text': 'Please choose a unique title.',
+            'buttons': None
+        }
+        self.TITLE_ERROR = {
+            'heading': 'Error with note title',
+            'text': 'Title must be 1-200 characters and unique from other notes title.',
+            'buttons': None
+        }
+        self.URL_ERROR = {
+            'heading': 'Error with Youtube URL',
+            'text': 'Please make sure the youtube URL is valid.',
+            'buttons': None
+        }
+
 def validateUsername(username):
     if not username:
         return {
@@ -65,8 +83,9 @@ def validateEmail(email):
         
 def create_item_and_noteList(item, note, index):
     if item['type'] == 'note':
+        obj = NoteContent(note=note, heading=item['content']['heading'], text=item['content']['text'])
         try:
-            obj = NoteContent(note=note, heading=item['content']['heading'], text=item['content']['text'])
+            obj.full_clean()
             obj.save()
         except:
             return {
@@ -75,8 +94,9 @@ def create_item_and_noteList(item, note, index):
                     'buttons': None
                 }
             
+        notelist_obj = NoteList(type=NoteList.NOTE, index=index, note=note, content=obj)
         try:
-            notelist_obj = NoteList(type=NoteList.NOTE, index=index, note=note, content=obj)
+            notelist_obj.full_clean()
             notelist_obj.save()
         except:
             return {
@@ -85,8 +105,9 @@ def create_item_and_noteList(item, note, index):
                     'buttons': None
                 }
     else:
+        obj = NoteTimestamp(note=note, timestamp=timedelta(seconds=item['content']['timestamp']), text=item['content']['text'])
         try:
-            obj = NoteTimestamp(note=note, timestamp=timedelta(seconds=item['content']['timestamp']), text=item['content']['text'])
+            obj.full_clean()
             obj.save()
         except:
             print(item)
@@ -96,8 +117,9 @@ def create_item_and_noteList(item, note, index):
                 'buttons': None
             }
             
+        notelist_obj = NoteList(type=NoteList.TIMESTAMP, index=index, note=note, timestamp=obj)
         try:
-            notelist_obj = NoteList(type=NoteList.TIMESTAMP, index=index, note=note, timestamp=obj)
+            notelist_obj.full_clean()
             notelist_obj.save()
         except:
             return {
@@ -140,6 +162,7 @@ def edit_item(item, id):
         obj.text = item['content']['text']
     
     try:
+        obj.full_clean()
         obj.save()
     except:
         return {

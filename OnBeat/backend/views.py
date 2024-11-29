@@ -10,7 +10,9 @@ from rest_framework import status
 from datetime import timedelta
 
 from .models import User, Note, NoteList, NoteContent, NoteTimestamp, YoutubeUrl
-from .helpers import validateUsername, validatePassword, validateEmail, save_noteList_item, edit_item, create_item_and_noteList, delete_notelist_item
+from .helpers import validateUsername, validatePassword, validateEmail, save_noteList_item, edit_item, create_item_and_noteList, delete_notelist_item, Error_message
+
+MESSAGE = Error_message()
 
 # Create your views here.
 def index(request):
@@ -91,42 +93,33 @@ def getCurrentUser(request):
 def create_note(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        title = data.get("title")
+        title =  data.get("title")
         youtubeUrl = data.get("youtubeUrl")
         noteList = data.get("noteList")
         user = request.user
         
         titleMatch = Note.objects.filter(user=user, title__iexact=title)
         if len(titleMatch) > 0:
-            return JsonResponse({
-                    'heading': 'Note title already exists.',
-                    'text': 'Please choose a unique title.',
-                    'buttons': None
-                }, status=409)
+            return JsonResponse(MESSAGE.TITLE_NOT_UNIQUE, status=409)
         else:
             
+            
+            note_title = Note(user=user, title=title)
             try:
-                note_title = Note(user=user, title=title)
+                note_title.full_clean()
                 note_title.save()
             except:
-                return JsonResponse({
-                    'heading': 'Error with note title',
-                    'text': 'Title must be 1-200 characters and unique from other notes title.',
-                    'buttons': None
-                }, status=409)
+                return JsonResponse(MESSAGE.TITLE_ERROR, status=409)
                 
                 
             if youtubeUrl is not None:
+                note_url = YoutubeUrl(note=note_title, url=youtubeUrl)
                 try:
-                    note_url = YoutubeUrl(note=note_title, url=youtubeUrl)
+                    note_url.full_clean()
                     note_url.save()
                 except:
                     note_title.delete()
-                    return JsonResponse({
-                    'heading': 'Error with Youtube URL',
-                    'text': 'Please make sure the youtube URL is valid.',
-                    'buttons': None
-                }, status=409)
+                    return JsonResponse(MESSAGE.URL_ERROR, status=409)
             else:
                 # if no youtube url, should not have timestamps. convert the timestamps into normal notes
                 for index, note in enumerate(noteList):
@@ -304,8 +297,9 @@ def edit_note(request, noteID):
                     'buttons': None
                 }, status=409)
             
+            note.title = title
             try:
-                note.title = title
+                note.full_clean()
                 note.save()
             except:
                 return JsonResponse({
@@ -317,8 +311,9 @@ def edit_note(request, noteID):
         url = YoutubeUrl.objects.filter(note=note)
         if len(url) == 0:
             if youtubeUrl is not None:
+                url = YoutubeUrl(note=note, url=youtubeUrl)
                 try:
-                    url = YoutubeUrl(note=note, url=youtubeUrl)
+                    url.full_clean()
                     url.save()
                 except:
                     return JsonResponse({
@@ -330,8 +325,9 @@ def edit_note(request, noteID):
         else:
             url = url[0]
             if youtubeUrl is not None and url.url != youtubeUrl:
+                url.url = youtubeUrl
                 try:
-                    url.url = youtubeUrl
+                    url.full_clean()
                     url.save()
                 except:
                     return JsonResponse({

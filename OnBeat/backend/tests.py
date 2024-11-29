@@ -44,6 +44,15 @@ class NoteTestCase(TestCase):
         note1 = user1.note.all().first()
         self.assertEqual(note1.title, "Note1", "Note title false")
         
+        example = Note(user=user1, title="")
+        try:
+            with transaction.atomic():
+                example.full_clean()
+                example.save()
+            self.fail('failed clean')
+        except:
+            pass
+        
         try:
             note1user1 = Note.objects.create(user=user2, title="Note1")
             note1user1.save()

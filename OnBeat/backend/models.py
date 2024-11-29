@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import Q
 from django.core.exceptions import ValidationError
+from django.core.validators import MinLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
@@ -21,7 +22,7 @@ class User(AbstractUser):
 
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="note")
-    title = models.CharField(blank=False, max_length=200)
+    title = models.CharField(null=False, blank=False, max_length=200, validators=[MinLengthValidator(1, 'field must be minimum 1 character')])
     date_created = models.DateTimeField(auto_now_add=True)
     
     class Meta:
