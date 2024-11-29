@@ -125,7 +125,9 @@ export default function Note(props) {
             okStatus = response.ok
             return response.json()
         }).then(result => {
-            setBookmarked(result)
+            if (okStatus) {
+                setBookmarked(result)
+            }
         }).catch(error => {
             console.log(error)
         })
@@ -145,11 +147,12 @@ export default function Note(props) {
             okStatus = response.ok
             return response.json()
         }).then(result => {
-            console.log(result)
+            if (okStatus) {
+                setBookmarked(result)
+            }
         }).catch(error => {
             console.log(error)
         })
-        setBookmarked(!bookmarked)
     },[bookmarked])
 
     if (edit) {

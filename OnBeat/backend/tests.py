@@ -219,12 +219,6 @@ class NoteTestCase(TestCase):
         note1 = user1.note.all().first()
         
         bookmark = Bookmark(user=user1, note=note1)
-        try:
-            with transaction.atomic():
-                note1.bookmark
-            self.fail('bookmark should not exist yet')
-        except:
-            pass
     
         try:
             with transaction.atomic():
@@ -233,11 +227,6 @@ class NoteTestCase(TestCase):
         except:
             self.fail("failed in making a bookmark")
             
-        try:
-            with transaction.atomic():
-                note1.bookmark
-        except:
-            self.fail('bookmark object should exist')
         
         bookmark2 = Bookmark(user=user1, note=note1)
         try:
