@@ -136,11 +136,11 @@ export default function Search(props) {
 
                     return(
                         <div className="row">
-                            <div className="col-12 col-sm-6">
+                            <div className="col-12 col-lg-6">
                                 <YouTube className="ratio ratio-16x9" ref={IframeRef} videoId={getVideoID(props.item.url)}
                                 onReady={onReady} onError={handleError} opts={opts}/>
                             </div>
-                            <div className="col-12 col-sm-6">
+                            <div className="col-12 col-lg-6">
                             <MarkdownDisplay markdownText={props.item.text} className={"col-12"}/>
                             </div>
                             </div>

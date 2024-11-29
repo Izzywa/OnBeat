@@ -1,13 +1,12 @@
 import React, { useState, useEffect} from "react";
 import YouTube from 'react-youtube';
 import LoadingSpinner from "./LoadingSpinner";
+import { height, maxHeight } from "@mui/system";
 
 export default function YoutubeIframe(props) {
     const opts = {
       width: '100%',
-      playerVars: {
-        autoplay: 0
-      },
+      height: '300em',
     }
 
     const errorMessage = {
@@ -29,10 +28,8 @@ export default function YoutubeIframe(props) {
         if (!props.viewOnly) {
             if (!error.error && ready) {
                 props.setInsertTimestamp(true)
-                //props.setYoutubeError(false)
             } else {
                 props.setInsertTimestamp(false)
-                //props.setYoutubeError(true)
             }
         }
     }, [error, ready])
@@ -81,13 +78,14 @@ export default function YoutubeIframe(props) {
 
         <LoadingSpinner hide={show}/>
         <div className={show ? "": "no-show"}>
-        <YouTube className="ratio ratio-16x9"
-         ref={props.IframeRef} videoId={props.id} 
-         opts={opts} onReady={onReady} 
-         onError={handleError}/>
+            <YouTube className="ratio ratio-16x9"
+            ref={props.IframeRef} videoId={props.id} 
+            opts={opts} onReady={onReady} 
+            onError={handleError}/>
          </div>
 
          { ready && !props.viewOnly ? <RenderAfterReady/>:null}
-    </div>
+         </div>
+
     )
 }

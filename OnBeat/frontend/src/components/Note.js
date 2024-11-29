@@ -165,10 +165,22 @@ export default function Note(props) {
             <h3 className="title-display mt-2">{props.noteObject.note.title}</h3>
 
             {props.noteObject.youtubeURL ? 
+            <div style={{
+    
+                }}>
                 <YoutubeIframe id={getVideoID(noteObject.youtubeURL.url)} IframeRef={IframeRef}
                 viewOnly={viewOnly} setYoutubeError={setYoutubeError} />
+                </div>
             : null}
 
+                <div className="notelist-div" 
+                style={ props.noteObject.youtubeURL ? 
+                    {
+                        overflow: 'scroll',
+                        maxHeight: '50vh'
+                    }
+                    : null
+                }>
             {props.noteObject.noteList.length > 0 ?
             props.noteObject.noteList.map((value, index) => {
                 return(
@@ -181,6 +193,7 @@ export default function Note(props) {
                 )
             })
             : null}
+            </div>
 
             <BasicModal openModal={openModal} setOpenModal={setOpenModal}
             messageHeading={modalMessage.heading} messageText={modalMessage.text}

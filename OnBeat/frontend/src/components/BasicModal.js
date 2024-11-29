@@ -47,7 +47,7 @@ export default function BasicModal(props) {
               <></>
             )
       }
-    });
+    }, [props.openModal]);
     return(
       <div className='modal-buttons'>
         {RenderButton()}
