@@ -2,6 +2,7 @@ import React, { useEffect, useState} from "react";
 import { useAuth } from "./AuthContext";
 import NavBar from "./NavBar";
 import NoteCard from "./NoteCard";
+import Paginator from "./Paginator";
 
 export default function Homepage(props) {
     const { setPageName } = useAuth();
@@ -9,7 +10,6 @@ export default function Homepage(props) {
         lastCreated: null,
         lastModified: null
     })
-    const [bookmarks, setBookmarks] = useState([])
 
     useEffect(() => {
         setPageName('Homepage')
@@ -18,12 +18,47 @@ export default function Homepage(props) {
         .then(response => response.json())
         .then(result => {
             setLastNotes(result.lastNotes)
-            setBookmarks(result.bookmarks)
-            console.log(result)
         }).catch(error => {
             console.log(error)
         })
     },[])
+
+        const [bookmarks, setBookmarks] = useState([])
+        const [page, setPage] = useState(null)
+        const [numPages, setNumPages] = useState(null)
+
+        
+    useEffect(() => {
+        const url = (page ? `/backend/bookmark/${page}`: '/backend/bookmark')
+        let okStatus;
+        fetch(url)
+        .then(response => {
+            okStatus = response.ok
+            return response.json()}
+        )
+        .then(result => {
+            if (okStatus){
+                setBookmarks(result.bookmarks)
+                setNumPages(result.numPages)
+            } else {
+                console.log(result)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+    }, [page])
+
+    /**
+     * { bookmarks.map((item,index) => {
+                return (
+                <div key={index}>
+                    <NoteCard value={item} />
+                    </div>
+                )
+            })}
+     */
+
+        console.log(bookmarks)
     
     return(
     <div>
@@ -40,14 +75,20 @@ export default function Homepage(props) {
         </div>
         <div className="container">
             <h3>bookmarks</h3>
-            { bookmarks.map((item,index) => {
-                return (
-                <div key={index}>
-                    <NoteCard value={item} />
-                    </div>
-                )
-            })}
+            {
+                bookmarks.map((item, index) => {
+                    return(
+                        <div key={index}>
+                            <p>{item.title}</p>
+                            <NoteCard value={item} />
+                        </div>
+                    )
+                })
+            }
+
+            { numPages ? <Paginator page={page} setPage={setPage} numPages={numPages}/> : null }
         </div>
+
     </div>
     )
 }

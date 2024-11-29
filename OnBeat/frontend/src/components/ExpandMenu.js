@@ -8,7 +8,7 @@ import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Icon } from "@mui/material";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export default function ExpandMenu(props) {
     const [navClassName, setNavClassName] = useState("hide")
@@ -59,6 +59,11 @@ export default function ExpandMenu(props) {
                 </span>
                 <span style={props.viewOnly ? {transform : 'translateY(-2.5em) translateX(5em)'} : HideIconStyle()}>
                     <a><EditNoteIcon onClick={props.handleEditBtnClicked}/></a>
+                </span>
+                <span style={props.viewOnly ? {transform: 'translateY(-2.5em) translateX(7.5em'}: HideIconStyle()}>
+                    <a className={props.bookmarked ? "bookmark": ""}>
+                        <BookmarkIcon onClick={props.handleBookmark}/>
+                        </a>
                 </span>
 
             </div>

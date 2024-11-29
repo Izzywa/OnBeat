@@ -94,16 +94,10 @@ html, body {
       position: absolute;
       z-index: 1;
       transition: all 0.3s ease;
-      /*&:nth-child(2) {
-        transform: translateY(-5.1em);
-      }*/
-     /*&:nth-child(3) {
-        transform: translateX(-2em) translateY(-3.8em);
-      }
-      &:nth-child(4) {
-        transform: translateX(-2em) translateY(-1.2em);
-      }*/
       a {
+        &.bookmark {
+          color: $purple-light;
+        }
         background: $orange-light;
       }
     }

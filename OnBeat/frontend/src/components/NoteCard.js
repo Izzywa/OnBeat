@@ -27,7 +27,7 @@ export default function NoteCard(props) {
                     </div>
                 )
         }
-    },[])
+    },[props.value])
     function handleNoteCardClicked() {
         window.location.href = `/note/${props.value.id}`
     }

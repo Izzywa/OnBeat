@@ -392,13 +392,36 @@ def homepage(request):
         'lastCreated': last_created,
         'lastModified': last_modified
     }
-    
-    bookmarks = Bookmark.objects.filter(user=user)
-    if len(bookmarks) != 0:
-        bookmarks = [bookmark.serialize() for bookmark in bookmarks]
-    else:
-        bookmarks = []
+
     return JsonResponse({
-        'lastNotes': lastNotes,
-        'bookmarks': bookmarks
+        'lastNotes': lastNotes
     }, status=status.HTTP_200_OK)
+    
+@login_required(login_url="/login")
+def bookmarks(request, number=None):
+    if request.method == 'POST':
+        return JsonResponse({'message': 'POST'}, status=status.HTTP_200_OK)
+    else:
+        if number is None:
+            number = 1
+        user = request.user
+        
+        bookmarks = Bookmark.objects.filter(user=user).order_by('-id')
+        if len(bookmarks) != 0:
+            numPages = Paginator(bookmarks,2).num_pages
+            print([b.note.title for b in bookmarks])
+            try:
+                bookmarks = Paginator(bookmarks,2).page(number)
+            except:
+                return JsonResponse({'message': 'page invalid'}, status=404)
+            print([b.note.title for b in bookmarks])
+            bookmarks = [bookmark.serialize() for bookmark in bookmarks]
+            
+        else:
+            bookmarks = []
+            numPages = None
+        
+        return JsonResponse({
+            'bookmarks': bookmarks,
+            'numPages': numPages
+        }, status=status.HTTP_200_OK)
