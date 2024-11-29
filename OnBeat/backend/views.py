@@ -283,30 +283,18 @@ def edit_note(request, noteID):
         try:
             note = Note.objects.get(user=user, id=noteID)
         except Note.DoesNotExist:
-            return JsonResponse({
-                'heading': 'ERROR',
-                'text': 'Note not found.',
-                'buttons': None
-            }, status=404)
+            return JsonResponse(MESSAGE.NOTE_NOT_FOUND, status=404)
             
         if note.title != title:
             if len(Note.objects.filter(user=user, title__iexact=title)) != 0:
-                return JsonResponse({
-                    'heading': 'Error with note title',
-                    'text': 'Title must be 1-200 characters and unique from other notes title.',
-                    'buttons': None
-                }, status=409)
+                return JsonResponse(MESSAGE.TITLE_ERROR, status=409)
             
             note.title = title
             try:
                 note.full_clean()
                 note.save()
             except:
-                return JsonResponse({
-                    'heading': 'Error with note title',
-                    'text': 'Title must be 1-200 characters and unique from other notes title.',
-                    'buttons': None
-                }, status=409)
+                return JsonResponse(MESSAGE.TITLE_ERROR, status=409)
             
         url = YoutubeUrl.objects.filter(note=note)
         if len(url) == 0:
@@ -316,11 +304,7 @@ def edit_note(request, noteID):
                     url.full_clean()
                     url.save()
                 except:
-                    return JsonResponse({
-                        'heading': 'Error with Youtube URL',
-                        'text': 'Please make sure the youtube URL is valid.',
-                        'buttons': None
-                    }, status=409)
+                    return JsonResponse(MESSAGE.URL_ERROR, status=409)
                     
         else:
             url = url[0]
@@ -330,11 +314,7 @@ def edit_note(request, noteID):
                     url.full_clean()
                     url.save()
                 except:
-                    return JsonResponse({
-                        'heading': 'Error with Youtube URL',
-                        'text': 'Please make sure the youtube URL is valid.',
-                        'buttons': None
-                    }, status=409)
+                    return JsonResponse(MESSAGE.URL_ERROR, status=409)
             elif youtubeUrl is None:
                 url.delete()
                 

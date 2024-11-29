@@ -24,6 +24,38 @@ class Error_message:
             'text': 'Please make sure the youtube URL is valid.',
             'buttons': None
         }
+        self.NOTE_NOT_FOUND = {
+            'heading': 'ERROR',
+            'text': 'Note not found.',
+            'buttons': None
+        }
+        self.CONTENT_NOT_FOUND = {
+            'heading': 'ERROR',
+            'text': 'Note content not found.',
+            'buttons': None
+        }
+        self.TIMESTAMP_NOT_FOUND = {
+            'heading': 'ERROR',
+            'text': 'Note timestamp not found.',
+            'buttons': None
+        }
+        self.CONTENT_NOT_VALID = {
+            'heading': 'Error in saving note content.',
+            'text': 'Note content invalid.',
+            'buttons': None
+        }
+        self.TIMESTAMP_NOT_VALID = {
+            'heading': 'Error in saving note timestamp.',
+            'text': 'Note timestamp invalid.',
+            'buttons': None
+        }
+        self.NOTELIST_NOT_VALID = {
+            'heading': "Error in saving noteList",
+            'text': "invalid notelist object",
+            'buttons': None
+        }
+        
+MESSAGE = Error_message()
 
 def validateUsername(username):
     if not username:
@@ -88,22 +120,14 @@ def create_item_and_noteList(item, note, index):
             obj.full_clean()
             obj.save()
         except:
-            return {
-                    'heading': 'Error in saving note content.',
-                    'text': 'Note content invalid.',
-                    'buttons': None
-                }
+            return MESSAGE.CONTENT_NOT_VALID
             
         notelist_obj = NoteList(type=NoteList.NOTE, index=index, note=note, content=obj)
         try:
             notelist_obj.full_clean()
             notelist_obj.save()
         except:
-            return {
-                    'heading': 'Error in saving note.',
-                    'text': 'Note content in notelist invalid.',
-                    'buttons': None
-                }
+            return MESSAGE.NOTELIST_NOT_VALID
     else:
         obj = NoteTimestamp(note=note, timestamp=timedelta(seconds=item['content']['timestamp']), text=item['content']['text'])
         try:
@@ -111,22 +135,14 @@ def create_item_and_noteList(item, note, index):
             obj.save()
         except:
             print(item)
-            return {
-                'heading': 'Error in saving timestamp.',
-                'text': 'Timestamp invalid.',
-                'buttons': None
-            }
+            return MESSAGE.TIMESTAMP_NOT_VALID
             
         notelist_obj = NoteList(type=NoteList.TIMESTAMP, index=index, note=note, timestamp=obj)
         try:
             notelist_obj.full_clean()
             notelist_obj.save()
         except:
-            return {
-                'heading': 'Error in saving note.',
-                'text': 'Note timestamp in notelist invalid.',
-                'buttons': None
-            }
+            return MESSAGE.NOTELIST_NOT_VALID
                 
     return None
         
@@ -142,22 +158,16 @@ def edit_item(item, id):
         try:
             obj = NoteContent.objects.get(id=id)
         except NoteContent.DoesNotExist:
-            return {
-                'heading': 'Error in editing note.',
-                'text': 'Note content does not exist',
-                'buttons': None
-            }
+            return MESSAGE.CONTENT_NOT_FOUND
+        
         obj.heading = item['content']['heading']
         obj.text = item['content']['text']
     else:
         try:
             obj = NoteTimestamp.objects.get(id=id)
         except NoteTimestamp.DoesNotExist:
-            return {
-                'heading': 'Error in editing timestamp.',
-                'text': 'Note timestamp does not exist',
-                'buttons': None
-            }
+            return MESSAGE.TIMESTAMP_NOT_FOUND
+        
         obj.timestamp = timedelta(seconds=item['content']['timestamp'])
         obj.text = item['content']['text']
     
@@ -165,11 +175,7 @@ def edit_item(item, id):
         obj.full_clean()
         obj.save()
     except:
-        return {
-            'heading': 'Error in editing note.',
-            'text': 'Note content or timestamp in invalid.',
-            'buttons': None
-        }
+        return MESSAGE.NOTELIST_NOT_VALID
     return None
 
 def delete_notelist_item(item):
