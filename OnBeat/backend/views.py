@@ -10,7 +10,7 @@ from rest_framework import status
 from datetime import timedelta
 
 from .models import User, Note, NoteList, NoteContent, NoteTimestamp, YoutubeUrl
-from .helpers import validateUsername, validatePassword, validateEmail, save_noteList_item, edit_item
+from .helpers import validateUsername, validatePassword, validateEmail, save_noteList_item, edit_item, create_item_and_noteList, delete_notelist_item
 
 # Create your views here.
 def index(request):
@@ -351,20 +351,15 @@ def edit_note(request, noteID):
                     return JsonResponse(error_message, status=409)
             elif len(original_noteList) != 0 and len(noteList) == 0 :
                 for note in original_noteList:
-                    if note.type == 'note':
-                        note.content.delete()
-                    else:
-                        note.timestamp.delete()
+                    delete_notelist_item(note)
+
             else:
                 # if the new notelist is shorter than the original notelist, delete the extra notes from the original notelist
                 if len(original_noteList) > len(noteList):
                     temp_list = original_noteList[len(noteList):]
                     original_noteList = original_noteList[:len(noteList)]
                     for note in temp_list:
-                        if note.type == 'note':
-                            note.content.delete()
-                        else:
-                            note.timestamp.delete()
+                        delete_notelist_item(note)
                 
                 for index, item in enumerate(noteList):
                     find_item = NoteList.objects.filter(note=note, index=index)
@@ -380,59 +375,17 @@ def edit_note(request, noteID):
                             if error_message is not None:
                                 return JsonResponse(error_message, status=409)
                         else:
-                            if find_item[0].type == 'note':
-                                find_item[0].content.delete()
-                            else:
-                                find_item[0].timestamp.delete()
-
-                        # if item dont exist, create new item and new notelist
-
-                '''
-                # go over all of the item in the new notelist
-                for index, item in enumerate(noteList):
-                    # check if the item exist and have the same type and id
-                    temp_item = original_noteList[index]
-                    if temp_item.type == item['type'] and temp_item.id == item['id']:
-                        # edit note item without deleting
-                        pass
-                        # check the type and id
+                            delete_notelist_item(find_item[0])
+                            
+                            error_message = create_item_and_noteList(item=item, note=note, index=index)
+                            if error_message is not None:
+                                return JsonResponse(error_message, status=409)
                     else:
-                        if temp_item.type == 'note':
-                            temp_item.content.delete()
-                        else:
-                            temp_item.timestamp.delete()
-                        # if not the same delete the item
+                        # if item dont exist, create new item and new notelist
+                        error_message = create_item_and_noteList(item=item, note=note, index=index)
+                        if error_message is not None:
+                            return JsonResponse(error_message, status=409)
 
-                    temp_item = NoteList.objects.filter(note=note, index=index)
-                    if len(temp_item) == 0:
-                        pass
-                        '''
-                    
-            '''
-            
-            isnt it easier to just delete all of the note content and just make a new one?
-            hmmmm
-            
-            if the original list is longer than the new list, slice up the extra, delete them
-            iterate over the new list with index and value;
-            if original_list[i] produces key error, create a new object??
-            
-            use index, item in enumerate(new notelist)
-            search for notelist item with note=note, index = index
-            if item exist, check if its the same type and id
-            if exist, not same type and id, 
-                - delete the existing item
-                - create new item,
-                - create new notelist item, index = index
-            if exist
-                - get the item
-                - update the content
-            if not exist,
-                - that means the original notelist dont have item of that index, i.e: the new notelist is longer than the original notelist
-                - create new item, 
-                - create new notelist item, index=index
-            '''
-            
         return JsonResponse(note.serialize(), status=status.HTTP_200_OK)
     else:
         return HttpResponseRedirect(reverse("frontend:view_note", args=(noteID,)))

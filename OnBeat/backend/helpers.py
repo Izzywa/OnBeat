@@ -148,3 +148,9 @@ def edit_item(item, id):
             'buttons': None
         }
     return None
+
+def delete_notelist_item(item):
+    if item.type == 'note':
+        item.content.delete()
+    else:
+        item.timestamp.delete()
