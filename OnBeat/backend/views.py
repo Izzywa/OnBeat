@@ -369,4 +369,29 @@ def edit_note(request, noteID):
     
 @login_required(login_url="/login")
 def homepage(request):
-    pass
+    last_created = Note.objects.filter(user=request.user).order_by("-date_created")
+    if len(last_created) != 0:
+        try:
+            youtubeURL = last_created[0].youtubeURL.url
+        except:
+            youtubeURL = None
+        last_created = last_created[0].serialize()
+        last_created['youtubeURL'] = youtubeURL
+    
+    last_modified = Note.objects.filter(user=request.user).order_by("-date_modified")
+    if len(last_modified) != 0:
+        try:
+            youtubeURL = last_modified[0].youtubeURL.url
+        except:
+            youtubeURL = None
+        last_modified = last_modified[0].serialize()
+        last_modified['youtubeURL'] = youtubeURL
+    
+    lastNotes = {
+        'lastCreated': last_created,
+        'lastModified': last_modified
+    }
+
+    return JsonResponse({
+        'lastNotes': lastNotes
+    }, status=status.HTTP_200_OK)
