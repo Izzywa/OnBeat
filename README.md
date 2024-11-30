@@ -34,37 +34,112 @@
 
 
 <details>
-<summary><b>App.js</b></summary>
-
-- something
+<summary><i>App.js</i></summary>
 </details>
 
-- `AuthContext.js`
-- `BasicModal.js`
-- `CreateNote.js`
-- `CSRFCookie.js`
-- `DisplayNoteComponent.js`
-- `DisplayTimestamp.js`
-- `ExpandMenu.js`
-- `getVidoID.js`
-- `Homepage.js`
-- `ListOfNotes.js`
-- `LoadingSpinner.js`
-- `Login.js`
-- `MarkdownDisplay.js`
-- `NavBar.js`
-- `NewNoteInput.js`
-- `NewTimestamp.js`
-- `Note.js`
-- `NoteCard.js`
-- `NoteInputField.js`
-- `Paginator.js`
-- `PrivateRoutes.js`
-- `Register.js`
-- `Search.js`
-- `TextInputField.js`
-- `YoutubeIframe.js`
-- `YoutubeLinkInput.js`
+<details>
+<summary><i>AuthContext.js</i></summary>
+</details>
+
+<details>
+<summary><i>BasicModal.js</i></summary>
+</details>
+
+<details>
+<summary><i>CreateNote.js</i></summary>
+</details>
+
+<details>
+<summary><i>CSRFCookie.js</i></summary>
+</details>
+
+<details>
+<summary><i>DisplayNoteComponent.js</i></summary>
+</details>
+
+<details>
+<summary><i>DisplayTimestamp.js</i></summary>
+</details>
+
+<details>
+<summary><i>ExpandMenu.js</i></summary>
+</details>
+
+<details>
+<summary><i>getVideoID.js</i></summary>
+</details>
+
+<details>
+<summary><i>Homepage.js</i></summary>
+</details>
+
+<details>
+<summary><i>ListOfNotes.js</i></summary>
+</details>
+
+<details>
+<summary><i>LoadingSpinner.js</i></summary>
+</details>
+
+<details>
+<summary><i>Login.js</i></summary>
+</details>
+
+<details>
+<summary><i>MarkdownDisplay.js</i></summary>
+</details>
+
+<details>
+<summary><i>NavBar.js</i></summary>
+</details>
+
+<details>
+<summary><i>NewNoteInput.js</i></summary>
+</details>
+
+<details>
+<summary><i>NewTimestamp.js</i></summary>
+</details>
+
+<details>
+<summary><i>Note.js</i></summary>
+</details>
+
+<details>
+<summary><i>NoteCard.js</i></summary>
+</details>
+
+<details>
+<summary><i>NoteInputField.js</i></summary>
+</details>
+
+<details>
+<summary><i>Paginator.js</i></summary>
+</details>
+
+<details>
+<summary><i>PrivateRoutes.js</i></summary>
+</details>
+
+<details>
+<summary><i>Register.js</i></summary>
+</details>
+
+<details>
+<summary><i>Search.js</i></summary>
+</details>
+
+<details>
+<summary><i>TextInputField.js</i></summary>
+</details>
+
+<details>
+<summary><i>YoutubeIframe.js</i></summary>
+</details>
+
+<details>
+<summary><i>YoutubeLinkInput.js</i></summary>
+</details>
 
 </details>
 
