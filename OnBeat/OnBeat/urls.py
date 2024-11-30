@@ -21,6 +21,5 @@ from rest_framework_simplejwt import views as jwt_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('backend/', include("backend.urls")),
-    path('', include("frontend.urls")),
-    path('youtube/', include("youtube.urls")),
+    path('', include("frontend.urls"))
 ]

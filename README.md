@@ -5,9 +5,10 @@
 - This Django project have two application that serve as the backend and the frontend of the application, and named as such.
     - The Backend application will be responsible for the server side logic and database interactions, with the primary goal of handling requests and delivering responses.
     - The Frontend will utilise React to render the client-side interface providing a user interactive application.
-- In previous projects, the Django server will render the templates of appliction and interactive user interface is implemented by asynchronous fetch requests or using `Babel` to translate JSX code written directly into the HTML file.
+- In previous the `Network` and `Mail` project, the Django server will render the templates of appliction while the interactive user interface is implemented by asynchronous fetch requests or using `Babel` to translate JSX code written directly into the HTML file.
     - This `OnBeat` project distinctiveness and complexity stems mostly on the setting the React app into the application
 ### React application
+
 
 ## What’s contained in each file you created.
 
