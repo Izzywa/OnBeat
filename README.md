@@ -34,7 +34,7 @@
 
 
 <details>
-        <summary>App.js</summary>
+<summary><b>App.js</b></summary>
 
 - something
 </details>
