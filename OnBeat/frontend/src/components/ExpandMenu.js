@@ -65,6 +65,17 @@ export default function ExpandMenu(props) {
                         <BookmarkIcon onClick={props.handleBookmark}/>
                         </a>
                 </span>
+                <span style={props.viewOnly ? {transform: 'translateY(-2.5em) translateX(10em)'}: HideIconStyle()}>
+                    <a>
+                        <div className="soundwave-container active">
+                            <div className="soundwave"></div>
+                            <div className="soundwave"></div>
+                            <div className="soundwave"></div>
+                            <div className="soundwave"></div>
+                            <div className="soundwave"></div>
+                        </div>
+                    </a>
+                </span>
 
             </div>
         </nav>

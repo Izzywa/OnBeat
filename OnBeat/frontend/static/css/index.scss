@@ -295,4 +295,84 @@ a {
 .homepage-title {
   text-transform: capitalize;
   font-size: medium;
+  height: 100%;
+}
+
+@keyframes soundwave1 {
+  0% {
+    transform: scaleY(.2);
+  }
+  25%{
+    transform: scaleY(.1)
+  }
+  50%{
+    transform: scaleY(.05);
+  }
+  100%{
+    transform: scaleY(.2);
+  }
+}
+@keyframes soundwave2 {
+  25%{
+    transform: scaleY(.3);
+  }
+  50%{
+    transform: scaleY(.2);
+  }
+  75%{
+    transform: scaleY(.1);
+  }
+}
+@keyframes soundwave3 {
+  0% {
+    transform: scaleY(0.3);
+  }
+  25%{
+    transform: scaleY(.2);
+  }
+  50%{
+    transform: scaleY(.1);
+  }
+  75%{
+    transform: scaleY(.2);
+  }
+  100% {
+    transform: scaleY(.3);
+  }
+}
+
+.soundwave-container {
+  display: flex;
+  justify-content: space-between;
+  height: 64px;
+  
+
+  .soundwave {
+    height: 100%;
+    transform: scaleY(.4);
+    background: $dark;
+    width: 3px;
+    margin-left: 1px;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  &.active {
+    .soundwave:nth-child(1) {
+      animation-name: soundwave1;
+    }
+    .soundwave:nth-child(2){
+      animation-name: soundwave2;
+    }
+    .soundwave:nth-child(3) {
+      animation-name: soundwave3;
+    }
+    .soundwave:nth-child(4) {
+      animation-name: soundwave2;
+    }
+    .soundwave:nth-child(5) {
+      animation-name: soundwave1;
+    }
+  }
 }
