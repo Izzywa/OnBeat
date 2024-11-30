@@ -297,13 +297,21 @@ a small {
 }
 .soundwave-container .soundwave {
   height: 100%;
-  transform: scaleY(0.4);
   background: #212121;
   width: 3px;
   margin-left: 1px;
   animation-duration: 1.5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+}
+.soundwave-container .soundwave:nth-child(1), .soundwave-container .soundwave:nth-child(5) {
+  transform: scaleY(0.1);
+}
+.soundwave-container .soundwave:nth-child(2), .soundwave-container .soundwave:nth-child(4) {
+  transform: scaleY(0.25);
+}
+.soundwave-container .soundwave:nth-child(3) {
+  transform: scaleY(0.3);
 }
 .soundwave-container.active .soundwave:nth-child(1) {
   animation-name: soundwave1;
