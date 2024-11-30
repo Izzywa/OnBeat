@@ -116,10 +116,6 @@ export default function Note(props) {
         }
     }
 
-    if (IframeRef.current) {
-        console.log(IframeRef.current)
-    }
-
     useEffect(() => {
         
         if (props.noteObject.youtubeURL && onBeat && !edit) {
@@ -127,12 +123,12 @@ export default function Note(props) {
             timestampList.map((item,index) => {
                 timestampTimeList[index] = item.content.timestamp
             })
-            console.log
-
                 const interval = setInterval(() => {
+                    let playerState;
+                    IframeRef.current.internalPlayer.getPlayerState().then(result => playerState=result)
                     IframeRef.current.internalPlayer.getCurrentTime()
                     .then(result => {
-                        if (timestampTimeList.includes(Math.round(result))) {
+                        if (timestampTimeList.includes(Math.round(result)) && playerState == 1) {
                             timestampRefs.current[timestampTimeList.indexOf(Math.round(result))]
                             .scrollIntoView( {behavior: 'smooth'} )
                         }
