@@ -92,6 +92,9 @@ export default function Note(props) {
         window.location.href = '/'
     }, [openModal])
 
+    const timestampRefs = useRef([])
+    const timestampList = props.noteObject.noteList.filter(item => item.type == 'timestamp')
+
     function NoteListDisplay(props) {
         if (props.value.type === 'note') {
             return(
@@ -100,12 +103,38 @@ export default function Note(props) {
             )
         } else {
             return(
+                <div className="timestamp-div" 
+                ref={el => timestampRefs.current[timestampList.indexOf(props.value)] = el}>
                 <DisplayTimestamp index={props.index} id={props.value.id}
                     noteList={props.noteObject.noteList} viewOnly={props.viewOnly} IframeRef={props.IframeRef}
                     youtubeError={props.youtubeError} 
                     setOpenModal={props.setOpenModal} setModalMessage={props.setModalMessage}/>
+                    </div>
             )
         }
+    }
+
+    const [onBeat, setOnBeat] = useState(true)
+
+    if (props.noteObject.youtubeURL && onBeat) {
+        let timestampTimeList = []
+        timestampList.map((item,index) => {
+            timestampTimeList[index] = item.content.timestamp
+        })
+
+        useEffect(() => {
+            const interval = setInterval(() => {
+                IframeRef.current.internalPlayer.getCurrentTime()
+                .then(result => {
+                    if (timestampTimeList.includes(Math.round(result))) {
+                        timestampRefs.current[timestampTimeList.indexOf(Math.round(result))]
+                        .scrollIntoView( {behavior: 'smooth'} )
+                    }
+                })
+            }, 1000)
+
+            return () => clearInterval(interval);
+        }, [props.noteObject])
     }
 
     const [bookmarked, setBookmarked] = useState(false)
