@@ -30,12 +30,20 @@
 ### Frontend
 #### src
 <details>
-<summary>`/components`</summary>
+<summary>/components</summary>
 </details>
     - This folder contains all of the React component used by the application
+
 #### static
-- `css/index.css`
+<details>
+<summary>/css</summary>
+
+- `index.css`
     - The css file, compiled with Sass from `index.scss`
+- `index.scss`
+    - Using `--watch index.scss : index.css`, this file was automatically compiled when writing the styles for the application.
+
+    </details>
 
 - `frontend/main.js`
     - The bundle of all of the Javascript from the source code
