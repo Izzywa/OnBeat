@@ -31,9 +31,40 @@
 #### src
 <details>
 <summary>/components</summary>
+
+- `App.js`
+- `AuthContext.js`
+- `BasicModal.js`
+- `CreateNote.js`
+- `CSRFCookie.js`
+- `DisplayNoteComponent.js`
+- `DisplayTimestamp.js`
+- `ExpandMenu.js`
+- `getVidoID.js`
+- `Homepage.js`
+- `ListOfNotes.js`
+- `LoadingSpinner.js`
+- `Login.js`
+- `MarkdownDisplay.js`
+- `NavBar.js`
+- `NewNoteInput.js`
+- `NewTimestamp.js`
+- `Note.js`
+- `NoteCard.js`
+- `NoteInputField.js`
+- `Paginator.js`
+- `PrivateRoutes.js`
+- `Register.js`
+- `Search.js`
+- `TextInputField.js`
+- `YoutubeIframe.js`
+- `YoutubeLinkInput.js`
+
 </details>
 
 - This folder contains all of the React component used by the application
+
+- `index.js`
 
 #### static
 <details>
@@ -47,7 +78,7 @@
 </details>
 
 - `frontend/main.js`
-    - The bundle of all of the Javascript from the source code
+    - The bundle of all of the Javascript from the `src` file.
 #### templates/frontend
 - `index.html`
     - This is the rendered HTML template
