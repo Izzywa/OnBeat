@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import NoteCard from "./NoteCard";
 import Paginator from "./Paginator";
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { Alert } from "@mui/material";
 
 export default function Homepage(props) {
     const { setPageName } = useAuth();
@@ -55,12 +56,14 @@ export default function Homepage(props) {
         <div className="container my-3">
             <h3 className="homepage-title">Last Created</h3>
             { lastNotes.lastCreated ? <NoteCard value={lastNotes.lastCreated}/>
-            : "no item"}
+            : <div className="alert-no-notes"><h6>No Notes</h6></div>
+            }
         </div>
         <div className="container my-3">
             <h3 className="homepage-title">Last Modified</h3>
             { lastNotes.lastModified ? <NoteCard value={lastNotes.lastModified}/>
-            : "no item"}
+            :  <div className="alert-no-notes"><h6>No Notes</h6></div>
+            }
         </div>
         <div className="container my-3">
             <h3 className="homepage-title"> <BookmarkIcon/>bookmarks</h3>

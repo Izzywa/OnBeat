@@ -296,6 +296,7 @@ a {
   text-transform: capitalize;
   font-size: medium;
   height: 100%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 @keyframes soundwave1 {
@@ -384,4 +385,12 @@ a {
       animation-name: soundwave1;
     }
   }
+}
+
+.alert-no-notes {
+  border: 1px solid $orange-light;
+  color: $orange-light;
+  border-radius: 2px;
+  @extend %center-flex;
+  padding: 1em;
 }

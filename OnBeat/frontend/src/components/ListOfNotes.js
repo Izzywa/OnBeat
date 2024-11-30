@@ -26,8 +26,12 @@ export default function ListOfNotes(props) {
         })
         .then(result => {
             if (okStatus) {
+                if(result.notes.length == 0) {
+                    setNumPages(null)
+                } else {
                 setList(result.notes)
                 setNumPages(result.num_pages)
+                }
             }
             else {
                 console.log(result)
@@ -52,7 +56,10 @@ export default function ListOfNotes(props) {
                 }
             </div>
 
-            { numPages ? <Paginator page={page} setPage={setPage} numPages={numPages}/>: null}
+            { numPages ? <Paginator page={page} setPage={setPage} numPages={numPages}/>
+            : <div className="my-3">
+                <div className="alert-no-notes"><h6>No Notes</h6></div>
+                </div>}
             
         </div>
         </>

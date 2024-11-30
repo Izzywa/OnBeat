@@ -378,6 +378,8 @@ def homepage(request):
             youtubeURL = None
         last_created = last_created[0].serialize()
         last_created['youtubeURL'] = youtubeURL
+    else:
+        last_created = None
     
     last_modified = Note.objects.filter(user=user).order_by("-date_modified")
     if len(last_modified) != 0:
@@ -387,6 +389,8 @@ def homepage(request):
             youtubeURL = None
         last_modified = last_modified[0].serialize()
         last_modified['youtubeURL'] = youtubeURL
+    else:
+        last_modified = None
     
     lastNotes = {
         'lastCreated': last_created,

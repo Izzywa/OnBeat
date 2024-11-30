@@ -13,7 +13,7 @@
   color: #212121;
 }
 
-.filter-container > label, .title-display, .spinner-div {
+.alert-no-notes, .filter-container > label, .title-display, .spinner-div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,6 +246,7 @@ a small {
   text-transform: capitalize;
   font-size: medium;
   height: 100%;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 @keyframes soundwave1 {
@@ -327,6 +328,13 @@ a small {
 }
 .soundwave-container.active .soundwave:nth-child(5) {
   animation-name: soundwave1;
+}
+
+.alert-no-notes {
+  border: 1px solid #ffd54f;
+  color: #ffd54f;
+  border-radius: 2px;
+  padding: 1em;
 }
 
 /*# sourceMappingURL=index.css.map */
