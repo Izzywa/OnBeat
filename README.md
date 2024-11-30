@@ -32,7 +32,8 @@
 <details>
 <summary>/components</summary>
 </details>
-    - This folder contains all of the React component used by the application
+
+- This folder contains all of the React component used by the application
 
 #### static
 <details>
@@ -44,7 +45,6 @@
     - Using `--watch index.scss : index.css`, this file was automatically compiled when writing the styles for the application.
 
     </details>
-
 - `frontend/main.js`
     - The bundle of all of the Javascript from the source code
 #### templates/frontend
