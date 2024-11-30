@@ -32,7 +32,12 @@
 <details>
 <summary>/components</summary>
 
-- `App.js`
+<details>
+<summary>App.js</summary>
+
+- something
+</details>
+
 - `AuthContext.js`
 - `BasicModal.js`
 - `CreateNote.js`
