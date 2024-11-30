@@ -38,8 +38,10 @@ export default function DisplayTimestamp(props) {
 
     } else {
         return(<>
+        {props.onBeat ? null : 
             <h4 className="timestamp-link" onClick={seekToTimestamp}>
                 {new Date (props.noteList[props.index].content.timestamp * 1000).toISOString().slice(11,19)}</h4>
+        }
             <MarkdownDisplay markdownText={props.noteList[props.index].content.text} className={"col-12"} />
             { !props.youtubeError && !props.viewOnly ? <button className="btn submit-btn mr-1" onClick={handleEdit}>Edit</button> : null }
             </>)

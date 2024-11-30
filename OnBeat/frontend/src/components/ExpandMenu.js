@@ -65,9 +65,10 @@ export default function ExpandMenu(props) {
                         <BookmarkIcon onClick={props.handleBookmark}/>
                         </a>
                 </span>
+                { props.handleOnBeat ?
                 <span style={props.viewOnly ? {transform: 'translateY(-2.5em) translateX(10em)'}: HideIconStyle()}>
                     <a>
-                        <div className="soundwave-container active">
+                        <div className={props.onBeat ? "soundwave-container active": "soundwave-container"} onClick={props.handleOnBeat}>
                             <div className="soundwave"></div>
                             <div className="soundwave"></div>
                             <div className="soundwave"></div>
@@ -76,6 +77,7 @@ export default function ExpandMenu(props) {
                         </div>
                     </a>
                 </span>
+                :null }
 
             </div>
         </nav>

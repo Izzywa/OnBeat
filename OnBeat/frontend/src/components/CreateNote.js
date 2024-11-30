@@ -15,6 +15,8 @@ export default function CreateNote(props) {
     const { setPageName } = useAuth();
     const IframeRef = useRef();
     const titleRef = useRef();
+    const noteInputDiv = useRef();
+    const timestampInputDiv = useRef();
 
     const [insertYoutubeLink, setInsertYoutubeLink]  = useState(false)
     const [insertTimestamp, setInsertTimestamp] = useState(false)
@@ -71,13 +73,22 @@ export default function CreateNote(props) {
         }
     }, [])
 
-    const handleNoteBtnClicked = useCallback(() => {
+    function handleNoteBtnClicked() {
         setInsertNote(true)
-    },[])
+    }
 
     function handleTimestampBtnClicked() {
         setTimestampInput(true)
     }
+
+    useEffect(() => {
+        if (noteInputDiv.current) {
+            noteInputDiv.current.scrollIntoView( {behavior: 'smooth'} )
+        } else if (timestampInputDiv.current) {
+            timestampInputDiv.current.scrollIntoView( {behavior: 'smooth'} )
+        }
+    }, [insertNote, timestampInput])
+
 
     function IconStyle(X, Y = "-2.5") {
 
@@ -247,10 +258,15 @@ export default function CreateNote(props) {
             <div className="my-2"><YoutubeLinkInput setInsertTimestamp={setInsertTimestamp} IframeRef={IframeRef}
             setYoutubeError={setYoutubeError} setYoutubeUrl={setYoutubeUrl} youtubeUrl={youtubeUrl}/></div>
             : null}
-            <div style={youtubeUrl ? {
-                overflow: 'scroll',
-                maxHeight: '50vh'
-            } : null}>
+            <div>
+            <div className="notelist-div" 
+                style={ youtubeUrl ? 
+                    {
+                        overflow: 'scroll',
+                        maxHeight: '50vh'
+                    }
+                    : null
+                }>
 
             {   noteList.length > 0 ?
                 noteList.map((value, key) => {
@@ -263,8 +279,18 @@ export default function CreateNote(props) {
                 : null
             }
 
-            {insertNote ? <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>: null }
-            {timestampInput ? <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/> : null }
+            {insertNote ? 
+            <div className="note-input-div" ref={noteInputDiv}>
+                <NewNoteInput setInsertNote={setInsertNote} noteList={noteList} setNoteList={setNoteList}/>
+                </div>
+            : null }
+            {timestampInput ?
+            <div className="timestamp-input-div" ref={timestampInputDiv}> 
+                <NewTimestamp IframeRef={IframeRef} setTimestampInput={setTimestampInput} noteList={noteList} setNoteList={setNoteList}/>
+                </div>
+                : null }
+                </div>
+
             </div>
 
             <BasicModal openModal={openModal} setOpenModal={setOpenModal} 
