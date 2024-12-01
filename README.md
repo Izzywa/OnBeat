@@ -102,7 +102,7 @@ The distinctiveness of this project includes the use of other third-party packag
 <hr></hr>
 </details>
 
-### Asyncronous fetch request
+### <ins>Asyncronous fetch request</ins>
 
 - As React is used for the frontend, any request to the server is done asynchronously. This also allows the application to handle errors more affectively such as `IntegrityError` when saving data to the database.
     <details>
@@ -128,7 +128,7 @@ The distinctiveness of this project includes the use of other third-party packag
     ![Bookmark toggles](README_images/bookmarkFunction.gif)
     </details>
 
-### Mobile responsiveness
+### <ins>Mobile responsiveness</ins>
 
 - Using mobile first approach, this application was developed to be responsive and fluid, taking into consideration on how this application will be displayed in a mobile setting.
 
@@ -139,7 +139,7 @@ The distinctiveness of this project includes the use of other third-party packag
     ![Navbar Mobile](README_images/MobileNav.gif)
     </details>
 
-### OnBeat
+### <ins>OnBeat</ins>
 
 - The heart of this project is ultimately to make a web application that allows user to watch youtube videos while reading or taking notes simultaneously.
 - It is estimated the numbers of smartphones in the world is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
