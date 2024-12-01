@@ -202,6 +202,13 @@ The distinctiveness of this project includes the use of other third-party packag
 
     [views.py](OnBeat/backend/views.py) will hold the views that will be responding to requests made from the application's client side application, either with database query response or changes to the database.
 
+    Some of the functions in this file will use helper function from [helpers.py](OnBeat/backend/helpers.py).
+
+    #### login_view
+    - Handle POST request for user login, authenticating the user if the username and password match
+    - Otherwise, it will return an error response status.
+    - This view will only accept a POST request, if the user tried to access this view with any other method, the user will be redirected to the login page of the application.
+
     </details>
 
     <details>
