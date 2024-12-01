@@ -230,8 +230,8 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary><b>src</b></summary>
 
-    <details>
-    <summary>components</summary>
+    - <details>
+        <summary>components</summary>
     <details>
     <summary><i>App.js</i></summary>
 
