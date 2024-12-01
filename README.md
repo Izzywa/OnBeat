@@ -37,56 +37,57 @@
 
 
 The distinctiveness of this project includes the use of other third-party packages such as:
-<details>
-<summary><i>Material UI Icon</i></summary>
-<hr></hr>
+    <details>
+    <summary><i>Material UI Icon</i></summary>
+    <hr></hr>
 
-- This project uses [Material UI Icons](https://mui.com/material-ui/material-icons/) to style the application.
+-     
+    - This project uses [Material UI Icons](https://mui.com/material-ui/material-icons/) to style the application.
+ 
+    ![menu bar example](README_images/expand_menu_bar1.png)
+    ![menu bar example](README_images/expand_menu_bar2.png)
 
-![menu bar example](README_images/expand_menu_bar1.png)
-![menu bar example](README_images/expand_menu_bar2.png)
+    - Material UI also have a powerful and flexible styling system for React components, however bootstrap library was used for this project solely for familiarity sake.
+    <hr></hr>
+    </details>
 
-- Material UI also have a powerful and flexible styling system for React components, however bootstrap library was used for this project solely for familiarity sake.
-<hr></hr>
-</details>
+    <details>
+    <summary><i>react-youtube</i></summary>
+    <hr></hr>
 
-<details>
-<summary><i>react-youtube</i></summary>
-<hr></hr>
+    - [react-youtube](https://www.npmjs.com/package/react-youtube) is a simple react component acting as a thin layer over the [Youtube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference).
+    - Props passed to this component allow the application to access the player in a similar way to the official api, but takes away the complexity of setting up the player in the first place.
+    - The use of this API also separates this `OnBeat` project from the rest. Aside from playing the video, the component and API is used to:
+        - Render certain components before or after the video is ready to be played.
 
-- [react-youtube](https://www.npmjs.com/package/react-youtube) is a simple react component acting as a thin layer over the [Youtube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference).
-- Props passed to this component allow the application to access the player in a similar way to the official api, but takes away the complexity of setting up the player in the first place.
-- The use of this API also separates this `OnBeat` project from the rest. Aside from playing the video, the component and API is used to:
-    - Render certain components before or after the video is ready to be played.
+        ![On video ready example](README_images/OnReadyExample.gif)
 
-    ![On video ready example](README_images/OnReadyExample.gif)
+        - Timestamp input is automatically set to the current time of the video.
 
-    - Timestamp input is automatically set to the current time of the video.
+        ![Timestamp auto time input](README_images/timestampTimeExample.gif)
 
-    ![Timestamp auto time input](README_images/timestampTimeExample.gif)
+        - Handle the input of timestamps to make sure that the given timestamps does not exceed the duration of the video.
 
-    - Handle the input of timestamps to make sure that the given timestamps does not exceed the duration of the video.
+        ![Timestamp invalid time](README_images/TimestampErrorExample.gif)
 
-    ![Timestamp invalid time](README_images/TimestampErrorExample.gif)
+        - Added error handling for invalid video.
 
-    - Added error handling for invalid video.
+        ![Video Error](README_images/VideoError.gif)
 
-    ![Video Error](README_images/VideoError.gif)
+        - Play the video to the specified time according to the timestamp.
 
-    - Play the video to the specified time according to the timestamp.
+        ![Timestamp clicked](README_images/TimestampClick.gif)
 
-    ![Timestamp clicked](README_images/TimestampClick.gif)
+        - In the search function of the applicaton, timestamps will be loaded with the video at the time corresponding with the timestamp. 
 
-    - In the search function of the applicaton, timestamps will be loaded with the video at the time corresponding with the timestamp. 
+        ![Timestamp search](README_images/TimestampSearch.gif)
 
-    ![Timestamp search](README_images/TimestampSearch.gif)
+        - Automatically scroll to the appropriate timestamp note that correspond to the current time playing on the video when the `OnBeat` function is on.
 
-    - Automatically scroll to the appropriate timestamp note that correspond to the current time playing on the video when the `OnBeat` function is on.
+        ![OnBeat function](README_images/OnBeatExample.gif)
 
-    ![OnBeat function](README_images/OnBeatExample.gif)
-
-<hr></hr>
-</details>
+    <hr></hr>
+    </details>
 
 
 
@@ -150,11 +151,11 @@ The distinctiveness of this project includes the use of other third-party packag
 
 - This also applied when the user is taking notes, the component for inputing new note or timestamp is scrolled into view on click as it will be hidden initially. 
 
-<details>
-<summary>Image</summary>
+    <details>
+    <summary>Image</summary>
 
-<img src="README_images/InputScrollIntoView.gif" width="250" height="500"/>
-</details>
+    <img src="README_images/InputScrollIntoView.gif" width="250" height="500"/>
+    </details>
 
 - Finally this application will have the `OnBeat` function for notes that are linked with a youtube video.
     - When the `OnBeat` function is active, it is represented by the moving icon on the setting button, animated using CSS.
@@ -163,7 +164,6 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary>Image</summary>
 
-    <img src="README_images/OnBeatIconAnimation.gif" width="300" height="200"/>
     <img src="README_images/OnBeatMobileExample.gif" width="250" height="500"/>
     </details>
 
