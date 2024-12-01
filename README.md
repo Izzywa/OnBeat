@@ -135,7 +135,7 @@ The distinctiveness of this project includes the use of other third-party packag
 - The heart of this project is ultimately to make a web application that allows user to watch youtube videos while reading or taking notes simultaneously.
 - It is estimated the numbers of smartphones in the world is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
 
-<img src="README_images/PCper100.png" width="250" height="500"/>
+<img src="README_images/PCper100.png" width="600" height="500"/>
 
 <small><i>image courtesy of [world population review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
 
