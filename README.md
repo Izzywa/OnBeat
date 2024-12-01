@@ -365,14 +365,14 @@ The distinctiveness of this project includes the use of other third-party packag
     - `frontend/main.js`
         - The bundle of all of the Javascript from the `src` file.
 
+    <hr></hr>
 
     #### templates/frontend
     - `index.html`
         - This is the rendered HTML template
     </details>
-
-    <hr></hr>
 </details>
+
 
 
 ## How to run the application.
