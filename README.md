@@ -120,8 +120,8 @@ The distinctiveness of this project includes the use of other third-party packag
 
 ### OnBeat
 
-- The heart of this project is ultimately to make a web application that allows for user to watch youtube videos while reading or taking notes simultaneously. This might not be a problem for users with a computer, laptop or a tablet. 
-- It is estimated the numbers of smartphones is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
+- The heart of this project is ultimately to make a web application that allows user to watch youtube videos while reading or taking notes simultaneously.
+- It is estimated the numbers of smartphones in the world is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
 
 ![PC per 100 person](README_images/PCper100.png)
 <small><i>image courtesy of [world pupulation review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
