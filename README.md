@@ -194,13 +194,13 @@ The distinctiveness of this project includes the use of other third-party packag
 
 - 
     <details>
-    <summary><ins>views.py</ins></summary>
+    <summary><b>views.py</b></summary>
 
     view
     </details>
 
     <details>
-    <summary><ins>helpers.py</ins></summary>
+    <summary><b>helpers.py</b></summary>
 
     helpers
     </details>
