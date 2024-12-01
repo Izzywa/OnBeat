@@ -14,6 +14,7 @@
 - The Models for this project will be stored in the `Backend` application, which will be responding to requests made by the client from the `Frontend` application with API responses.
 <details>
 <summary> Why </summary>
+<hr></hr>
 
 - In the previous projects, the application could function without the separation of the application into frontend and backend portions.
 - The decision to do such originates mostly from the interest to explore and learn more of React as it offers many benefits such as:
@@ -23,7 +24,8 @@
 
 - In learning to integrate React application with Django, it was seen separating the backend and frontend portions of the application keeps the project more organised and streamlined.
 - Changes to either frontend or backend of the application was more manageable, as the entire procedure was compartmentalised into smaller pieces. This ease the troubleshooting process as it makes it easier to pinpoint any irregularities.
-- This also makes the development process more flexible and efficient, as each task is delegated and tackled can be tackled separately with less likely chances that it would break the whole application.
+- This also makes the development process more flexible and efficient, as each task is delegated and tackled separately with less likely chances that it would break the whole application.
+<hr></hr>
 </details>
 
 - After setting up a Node project with `npm init`, several packages and modules were installed including:
