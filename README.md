@@ -353,9 +353,9 @@ The distinctiveness of this project includes the use of other third-party packag
 
     
     - <details>
-    <summary>css</summary>
+        <summary>css</summary>
 
-    </details>
+        </details>
 
     #### frontend/main.js
     </details>
