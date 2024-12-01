@@ -36,10 +36,11 @@
     - [react-dom](https://www.npmjs.com/package/react-dom)
 - The distinctiveness of this project also includes the use of other third-party packages that streamlines the development such as:
 <details>
-<summary><i>Material UI Icon<i></summary>
+<summary><i>Material UI Icon</i>i></summary>
 <hr></hr>
 
 - This project uses [Material UI Icons](https://mui.com/material-ui/material-icons/) to style the application.
+- 
 - Material UI also have a powerful and flexible styling system for React components, however bootstrap library was used for this project solely for familiarity sake as Material UI have a steeper learning curve.
 <hr></hr>
 </details>
