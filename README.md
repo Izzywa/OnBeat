@@ -345,20 +345,24 @@ The distinctiveness of this project includes the use of other third-party packag
     #### index.js
     </details>
 
+    <details>
+    <summary><b>src</b></summary>
+
+    <details>
+    <summary>/css</summary>
+
+    - `index.css`
+        - The css file, compiled with Sass from `index.scss`
+    - `index.scss`
+        - Using `--watch index.scss : index.css`, this file was automatically compiled when writing the styles for the application.
+
+    </details>
+    </details>
 </details>
 
 
 
-#### static
-<details>
-<summary>/css</summary>
 
-- `index.css`
-    - The css file, compiled with Sass from `index.scss`
-- `index.scss`
-    - Using `--watch index.scss : index.css`, this file was automatically compiled when writing the styles for the application.
-
-</details>
 
 - `frontend/main.js`
     - The bundle of all of the Javascript from the `src` file.
