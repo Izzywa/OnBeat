@@ -24,7 +24,7 @@
 
 - By integrating React with Django, separating the backend and frontend portions of the application had been proven to keep the project more organised and streamlined.
 - Changes to either frontend or backend of the application was more manageable, as the entire procedure was compartmentalised into smaller pieces. This ease the troubleshooting process as it makes it easier to pinpoint any irregularities.
-- This also makes the development process more flexible and efficient, as each task is delegated and tackled separately without breaking the whole application.
+- This also makes the development process more flexible and efficient, as each task is delegated and tackled separately without having to worry that it would break the entire application.
 <hr></hr>
 </details>
 
