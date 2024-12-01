@@ -347,12 +347,10 @@ The distinctiveness of this project includes the use of other third-party packag
 
     #### index.js
 
-    <hr></hr>
     </details>
 
     <details>
     <summary><b>static</b></summary>
-    <hr></hr>
 
     <details>
     <summary>/css</summary>
@@ -363,20 +361,19 @@ The distinctiveness of this project includes the use of other third-party packag
         - Using `--watch index.scss : index.css`, this file was automatically compiled when writing the styles for the application.
 
     </details>
+
+    - `frontend/main.js`
+        - The bundle of all of the Javascript from the `src` file.
+
+
+    #### templates/frontend
+    - `index.html`
+        - This is the rendered HTML template
     </details>
 
     <hr></hr>
 </details>
 
-
-
-
-
-- `frontend/main.js`
-    - The bundle of all of the Javascript from the `src` file.
-#### templates/frontend
-- `index.html`
-    - This is the rendered HTML template
 
 ## How to run the application.
 1. Install virtualenv
