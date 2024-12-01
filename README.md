@@ -345,7 +345,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
     - This folder contains the components used in the application.
 
-    #### index.js
+        #### index.js
     </details>
 
     </details>
