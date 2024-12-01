@@ -34,7 +34,9 @@
     - [react](https://www.npmjs.com/package/react)
     - [react-router-dom](https://www.npmjs.com/package/react-router-dom)
     - [react-dom](https://www.npmjs.com/package/react-dom)
-- The distinctiveness of this project also includes the use of other third-party packages that streamlines the development such as:
+
+
+- The distinctiveness of this project includes the use of other third-party packages that streamlines the development such as:
 <details>
 <summary><i>Material UI Icon</i></summary>
 <hr></hr>
@@ -85,7 +87,17 @@
 
 <hr></hr>
 </details>
-- [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6)
+
+<details>
+<summary><i>react-markdown</i><summary>
+<hr></hr>
+
+- Notes in this application is formatted from plaintext into markdwon using [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6).
+- Although inspired from the `wiki` project, it differs in that this application renders the text client-side without having to make a request to the server. This allows the markdown component to be rendered even while the user is writing the note.
+
+![Markdown Example](README_images/markdownExample.gif)
+<hr></hr>
+</details>
 
 
 ## What’s contained in each file you created.
