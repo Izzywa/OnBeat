@@ -139,6 +139,8 @@ The distinctiveness of this project includes the use of other third-party packag
 <small><i>image courtesy of [world pupulation review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
 
 - Firstly, the note portion of the application is made scrollable should a youtube video is available to make the video still visible to the user.
+
+
 <details>
 <summary>image</summary>
 
