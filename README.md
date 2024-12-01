@@ -88,8 +88,10 @@
 <hr></hr>
 </details>
 
+
+
 <details>
-<summary><i>react-markdown</i><summary>
+<summary><i>react-markdown</i></summary>
 <hr></hr>
 
 - Notes in this application is formatted from plaintext into markdwon using [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6).
