@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import { useAuth } from "./AuthContext";
-import { Alert } from "@mui/material";
 import YoutubeIframe from "./YoutubeIframe";
 import DisplayNoteComponent from "./DisplayNoteComponent";
 import DisplayTimestamp from "./DisplayTimestamp";
@@ -256,7 +255,7 @@ export default function Note(props) {
      : null }
 
 
-    { noteAvailable === false ? <div className="container my-3"><Alert severity="error">Note not available</Alert></div> : null}
+    { noteAvailable === false ? <div className="alert-no-notes"><h6>No Notes</h6></div> : null}
     </div>
     <footer style={{height: "5em"}}></footer>
 

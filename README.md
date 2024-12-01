@@ -28,14 +28,16 @@
 <hr></hr>
 </details>
 
-- After setting up a Node project with `npm init`, several packages and modules were installed including:
+- After setting up a Node project with `npm init` in the `Frontend` application, several packages and modules were installed including but not limited to:
     - [webpack](https://www.npmjs.com/package/webpack)
     - [babel](https://www.npmjs.com/package/Babel)
     - [react](https://www.npmjs.com/package/react)
     - [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-- 
-
-
+    - [react-dom](https://www.npmjs.com/package/react-dom)
+- The distinctiveness of this project also includes the use of other third-party packages that streamlines the development such as:
+    - [Material UI](https://mui.com/material-ui/material-icons/)
+    - [react-youtube](https://www.npmjs.com/package/react-youtube)
+    - [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6)
 
 
 ## What’s contained in each file you created.
