@@ -3,6 +3,7 @@ from django.test import TestCase
 from .models import User, Note, NoteContent, YoutubeUrl, NoteTimestamp, NoteList, Bookmark
 from datetime import timedelta, datetime
 from django.utils import timezone
+from django.test import Client
 
 # Create your tests here.
 class NoteTestCase(TestCase):
@@ -249,3 +250,9 @@ class NoteTestCase(TestCase):
             self.fail("another user should not be able to save another user's note")
         except:
             pass
+        
+    def test_HTTP_response(self):
+        c = Client()
+        
+        response = c.get("/")
+        self.assertEqual(response.status_code, 200)
