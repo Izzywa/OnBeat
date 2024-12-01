@@ -231,9 +231,115 @@ The distinctiveness of this project includes the use of other third-party packag
     <summary>components</summary>
 
     <details>
+
+    - This folder contains all of the components used by the application
     <summary><i>App.js</i></summary>
-    
+
     apps.js
+    </details>
+
+    <details>
+    <summary><i>AuthContext.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>BasicModal.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>CreateNote.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>CSRFCookie.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>DisplayNoteComponent.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>DisplayTimestamp.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>ExpandMenu.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>getVideoID.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>Homepage.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>ListOfNotes.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>LoadingSpinner.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>Login.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>MarkdownDisplay.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>NavBar.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>NewNoteInput.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>NewTimestamp.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>Note.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>NoteCard.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>NoteInputField.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>Paginator.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>PrivateRoutes.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>Register.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>Search.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>TextInputField.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>YoutubeIframe.js</i></summary>
+    </details>
+
+    <details>
+    <summary><i>YoutubeLinkInput.js</i></summary>
     </details>
 
     </details>
@@ -243,124 +349,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 </details>
 
-#### src
-<details>
-<summary>/components</summary>
 
-
-<details>
-<summary><i>App.js</i></summary>
-</details>
-
-<details>
-<summary><i>AuthContext.js</i></summary>
-</details>
-
-<details>
-<summary><i>BasicModal.js</i></summary>
-</details>
-
-<details>
-<summary><i>CreateNote.js</i></summary>
-</details>
-
-<details>
-<summary><i>CSRFCookie.js</i></summary>
-</details>
-
-<details>
-<summary><i>DisplayNoteComponent.js</i></summary>
-</details>
-
-<details>
-<summary><i>DisplayTimestamp.js</i></summary>
-</details>
-
-<details>
-<summary><i>ExpandMenu.js</i></summary>
-</details>
-
-<details>
-<summary><i>getVideoID.js</i></summary>
-</details>
-
-<details>
-<summary><i>Homepage.js</i></summary>
-</details>
-
-<details>
-<summary><i>ListOfNotes.js</i></summary>
-</details>
-
-<details>
-<summary><i>LoadingSpinner.js</i></summary>
-</details>
-
-<details>
-<summary><i>Login.js</i></summary>
-</details>
-
-<details>
-<summary><i>MarkdownDisplay.js</i></summary>
-</details>
-
-<details>
-<summary><i>NavBar.js</i></summary>
-</details>
-
-<details>
-<summary><i>NewNoteInput.js</i></summary>
-</details>
-
-<details>
-<summary><i>NewTimestamp.js</i></summary>
-</details>
-
-<details>
-<summary><i>Note.js</i></summary>
-</details>
-
-<details>
-<summary><i>NoteCard.js</i></summary>
-</details>
-
-<details>
-<summary><i>NoteInputField.js</i></summary>
-</details>
-
-<details>
-<summary><i>Paginator.js</i></summary>
-</details>
-
-<details>
-<summary><i>PrivateRoutes.js</i></summary>
-</details>
-
-<details>
-<summary><i>Register.js</i></summary>
-</details>
-
-<details>
-<summary><i>Search.js</i></summary>
-</details>
-
-<details>
-<summary><i>TextInputField.js</i></summary>
-</details>
-
-<details>
-<summary><i>YoutubeIframe.js</i></summary>
-</details>
-
-<details>
-<summary><i>YoutubeLinkInput.js</i></summary>
-</details>
-
-</details>
-
-- This folder contains all of the React component used by the application
-
-- `index.js`
 
 #### static
 <details>
