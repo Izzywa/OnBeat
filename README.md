@@ -192,7 +192,7 @@ The distinctiveness of this project includes the use of other third-party packag
 <details>
 <summary><ins><b>backend</b></ins></summary>
 
-- files
+- 
     <details>
     <summary><ins>views.py</ins></summary>
 
@@ -205,14 +205,20 @@ The distinctiveness of this project includes the use of other third-party packag
     helpers
     </details>
 
+    #### urls.py
+    - urls
+
+    #### models.py
+    - models
+
+    #### admin.py
+    - configuration for the admin interface
+
+    #### test.py
+    - test
+
 </details>
 
-
-
-- urls.py
-- models.py
-- admin.py
-- test.py
 
 ### Frontend
 #### src
