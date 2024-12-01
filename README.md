@@ -95,7 +95,7 @@ The distinctiveness of this project includes the use of other third-party packag
 <summary><i>react-markdown</i></summary>
 <hr></hr>
 
-- Notes in this application is formatted from plaintext into markdwon using [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6).
+- Notes in this application is formatted from plaintext into markdown using [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6).
 - Although inspired from the `wiki` project, it differs in that this application renders the text client-side without having to make a request to the server. This allows the markdown component to be rendered even while the user is writing the note.
 
 ![Markdown Example](README_images/markdownExample.gif)
@@ -104,7 +104,15 @@ The distinctiveness of this project includes the use of other third-party packag
 
 ### Asyncronous fetch request
 
-- Asynchrnous fetch request and React state are used to display the search results, the list of notes, and the bookmarked notes.
+- As React is used for the frontend, any request to the server is done asynchronously. This also allows the application to handle errors more affectively such as `IntegrityError` when saving data to the database.
+    <details>
+    <summary>image</summary>
+
+    ![Search toggles](README_images/TitleAlreadyExist.gif)
+    </details>
+
+
+- Single-Page style is used to display the search results, list of notes, and the bookmarked notes.
     - With changes in the pagination, only the components displayed were changed following the response from the request.
     - This provides a fast and responsive page especially with the `/search` function of the application where the results are rendered with every input the user make in the search bar and changes made to the filter toggles.
     <details>
