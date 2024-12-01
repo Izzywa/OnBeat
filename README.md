@@ -348,6 +348,11 @@ The distinctiveness of this project includes the use of other third-party packag
         #### index.js
     </details>
 
+    <details>
+    <summary><b>static</b></summary>
+
+    </details>
+
 <hr></hr>
     </details>
 
