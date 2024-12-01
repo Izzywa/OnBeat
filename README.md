@@ -139,7 +139,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 <small><i>image courtesy of [world population review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
 
-- Firstly, the note portion of the application is made scrollable should a youtube video is available to make the video still visible to the user.
+- Firstly, the note portion of the application is made scrollable should a youtube video is available to make the video still visible to the user while reading the notes.
 
 <details>
 <summary>Image</summary>
@@ -155,6 +155,17 @@ The distinctiveness of this project includes the use of other third-party packag
 
 <img src="README_images/InputScrollIntoView.gif" width="250" height="500"/>
 </details>
+
+- Finally this application will have the `OnBeat` function for notes that are linked with a youtube video.
+    - When the `OnBeat` function is active, it is represented by the moving icon on the setting button, animated using CSS.
+    - When active, the timestamps of the note will be hidden and when the video is played the timestamp note will scroll into view when the current time of the video corresponds with the given timestamp.
+
+    <details>
+    <summary>Image</summary>
+
+    <img src="README_images/OnBeatMobileExample.gif" width="250" height="500"/>
+    </details>
+
 
 
 ## What’s contained in each file you created.
