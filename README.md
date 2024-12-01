@@ -226,7 +226,7 @@ The distinctiveness of this project includes the use of other third-party packag
     #### create_note
     - The body of the post request is validated to create a new note.
     - The title of the note is checked so that each user does not have multiple notes of the same title, case insensitive.
-    - Aside from the title of the note, other contents of the notes is optional as it is a requirement to create other models for the note.
+    - Aside from the title of the note, other contents of the notes is optional.
     - Youtube url:
         - The `YoutubeUrl` model have a validation to make sure it is a valid youtube link. If invalid, the note will be removed and the view will respond with an error.
         - Client-side, the application is set not to save timestamps should there be no valid youtube linked to the note. Even so, as a failsafe, any timestamp submitted will be converted into regular note if there is no youtube url given.
@@ -256,8 +256,8 @@ The distinctiveness of this project includes the use of other third-party packag
 
 
     #### edit_note
-    - When the user edit an existing note, the title is validated and then the title is validated to ensure case insensitive uniqueness of the title.
-    - The content of the notes are also changed, either with addition or removal of content.
+    - When the user edit an existing note, the note then the title is validated.
+    - The content of the notes are also altered, either with addition, removal, or update.
     - If all the changes are successfully made, the `note.save()` is called to update the date modified of the note as it might not change if the user does not change the note title.
 
     #### homepage
