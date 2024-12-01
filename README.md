@@ -192,8 +192,7 @@ The distinctiveness of this project includes the use of other third-party packag
 <details>
 <summary><ins><b>backend</b></ins></summary>
 
-- 
-
+- files
     <details>
     <summary><ins>views.py</ins></summary>
 
