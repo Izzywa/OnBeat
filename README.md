@@ -355,6 +355,11 @@ The distinctiveness of this project includes the use of other third-party packag
     - <details>
         <summary>css</summary>
 
+        #### index.css
+        - The `css` file used to style the application
+
+        #### index.scss
+        - This file is mapped to [index.css](#indexcss)
         </details>
 
         #### frontend/main.js
