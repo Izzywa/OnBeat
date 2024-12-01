@@ -357,7 +357,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
         </details>
 
-    #### frontend/main.js
+        #### frontend/main.js
     </details>
 
     #### templates/index.html
