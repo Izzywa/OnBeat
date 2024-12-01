@@ -40,7 +40,8 @@
 <hr></hr>
 
 - This project uses [Material UI Icons](https://mui.com/material-ui/material-icons/) to style the application.
-- 
+![menu bar example](README_images/expand_menu_bar1.png)
+![menu bar example](README_images/expand_menu_bar2.png)
 - Material UI also have a powerful and flexible styling system for React components, however bootstrap library was used for this project solely for familiarity sake as Material UI have a steeper learning curve.
 <hr></hr>
 </details>
