@@ -140,7 +140,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 - Firstly, the note portion of the application is made scrollable should a youtube video is available to make the video still visible to the user.
 
-<img src="README_images/MobileScrollWithVideo.gif" width="250" height="500"/>
+<img src="README_images/MobileWithVideo.gif" width="250" height="500"/>
 
 - This also applied when the user is taking notes, the component for inputing new notes is scrolled into view on click as it will be hidden initially. 
 
