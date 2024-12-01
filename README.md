@@ -166,9 +166,10 @@ The distinctiveness of this project includes the use of other third-party packag
     <img src="README_images/InputScrollIntoView.gif" width="250" height="500"/>
     </details>
 
-- Finally this application will have the `OnBeat` function for notes that are linked with a youtube video.
+- Finally, this application will have the `OnBeat` function for notes that are linked with a youtube video.
     - When the `OnBeat` function is active, it is represented by the moving icon on the setting button, animated using CSS.
-    - When active, the timestamps of the note will be hidden and when the video is played the timestamp note will automatically scroll into view when the current time of the video corresponds with the given timestamp.
+    - When active, the timestamps of the note will be hidden and when the video is played, the timestamp note will automatically scroll into view when the current time of the video corresponds with the given timestamp.
+    - This allows for a seamless experience for the user to view the youtube video while reviewing the notes.
 
     <details>
     <summary>Image</summary>
