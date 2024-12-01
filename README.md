@@ -1,4 +1,4 @@
-# OnBeat
+# OnBeat 
 
 ## Distinctiveness and Complexity
 - This project is a full stack web application fully integrating the Django framework with the React library.
@@ -145,7 +145,7 @@ The distinctiveness of this project includes the use of other third-party packag
 - The heart of this project is ultimately to make a web application that allows user to watch youtube videos while reading or taking notes simultaneously.
 - It is estimated the numbers of smartphones in the world is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
 
-    <img src="README_images/PCper100.png" width="600" height="500"/>
+    <img src="README_images/PCper100.png" width="700" height="500"/>
 
     <small><i>image courtesy of [world population review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
 
@@ -158,7 +158,7 @@ The distinctiveness of this project includes the use of other third-party packag
     <img src="README_images/MobileNoVideo.gif" width="250" height="500"/>
     </details>
 
-- This also applied when the user is taking notes, the component for inputing new note or timestamp is scrolled into view on click as it will be hidden initially. 
+- This also applies when the user is taking notes. The component for inputing new note or timestamp is scrolled into view on click as it will be hidden initially. 
 
     <details>
     <summary>Image</summary>
@@ -168,7 +168,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 - Finally this application will have the `OnBeat` function for notes that are linked with a youtube video.
     - When the `OnBeat` function is active, it is represented by the moving icon on the setting button, animated using CSS.
-    - When active, the timestamps of the note will be hidden and when the video is played the timestamp note will scroll into view when the current time of the video corresponds with the given timestamp.
+    - When active, the timestamps of the note will be hidden and when the video is played the timestamp note will automatically scroll into view when the current time of the video corresponds with the given timestamp.
 
     <details>
     <summary>Image</summary>
