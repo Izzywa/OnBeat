@@ -147,9 +147,13 @@ The distinctiveness of this project includes the use of other third-party packag
 <img src="README_images/MobileNoVideo.gif" width="250" height="500"/>
 </details>
 
-- This also applied when the user is taking notes, the component for inputing new notes is scrolled into view on click as it will be hidden initially. 
+- This also applied when the user is taking notes, the component for inputing new note or timestamp is scrolled into view on click as it will be hidden initially. 
 
+<details>
+<summary>image</image>
 
+<img src="README_images/InputScrollIntoView.gif" width="250" height="500"/>
+</details>
 ## What’s contained in each file you created.
 
 ### .github/workflows
