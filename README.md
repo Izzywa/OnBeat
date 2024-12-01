@@ -230,9 +230,8 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary>components</summary>
 
+    - This folder contains the components used in the application.
     <details>
-
-    - This folder contains all of the components used by the application
     <summary><i>App.js</i></summary>
 
     apps.js
