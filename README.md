@@ -232,11 +232,12 @@ The distinctiveness of this project includes the use of other third-party packag
 
     - <details>
         <summary>components</summary>
-    <details>
-    <summary><i>App.js</i></summary>
+        
+        <details>
+        <summary><i>App.js</i></summary>
 
-    apps.js
-    </details>
+        apps.js
+        </details>
 
     <details>
     <summary><i>AuthContext.js</i></summary>
