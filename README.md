@@ -191,6 +191,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 <details>
 <summary><ins><b>backend</b></ins></summary>
+<hr></hr>
 
 - 
     <details>
@@ -217,11 +218,13 @@ The distinctiveness of this project includes the use of other third-party packag
     #### test.py
     - test
 
+<hr></hr>
 </details>
 
 
 <details>
 <summary><ins><b>frontend</b></ins></summary>
+<hr></hr>
 
 - 
     <details>
@@ -346,7 +349,7 @@ The distinctiveness of this project includes the use of other third-party packag
     </details>
 
     <details>
-    <summary><b>src</b></summary>
+    <summary><b>static</b></summary>
 
     <details>
     <summary>/css</summary>
@@ -358,6 +361,8 @@ The distinctiveness of this project includes the use of other third-party packag
 
     </details>
     </details>
+
+    <hr></hr>
 </details>
 
 
