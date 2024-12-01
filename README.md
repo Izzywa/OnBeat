@@ -145,7 +145,7 @@ The distinctiveness of this project includes the use of other third-party packag
 <summary>image</summary>
 
 <img src="README_images/MobileNoVideo.gif" width="250" height="500"/>
-<img src="README_images/MobileScrollWithVideo.gif" width="250" height="500">
+<img src="README_images/MobileScrollWithVideo.gif" width="250" height="500"/>
 </details>
 
 - This also applied when the user is taking notes, the component for inputing new notes is scrolled into view on click as it will be hidden initially. 
