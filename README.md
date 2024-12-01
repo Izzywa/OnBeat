@@ -343,36 +343,12 @@ The distinctiveness of this project includes the use of other third-party packag
         <summary><i>YoutubeLinkInput.js</i></summary>
         </details>
 
-    </details>
     - This folder contains the components used in the application.
 
     #### index.js
-
     </details>
 
-    <details>
-    <summary><b>static</b></summary>
-
-    <details>
-    <summary>/css</summary>
-
-    - `index.css`
-        - The css file, compiled with Sass from `index.scss`
-    - `index.scss`
-        - Using `--watch index.scss : index.css`, this file was automatically compiled when writing the styles for the application.
-
     </details>
-
-    - `frontend/main.js`
-        - The bundle of all of the Javascript from the `src` file.
-
-    <hr></hr>
-
-    #### templates/frontend
-    - `index.html`
-        - This is the rendered HTML template
-    </details>
-</details>
 
 
 
