@@ -130,13 +130,14 @@ The distinctiveness of this project includes the use of other third-party packag
 
 ### <ins>Mobile responsiveness</ins>
 
-- Using mobile first approach, this application was developed to be responsive and fluid, taking into consideration on how this application will be displayed in a mobile setting.
+- Using a mobile-first approach, this application was developed to be responsive and fluid, taking into consideration on how this application will be displayed in a mobile setting.
 
     <details>
     <summary>image</summary>
 
-    ![Navbar Desktop](README_images/DesktopSizeNav.gif)
-    ![Navbar Mobile](README_images/MobileNav.gif)
+    <img src="README_images/DesktopSizeNav.gif" width="300" height="250"/>
+    <img src="README_images/MobileNav.gif" width="300" height="250"/>
+
     </details>
 
 ### <ins>OnBeat</ins>
