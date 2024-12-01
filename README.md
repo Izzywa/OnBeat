@@ -128,7 +128,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 ![Navbar Desktop](README_images/DesktopSizeNav.gif)
 ![Navbar Mobile](README_images/MobileNav.gif)
-<details>
+</details>
 
 ### OnBeat
 
