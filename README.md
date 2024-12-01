@@ -261,7 +261,7 @@ The distinctiveness of this project includes the use of other third-party packag
     - If all the changes are successfully made, the `note.save()` is called to update the date modified of the note as it might not change if the user does not change the note title.
 
     #### homepage
-    - This view return the recently created and created notes.
+    - This view return the recently created and modified notes.
 
     #### bookmarks
     - If a POST request is made to this view, it will return the status of bookmark of the requested note.
