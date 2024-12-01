@@ -147,6 +147,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 - This also applied when the user is taking notes, the component for inputing new notes is scrolled into view on click as it will be hidden initially. 
 
+
 ## What’s contained in each file you created.
 
 ### .github/workflows
