@@ -99,10 +99,10 @@ html, body {
   word-wrap: break-all;
 }
 
+/*
 pre {
-  background: #ede7f6;
-}
-
+  background: $light;
+}*/
 .timestamp-link {
   color: #7e57c2;
   text-decoration: underline;

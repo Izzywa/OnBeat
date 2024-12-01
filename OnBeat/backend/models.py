@@ -8,7 +8,9 @@ from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
 def validate_youtube_url(value):
-    if not value.startswith('https://www.youtube.com/watch?v=') or not value.startswith('https://youtu.be/'):
+    if value.startswith('https://www.youtube.com/watch?v=') or value.startswith('https://youtu.be/'):
+        pass
+    else:
         raise ValidationError(
             _('%(value)s is not valid youtube url.'),
             params={'value': value},

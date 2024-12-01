@@ -121,26 +121,30 @@ class NoteTestCase(TestCase):
             self.assertTrue(True)
             
         # test youtube url validation
+        test_url = YoutubeUrl(note=note1, url="https://stackoverflow.com/questions/7366363/adding-custom-django-model-validation")
         try:
             with transaction.atomic():
-                test_url = YoutubeUrl(note=note1, url="https://stackoverflow.com/questions/7366363/adding-custom-django-model-validation")
+                test_url.full_clean()
                 test_url.save()
             self.fail("Should not save invalid youtube url")
         except:
             pass
         
+        test_url = YoutubeUrl(note=note2, url="https://www.youtube.com/watch?v=jrBhi8wbzPw")
         try:
             with transaction.atomic():
-                test_url = YoutubeUrl(note=note2, url="https://www.youtube.com/watch?v=n4DN7_IFjEo&t=1418s")
+                test_url.full_clean()
                 test_url.save()
             pass
         except:
             self.fail("This should be a valid url")
             
         test_url.delete()
+        
+        test_url = YoutubeUrl(note=note2, url="https://youtu.be/n4DN7_IFjEo?si=pot68ZTzFptwIYHp")
         try:
             with transaction.atomic():
-                test_url = YoutubeUrl(note=note2, url="https://youtu.be/n4DN7_IFjEo?si=pot68ZTzFptwIYHp")
+                test_url.full_clean()
                 test_url.save()
             pass
         except:
