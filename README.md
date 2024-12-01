@@ -179,10 +179,14 @@ The distinctiveness of this project includes the use of other third-party packag
 
 
 
-## What’s contained in each file you created.
+## Project Files
 
-### .github/workflows
-- cy.yml
+<details>
+<summary><ins><b>.github/workflows</b></ins></summary>
+
+#### cy.yml
+
+</details>
 
 
 ### Backend
