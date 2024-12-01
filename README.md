@@ -103,7 +103,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 ### Asyncronous fetch request
 
-- Asynchrnous fetch request and React state are used to display the search results, the list of user notes and the user's bookmarked notes.
+- Asynchrnous fetch request and React state are used to display the search results, the list of notes, and the bookmarked notes.
     - With changes in the pagination, only the components displayed were changed following the response from the request.
     - This provides a fast and responsive page especially with the `/search` function of the application where the results are rendered with every input the user make in the search bar and changes made to the filter toggles.
 
@@ -122,7 +122,7 @@ The distinctiveness of this project includes the use of other third-party packag
 - It is estimated the numbers of smartphones is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
 
 ![PC per 100 person](README_images/PCper100.png)
-<small>image courtesy of [world pupulation review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</small>
+<small><i>image courtesy of [world pupulation review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
 
 ## What’s contained in each file you created.
 
