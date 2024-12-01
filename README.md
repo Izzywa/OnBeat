@@ -186,8 +186,8 @@ The distinctiveness of this project includes the use of other third-party packag
 
 #### [cy.yml](.github/workflows/cy.yml)
 - This file is written to setup GitHub Actions.
-    - It was setup so that for every push to the repository, this workflow will run.
-    - The workflow will run the testing file after setting up the project dependencies, making sure to catch any errors made by the changes made.
+    - For every push to the repository, a workflow will run.
+    - The workflow will run the testing file after setting up the project dependencies, making sure to catch any errors made by the changes applied.
 
 </details>
 
@@ -198,7 +198,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 - 
     <details>
-    <summary><b>views.py</b></summary>
+    <summary><b>[views.py](OnBeat/backend/views.py)</b></summary>
 
     view
     </details>
