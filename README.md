@@ -37,6 +37,7 @@
 
 
 The distinctiveness of this project includes the use of other third-party packages such as:
+- 
     <details>
     <summary><i>Material UI Icon</i></summary>
     <hr></hr>
