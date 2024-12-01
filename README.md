@@ -44,11 +44,28 @@
 ![menu bar example](README_images/expand_menu_bar1.png)
 ![menu bar example](README_images/expand_menu_bar2.png)
 
-- Material UI also have a powerful and flexible styling system for React components, however bootstrap library was used for this project solely for familiarity sake as Material UI have a steeper learning curve.
+- Material UI also have a powerful and flexible styling system for React components, however bootstrap library was used for this project solely for familiarity sake.
 <hr></hr>
 </details>
 
-- [react-youtube](https://www.npmjs.com/package/react-youtube)
+<details>
+<summary><i>react-youtube</i></summary>
+<hr></hr>
+
+- [react-youtube](https://www.npmjs.com/package/react-youtube) is a simple react component acting as a thin layer over the [Youtube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference).
+- Props passed to this component allow the application to access the player in a similar way to the official api, but takes away the complexity of setting up the player in the first place.
+- The use of this API also separates this `OnBeat` project from the rest. Aside from playing the video, the component and API is used to:
+    - Render certain components only when the video before or after the video is ready to be played.
+
+    ![On video ready example](README_images/OnReadyExample.gif)
+
+    - Handle the input of timestamps to make sure that the given timestamps does not exceed the duration of the video.
+    - Added error handling.
+    - Seek the video to the appropriate time according to the timestamp
+    - Scroll to the appropriate timestamp note that correspond to the current time playing on the video when the `OnBeat` function is on.
+
+<hr></hr>
+</details>
 - [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6)
 
 
