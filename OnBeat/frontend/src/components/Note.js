@@ -255,7 +255,7 @@ export default function Note(props) {
      : null }
 
 
-    { noteAvailable === false ? <div className="alert-no-notes"><h6>No Notes</h6></div> : null}
+    { noteAvailable === false ? <div className="alert-no-notes my-3"><h6>No Notes</h6></div> : null}
     </div>
     <footer style={{height: "5em"}}></footer>
 

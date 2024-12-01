@@ -49,8 +49,10 @@ export default function Homepage(props) {
             console.log(error)
         })
     }, [page])
+
     
     return(
+        <>
     <div>
         <NavBar/>
         <div className="container my-3">
@@ -81,5 +83,7 @@ export default function Homepage(props) {
         </div>
 
     </div>
+    <footer style={{height: "5em"}}></footer>
+    </>
     )
 }

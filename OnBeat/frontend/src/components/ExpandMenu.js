@@ -67,8 +67,8 @@ export default function ExpandMenu(props) {
                 </span>
                 { props.handleOnBeat ?
                 <span style={props.viewOnly ? {transform: 'translateY(-2.5em) translateX(10em)'}: HideIconStyle()}>
-                    <a>
-                        <div className={props.onBeat ? "soundwave-container active": "soundwave-container"} onClick={props.handleOnBeat}>
+                    <a  onClick={props.handleOnBeat}>
+                        <div className={props.onBeat ? "soundwave-container active": "soundwave-container"}>
                             <div className="soundwave"></div>
                             <div className="soundwave"></div>
                             <div className="soundwave"></div>

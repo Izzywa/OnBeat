@@ -8,7 +8,7 @@
 - In the previous `Network` and `Mail` project, a single Django application will render the templates of appliction while the interactive user interface is implemented by asynchronous fetch requests or using `Babel` to translate JSX code written directly into the script of the HTML file.
     - This `OnBeat` project distinctiveness and complexity stems mostly on the setting the React app into the application.
 
-### React application and Django REST framework
+### React
 - Two Django applications were created, `Backend` and `Frontend`.
 - In the `Frontend` application, folders for `static` files and `templates` were created. This application will serve to render all client side interactivity for the application.
 - The Models for this project will be stored in the `Backend` application, which will be responding to requests made by the client from the `Frontend` application with API responses.
@@ -101,6 +101,28 @@ The distinctiveness of this project includes the use of other third-party packag
 <hr></hr>
 </details>
 
+### Asyncronous fetch request
+
+- Asynchrnous fetch request and React state are used to display the search results, the list of user notes and the user's bookmarked notes.
+    - With changes in the pagination, only the components displayed were changed following the response from the request.
+    - This provides a fast and responsive page especially with the `/search` function of the application where the results are rendered with every input the user make in the search bar and changes made to the filter toggles.
+
+    ![Search toggles](README_images/SearchAsync.gif)
+
+- It is also used to determine and alter the bookmark status of a note.
+    ![Bookmark toggles](README_images/bookmarkFunction.gif)
+
+### Mobile responsiveness
+
+- Using mobile first approach, this application was developed to be responsive and fluid, taking into consideration on how this application will be displayed in a mobile setting.
+
+### OnBeat
+
+- The heart of this project is ultimately to make a web application that allows for user to watch youtube videos while reading or taking notes simultaneously. This might not be a problem for users with a computer, laptop or a tablet. 
+- It is estimated the numbers of smartphones is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
+
+![PC per 100 person](README_images/PCper100.png)
+<small>image courtesy of [world pupulation review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</small>
 
 ## What’s contained in each file you created.
 
