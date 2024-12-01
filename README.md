@@ -71,8 +71,14 @@
 
     ![Video Error](README_images/VideoError.gif)
 
-    - Seek the video to the appropriate time according to the timestamp
+    - Seek the video to the appropriate time according to the timestamp, or load the timestamp already at the appropriate time with the search function.
+
+    ![Timestamp clicked](README_images/TimestampClick.gif)
+    ![Timestamp search](README_images/TimestampSearch.gif)
+
     - Scroll to the appropriate timestamp note that correspond to the current time playing on the video when the `OnBeat` function is on.
+
+    ![OnBeat function](README_images/OnBeatExample.gif)
 
 <hr></hr>
 </details>
