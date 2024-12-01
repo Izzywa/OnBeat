@@ -226,11 +226,48 @@ The distinctiveness of this project includes the use of other third-party packag
     #### create_note
     - The body of the post request is validated to create a new note.
     - The title of the note is checked so that each user does not have multiple notes of the same title, case insensitive.
-    - Aside from the title of the note, other contents of the notes is optional.
+    - Aside from the title of the note, other contents of the notes is optional as it is a requirement to create other models for the note.
     - Youtube url:
         - The `YoutubeUrl` model have a validation to make sure it is a valid youtube link. If invalid, the note will be removed and the view will respond with an error.
         - Client-side, the application is set not to save timestamps should there be no valid youtube linked to the note. Even so, as a failsafe, any timestamp submitted will be converted into regular note if there is no youtube url given.
-    - Other contents of the note is saved with the helper function [`save_noteList_item`](#save_notelist_item)
+    - Other contents of the note is saved with the helper function [`save_noteList_item`](#save_notelist_item). If any exception occurs in saving the note's content, the note will be deleted and the view will respond with and error.
+
+    #### view_note
+    - This view takes in an integer argument, which should be the ID of the note the user is trying to view.
+    - First of all, it is validated that the note to be viewed exist and is made by the user that is making the request.
+    - Then, the view will respond with contents of the notes such as the linked youtube url, notes, or timestamps if any.
+
+    #### delete_note
+    - Taking in an argument for the note id, after making sure the note object exist and is created by the requested user, this view will then procede to delete the note.
+
+    - If the user try to access this view with method other than POST, the user will be redirected to the page to view the note.
+
+
+    #### list_notes
+    - This view will return the list of five notes the user created per page, taking in the optional arguments for the requested page number.
+
+    #### search
+    - When the user access the `/search` route of the application, a POST request is made with data for the filter applied, the page, and the search query.
+    - The search result will be the titles, timestamp text, or plain note text if no filter is applied. 
+        - This allows flexibility in the search function and simplifies the display of the search result.
+        - The user can view a certain part of the notes without having to load the entire note.
+        - Texts from multiple notes across the database could also be viewed in the same page without having to open several notes at once.
+    - The resulting list is also sorted with the most recent notes first.
+
+
+    #### edit_note
+    - When the user edit an existing note, the title is validated and then the title is validated to ensure case insensitive uniqueness of the title.
+    - The content of the notes are also changed, either with addition or removal of content.
+    - If all the changes are successfully made, the `note.save()` is called to update the date modified of the note as it might not change if the user does not change the note title.
+
+    #### homepage
+    - This view return the recently created and created notes.
+
+    #### bookmarks
+    - If a POST request is made to this view, it will return the status of bookmark of the requested note.
+    - A PUT request will alter the bookmark status.
+    - Otherwise the view will return a two item per page view of notes bookmarked by the user.
+
 
     </details>
 
