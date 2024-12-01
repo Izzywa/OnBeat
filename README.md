@@ -115,6 +115,9 @@ The distinctiveness of this project includes the use of other third-party packag
 
 - Using mobile first approach, this application was developed to be responsive and fluid, taking into consideration on how this application will be displayed in a mobile setting.
 
+![Navbar Desktop](README_images/DesktopSizeNav.gif)
+![Navbar Mobile](README_images/MobileNav.gif)
+
 ### OnBeat
 
 - The heart of this project is ultimately to make a web application that allows for user to watch youtube videos while reading or taking notes simultaneously. This might not be a problem for users with a computer, laptop or a tablet. 
