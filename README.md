@@ -356,10 +356,10 @@ The distinctiveness of this project includes the use of other third-party packag
         <summary>css</summary>
 
         #### index.css
-        - The `css` file used to style the application
+        - This file is linked to the HTML page to apply styling to the application.
 
         #### index.scss
-        - This file is mapped to [index.css](#indexcss)
+        - Styling of the application is written in Sass in this file, then compiled into the [index.css](#indexcss) file
         </details>
 
         #### frontend/main.js
