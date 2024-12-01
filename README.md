@@ -5,11 +5,34 @@
 - This Django project have two application that serve as the backend and the frontend of the application, and named as such.
     - The `Backend` application will be responsible for the server side logic and database interactions, with the primary goal of handling requests and delivering responses.
     - The `Frontend` will utilise React to render the client-side interface providing a user interactive application.
-- In previous the `Network` and `Mail` project, the Django server will render the templates of appliction while the interactive user interface is implemented by asynchronous fetch requests or using `Babel` to translate JSX code written directly into the HTML file.
+- In the previous `Network` and `Mail` project, a single Django application will render the templates of appliction while the interactive user interface is implemented by asynchronous fetch requests or using `Babel` to translate JSX code written directly into the script of the HTML file.
     - This `OnBeat` project distinctiveness and complexity stems mostly on the setting the React app into the application.
+
 ### React application and Django REST framework
-- A separate Django application is created to serve as the frontend of the web application. 
-- No `static` and `templates` folder was created for the `Backend` application as the it will serve only as the REST API framework for the web application while the `Frontend` will handle all the client side interactivity.
+- Two Django applications were created, `Backend` and `Frontend`.
+- In the `Frontend` application, folders for `static` files and `templates` were created. This application will serve to render all client side interactivity for the application.
+- The Models for this project will be stored in the `Backend` application, which will be responding to requests made by the client from the `Frontend` application with API responses.
+<details>
+<summary> Why </summary>
+
+- In the previous projects, the application could function without the separation of the application into frontend and backend portions.
+- The decision to do such originates mostly from the interest to explore and learn more of React as it offers many benefits such as:
+    - Providing interactive user interface
+    - Components reusability
+    - Rich library
+
+- In learning to integrate React application with Django, it was seen separating the backend and frontend portions of the application keeps the project more organised and streamlined.
+- Changes to either frontend or backend of the application was more manageable, as the entire procedure was compartmentalised into smaller pieces. This ease the troubleshooting process as it makes it easier to pinpoint any irregularities.
+- This also makes the development process more flexible and efficient, as each task is delegated and tackled can be tackled separately with less likely chances that it would break the whole application.
+</details>
+
+- After setting up a Node project with `npm init`, several packages and modules were installed including:
+    - [webpack](https://www.npmjs.com/package/webpack)
+    - [babel](https://www.npmjs.com/package/Babel)
+    - [react](https://www.npmjs.com/package/react)
+    - [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+- 
+
 
 
 
@@ -20,11 +43,17 @@
 
 
 ### Backend
-- views.py
+<details>
+<summary>views.py</summary>
+</details>
+
+<details>
+<summary>helpers.py</summary>
+</details>
+
 - urls.py
 - models.py
 - admin.py
-- helpers.py
 - test.py
 
 ### Frontend

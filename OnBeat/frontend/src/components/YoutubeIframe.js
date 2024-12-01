@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react";
 import YouTube from 'react-youtube';
 import LoadingSpinner from "./LoadingSpinner";
-import { height, maxHeight } from "@mui/system";
 
 export default function YoutubeIframe(props) {
     const opts = {
