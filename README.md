@@ -106,47 +106,47 @@ The distinctiveness of this project includes the use of other third-party packag
 - Asynchrnous fetch request and React state are used to display the search results, the list of notes, and the bookmarked notes.
     - With changes in the pagination, only the components displayed were changed following the response from the request.
     - This provides a fast and responsive page especially with the `/search` function of the application where the results are rendered with every input the user make in the search bar and changes made to the filter toggles.
-<details>
-<summary>image</summary>
+    <details>
+    <summary>image</summary>
 
-![Search toggles](README_images/Search.gif)
-</details>
+    ![Search toggles](README_images/Search.gif)
+    </details>
 
 - It is also used to determine and alter the bookmark status of a note.
-<details>
-<summary>image</summary>
+    <details>
+    <summary>image</summary>
 
-![Bookmark toggles](README_images/bookmarkFunction.gif)
-</details>
+    ![Bookmark toggles](README_images/bookmarkFunction.gif)
+    </details>
 
 ### Mobile responsiveness
 
 - Using mobile first approach, this application was developed to be responsive and fluid, taking into consideration on how this application will be displayed in a mobile setting.
 
-<details>
-<summary>image</summary>
+    <details>
+    <summary>image</summary>
 
-![Navbar Desktop](README_images/DesktopSizeNav.gif)
-![Navbar Mobile](README_images/MobileNav.gif)
-</details>
+    ![Navbar Desktop](README_images/DesktopSizeNav.gif)
+    ![Navbar Mobile](README_images/MobileNav.gif)
+    </details>
 
 ### OnBeat
 
 - The heart of this project is ultimately to make a web application that allows user to watch youtube videos while reading or taking notes simultaneously.
 - It is estimated the numbers of smartphones in the world is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
 
-<img src="README_images/PCper100.png" width="600" height="500"/>
+    <img src="README_images/PCper100.png" width="600" height="500"/>
 
-<small><i>image courtesy of [world population review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
+    <small><i>image courtesy of [world population review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
 
 - Firstly, the note portion of the application is made scrollable should a youtube video is available to make the video still visible to the user while reading the notes.
 
-<details>
-<summary>Image</summary>
+    <details>
+    <summary>Image</summary>
 
-<img src="README_images/MobileWithVideo.gif" width="250" height="500"/>
-<img src="README_images/MobileNoVideo.gif" width="250" height="500"/>
-</details>
+    <img src="README_images/MobileWithVideo.gif" width="250" height="500"/>
+    <img src="README_images/MobileNoVideo.gif" width="250" height="500"/>
+    </details>
 
 - This also applied when the user is taking notes, the component for inputing new note or timestamp is scrolled into view on click as it will be hidden initially. 
 
@@ -163,6 +163,7 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary>Image</summary>
 
+    <img src="README_images/OnBeatIconAnimation.gif" width="300" height="200"/>
     <img src="README_images/OnBeatMobileExample.gif" width="250" height="500"/>
     </details>
 
