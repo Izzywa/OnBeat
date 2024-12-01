@@ -204,15 +204,40 @@ The distinctiveness of this project includes the use of other third-party packag
 
     Some of the functions in this file will use helper function from [helpers.py](OnBeat/backend/helpers.py).
 
+    Most of the views for this application requires user to be logged in, to prevent another user of having access to another user's note. The user will be redirected to the `/login` route if not authenticated.
+
     #### login_view
     - Handle POST request for user login, authenticating the user if the username and password match
     - Otherwise, it will return an error response status.
     - This view will only accept a POST request, if the user tried to access this view with any other method, the user will be redirected to the login page of the application.
 
+    #### logout_view
+    - Logs out the user, then the user is redirected back to the login page.
+
+    #### register
+    - Register a new user
+    - User will be redirected to the `/register` route of the application if the user requested this view not with the POST method.
+    - Using helper functions, the user's input is validated and error responses will be rendered client-side so the user will know which input was invalid.
+    - If all of the field is valid, the user is registered and logged in.
+
+    #### getCurrentUser
+    - This view functions to validate user's authentication for user to access the private route of the frontend application.
+
+    #### create_note
+    - The body of the post request is validated to create a new note.
+    - The title of the note is checked so that each user does not have multiple notes of the same title, case insensitive.
+    - Aside from the title of the note, other contents of the notes is optional.
+    - Youtube url:
+        - The `YoutubeUrl` model have a validation to make sure it is a valid youtube link. If invalid, the note will be removed and the view will respond with an error.
+        - Client-side, the application is set not to save timestamps should there be no valid youtube linked to the note. Even so, as a failsafe, any timestamp submitted will be converted into regular note if there is no youtube url given.
+    - Other contents of the note is saved with the helper function [`save_noteList_item`](#save_notelist_item)
+
     </details>
 
     <details>
     <summary><b>helpers.py</b></summary>
+
+    #### save_noteList_item
 
     helpers
     </details>
