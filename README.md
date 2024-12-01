@@ -204,7 +204,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
     Some of the functions in this file will use helper function from [helpers.py](OnBeat/backend/helpers.py).
 
-    Most of the views for this application requires user to be logged in, to prevent another user of having access to another user's note. The user will be redirected to the `/login` route if not authenticated.
+    Most of the views for this application requires user to be logged in, to prevent one user from having access to another user's note. The user will be redirected to the `/login` route if not authenticated.
 
     #### login_view
     - Handle POST request for user login, authenticating the user if the username and password match
