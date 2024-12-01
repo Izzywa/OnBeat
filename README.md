@@ -135,7 +135,7 @@ The distinctiveness of this project includes the use of other third-party packag
 - The heart of this project is ultimately to make a web application that allows user to watch youtube videos while reading or taking notes simultaneously.
 - It is estimated the numbers of smartphones in the world is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
 
-![PC per 100 person](README_images/PCper100.png)
+<img src="README_images/PCper100.png" width="500" height="500"/>
 <small><i>image courtesy of [world pupulation review](https://worldpopulationreview.com/country-rankings/computers-per-capita-by-country)</i></small>
 
 - Firstly, the note portion of the application is made scrollable should a youtube video is available to make the video still visible to the user.
@@ -150,10 +150,12 @@ The distinctiveness of this project includes the use of other third-party packag
 - This also applied when the user is taking notes, the component for inputing new note or timestamp is scrolled into view on click as it will be hidden initially. 
 
 <details>
-<summary>image</image>
+<summary>Image</summary>
 
 <img src="README_images/InputScrollIntoView.gif" width="250" height="500"/>
 </details>
+
+
 ## What’s contained in each file you created.
 
 ### .github/workflows
