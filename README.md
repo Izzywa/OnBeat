@@ -44,8 +44,8 @@
 <hr></hr>
 </details>
 
-    - [react-youtube](https://www.npmjs.com/package/react-youtube)
-    - [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6)
+- [react-youtube](https://www.npmjs.com/package/react-youtube)
+- [react-markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6)
 
 
 ## What’s contained in each file you created.
