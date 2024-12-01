@@ -144,7 +144,7 @@ The distinctiveness of this project includes the use of other third-party packag
 <details>
 <summary>image</summary>
 
-<img src="README_images/MobileScrollWithVideo.gif" width="250" height="500"/>
+![mobile scroll](README_images/MobileWithVideo.gif)
 
 </details>
 
