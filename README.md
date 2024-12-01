@@ -22,7 +22,7 @@
     - Components reusability
     - Rich library
 
-- In learning to integrate React application with Django, it was seen separating the backend and frontend portions of the application keeps the project more organised and streamlined.
+- By integrating React with Django, separating the backend and frontend portions of the application had been proven to keep the project more organised and streamlined.
 - Changes to either frontend or backend of the application was more manageable, as the entire procedure was compartmentalised into smaller pieces. This ease the troubleshooting process as it makes it easier to pinpoint any irregularities.
 - This also makes the development process more flexible and efficient, as each task is delegated and tackled separately with less likely chances that it would break the whole application.
 <hr></hr>
@@ -36,7 +36,7 @@
     - [react-dom](https://www.npmjs.com/package/react-dom)
 
 
-- The distinctiveness of this project includes the use of other third-party packages that streamlines the development such as:
+The distinctiveness of this project includes the use of other third-party packages such as:
 <details>
 <summary><i>Material UI Icon</i></summary>
 <hr></hr>
