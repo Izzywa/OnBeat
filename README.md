@@ -37,12 +37,11 @@
 
 
 The distinctiveness of this project includes the use of other third-party packages such as:
-- 
-
     <details>
     <summary><i>Material UI Icon</i></summary>
     <hr></hr>
-     
+
+-   
     - This project uses [Material UI Icons](https://mui.com/material-ui/material-icons/) to style the application.
  
     ![menu bar example](README_images/expand_menu_bar1.png)
