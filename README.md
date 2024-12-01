@@ -191,7 +191,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
 <details>
 <summary><ins><b>backend</b></ins></summary>
-<hr></hr>
+    <hr></hr>
 
 - 
     <details>
@@ -218,13 +218,13 @@ The distinctiveness of this project includes the use of other third-party packag
     #### test.py
     - test
 
-<hr></hr>
+    <hr></hr>
 </details>
 
 
 <details>
 <summary><ins><b>frontend</b></ins></summary>
-<hr></hr>
+    <hr></hr>
 
 - 
     <details>
@@ -346,10 +346,13 @@ The distinctiveness of this project includes the use of other third-party packag
     - This folder contains the components used in the application.
 
     #### index.js
+
+    <hr></hr>
     </details>
 
     <details>
     <summary><b>static</b></summary>
+    <hr></hr>
 
     <details>
     <summary>/css</summary>
