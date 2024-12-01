@@ -206,17 +206,30 @@ The distinctiveness of this project includes the use of other third-party packag
     helpers
     </details>
 
-    #### urls.py
-    - urls
+    <details>
+    <summary><b>urls.py</b></summary>
 
-    #### models.py
-    - models
+    helpers
+    </details>
 
-    #### admin.py
-    - configuration for the admin interface
+    <details>
+    <summary><b>models.py</b></summary>
 
-    #### test.py
-    - test
+    helpers
+    </details>
+
+
+    <details>
+    <summary><b>admin.py</b></summary>
+
+    helpers
+    </details>
+
+    <details>
+    <summary><b>test.py</b></summary>
+
+    helpers
+    </details>
 
 <hr></hr>
 </details>
@@ -359,7 +372,7 @@ The distinctiveness of this project includes the use of other third-party packag
         - This file is linked to the HTML page to apply styling to the application.
 
         #### index.scss
-        - Styling of the application is written in Sass in this file, then compiled into the [index.css](#indexcss) file
+        - Styling of the application is written in Sass in this file, then compiled into the [index.css](#indexcss) file.
         </details>
 
         #### frontend/main.js
