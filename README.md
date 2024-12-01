@@ -107,6 +107,7 @@ The distinctiveness of this project includes the use of other third-party packag
     - With changes in the pagination, only the components displayed were changed following the response from the request.
     - This provides a fast and responsive page especially with the `/search` function of the application where the results are rendered with every input the user make in the search bar and changes made to the filter toggles.
 
+![Search toggles](README_images/Search.gif)
 
 - It is also used to determine and alter the bookmark status of a note.
     ![Bookmark toggles](README_images/bookmarkFunction.gif)
