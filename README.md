@@ -8,7 +8,7 @@
 - In the previous `Network` and `Mail` project, a single Django application will render the templates of appliction while the interactive user interface is implemented by asynchronous fetch requests or using `Babel` to translate JSX code written directly into the script of the HTML file.
     - This `OnBeat` project distinctiveness and complexity stems mostly on the setting the React app into the application.
 
-### React
+### <ins>React</ins>
 - Two Django applications were created, `Backend` and `Frontend`.
 - In the `Frontend` application, folders for `static` files and `templates` were created. This application will serve to render all client side interactivity for the application.
 - The Models for this project will be stored in the `Backend` application, which will be responding to requests made by the client from the `Frontend` application with API responses.
@@ -74,7 +74,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
         ![Video Error](README_images/VideoError.gif)
 
-        - Play the video to the specified time according to the timestamp.
+        - Skip the video to the specified time according to the timestamp clicked.
 
         ![Timestamp clicked](README_images/TimestampClick.gif)
 
