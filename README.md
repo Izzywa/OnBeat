@@ -24,7 +24,7 @@
 
 - By integrating React with Django, separating the backend and frontend portions of the application had been proven to keep the project more organised and streamlined.
 - Changes to either frontend or backend of the application was more manageable, as the entire procedure was compartmentalised into smaller pieces. This ease the troubleshooting process as it makes it easier to pinpoint any irregularities.
-- This also makes the development process more flexible and efficient, as each task is delegated and tackled separately with less likely chances that it would break the whole application.
+- This also makes the development process more flexible and efficient, as each task is delegated and tackled separately without breaking the whole application.
 <hr></hr>
 </details>
 
@@ -62,7 +62,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
         ![On video ready example](README_images/OnReadyExample.gif)
 
-        - Timestamp input is automatically set to the current time of the video.
+        - Automatically set the timestamp time input to the current time of the video.
 
         ![Timestamp auto time input](README_images/timestampTimeExample.gif)
 
@@ -70,7 +70,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
         ![Timestamp invalid time](README_images/TimestampErrorExample.gif)
 
-        - Added error handling for invalid video.
+        - Handle error events for invalid video.
 
         ![Video Error](README_images/VideoError.gif)
 
@@ -78,7 +78,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
         ![Timestamp clicked](README_images/TimestampClick.gif)
 
-        - In the search function of the applicaton, timestamps will be loaded with the video at the time corresponding with the timestamp. 
+        - Load the video at the time corresponding with the timestamp when the `/search` route is used.
 
         ![Timestamp search](README_images/TimestampSearch.gif)
 
