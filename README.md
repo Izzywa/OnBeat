@@ -351,6 +351,13 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary><b>static</b></summary>
 
+    
+    - <details>
+    <summary>css</summary>
+
+    </details>
+
+    #### frontend/main.js
     </details>
 
     #### templates/index.html
