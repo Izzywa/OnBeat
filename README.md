@@ -498,7 +498,7 @@ The distinctiveness of this project includes the use of other third-party packag
 
         - Display a five item per page of search result from all content of the user's notes.
         - The result will be rendered asynchronously with every change to the search query and filter toggles.
-        - Timestamps will display along with the associated video seek at the given time.
+        - Timestamps will display along with the video ready to play at the given timestamp value.
         </details>
 
         <details>
