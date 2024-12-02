@@ -341,13 +341,6 @@ The distinctiveness of this project includes the use of other third-party packag
     <hr></hr>
 
 - 
-
-    #### views.index
-    -  render the html file
-
-    #### urls.py
-    - routes for the appliction
-
     <details>
     <summary><b>src</b></summary>
 
