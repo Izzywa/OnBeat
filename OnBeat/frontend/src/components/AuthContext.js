@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext,} from "react";
+import React, { useState, createContext, useContext, useEffect,} from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -27,11 +27,9 @@ export const AuthProvider = ({children}) => {
         localStorage.clear();
     }
 
-    const user = localStorage.getItem('auth')
-    const isAuth = user
 
     return (
-        <AuthContext.Provider value={{ login, logout, isAuth, pageName, setPageName }}>
+        <AuthContext.Provider value={{ login, logout, pageName, setPageName }}>
             {children}
         </AuthContext.Provider>
     );

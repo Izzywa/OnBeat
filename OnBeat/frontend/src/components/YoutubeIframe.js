@@ -31,6 +31,12 @@ export default function YoutubeIframe(props) {
                 props.setInsertTimestamp(false)
             }
         }
+
+        if (error.error) {
+            props.setYoutubeError(true)
+        } else {
+            props.setYoutubeError(false)
+        }
     }, [error, ready])
 
     const [show, setShow] = useState(false)
@@ -59,7 +65,6 @@ export default function YoutubeIframe(props) {
             error: true,
             message: errorMessage[event.data]
         })
-        props.setYoutubeError(true)
     }
 
     function ErrorAlert(){
