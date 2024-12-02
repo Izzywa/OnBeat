@@ -323,13 +323,13 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary><b>admin.py</b></summary>
 
-    helpers
+    - Configuration done for the Django admin interface
     </details>
 
     <details>
     <summary><b>test.py</b></summary>
 
-    helpers
+    - Runs tests for the application database.
     </details>
 
 <hr></hr>
@@ -350,116 +350,177 @@ The distinctiveness of this project includes the use of other third-party packag
         <details>
         <summary><i>App.js</i></summary>
 
-        apps.js
+        - Contains the routes for the application.
         </details>
 
         <details>
         <summary><i>AuthContext.js</i></summary>
+
+        - Provide a way to manage a global state, primarily for the authentication status of the user, but also used to set the title on the navigation bar.
         </details>
 
         <details>
         <summary><i>BasicModal.js</i></summary>
+
+        - Pops up a modal. The contents and buttons of the modal is passed as props.
         </details>
 
         <details>
         <summary><i>CreateNote.js</i></summary>
+
+        - Component to create or edit a note.
         </details>
 
         <details>
         <summary><i>CSRFCookie.js</i></summary>
+
+        - Return the csrftoken to be used for POST request to the server, as per [Django documentation](https://docs.djangoproject.com/en/5.1/howto/csrf/)
         </details>
 
         <details>
         <summary><i>DisplayNoteComponent.js</i></summary>
+
+        - Display the text only content of a note.
         </details>
 
         <details>
         <summary><i>DisplayTimestamp.js</i></summary>
+
+        - Display the timestamp of a note and allowing the timestamp link to seek the video to the appropriate time as provided by the timestamp.
         </details>
 
         <details>
         <summary><i>ExpandMenu.js</i></summary>
+
+        - Menu bar set at the bottom of the note during editing and viewing.
         </details>
 
         <details>
         <summary><i>getVideoID.js</i></summary>
+
+        - Return the ID of a video from the youtube url.
         </details>
 
         <details>
         <summary><i>Homepage.js</i></summary>
+
+        - The homepage of the application, displaying the recently created and modified note as well as the bookmarks.
         </details>
 
         <details>
         <summary><i>ListOfNotes.js</i></summary>
+
+        - Return a list of five notes per page for all the notes the user had created.
         </details>
 
         <details>
         <summary><i>LoadingSpinner.js</i></summary>
+
+        - Animated component rendered before the video is loading, as the iframe for the youtube video will return blank before it is ready.
         </details>
 
         <details>
         <summary><i>Login.js</i></summary>
+
+        - Component rendered for the `/login` route for user to log in.
         </details>
 
         <details>
         <summary><i>MarkdownDisplay.js</i></summary>
+
+        - Display text props as markdown with `react-markdown`
         </details>
 
         <details>
         <summary><i>NavBar.js</i></summary>
+
+        - Navigation bar component.
         </details>
 
         <details>
         <summary><i>NewNoteInput.js</i></summary>
+
+        - Input component for when user is inserting new text content to a note.
         </details>
 
         <details>
         <summary><i>NewTimestamp.js</i></summary>
+
+        - Input component for when user is inserting new timestamp to a note.
+        - Timestamp automatically set to current video time when first rendered.
         </details>
 
         <details>
         <summary><i>Note.js</i></summary>
+
+        - Display a note and its content.
         </details>
 
         <details>
         <summary><i>NoteCard.js</i></summary>
+
+        - Card to display note that allows the user to view the note when the card is clicked.
+        - If the note have a youtube url linked, the ID of the video will be used to display the thumbnail image of said video.
         </details>
 
         <details>
         <summary><i>NoteInputField.js</i></summary>
+
+        - Rendered with `NewNoteInput.js` component to display the markdown formatting of the user's current input.
+        - The markdown display can be toggled off.
         </details>
 
         <details>
         <summary><i>Paginator.js</i></summary>
+
+        - Component to display pagination.
+        - Allow user to input the page number.
+        - Disable the previous and next button if there is no such page.
         </details>
 
         <details>
         <summary><i>PrivateRoutes.js</i></summary>
+
+        - Checks the authentication status of the user and updates the global `Authcontext` state of the user's authentication status.
+        - Protects certain routes from unauthenticated user.
         </details>
 
         <details>
         <summary><i>Register.js</i></summary>
+
+        - Rendered for the `/register` route to register new user
         </details>
 
         <details>
         <summary><i>Search.js</i></summary>
+
+        - Display a five item per page of search result from all content of the user's notes.
+        - The result will be rendered asynchronously with every change to the search query and filter toggles.
+        - Timestamps will display along with the associated video seek at the given time.
         </details>
 
         <details>
         <summary><i>TextInputField.js</i></summary>
+
+        - Input field that can have props to be passed to display error.
         </details>
 
         <details>
         <summary><i>YoutubeIframe.js</i></summary>
+
+        - Display the youtube video using `react-youtube` component.
         </details>
 
         <details>
         <summary><i>YoutubeLinkInput.js</i></summary>
+
+        - Validate the given url as a valid youtube url, then render the youtube iframe.
         </details>
 
     - This folder contains the components used in the application.
 
         #### index.js
+        - Create a root and render the React components inside of it.
     </details>
 
     <details>
