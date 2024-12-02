@@ -230,7 +230,7 @@ The distinctiveness of this project includes the use of other third-party packag
     - Youtube url:
         - The `YoutubeUrl` model have a validation to make sure it is a valid youtube link. If invalid, the note will be removed and the view will respond with an error.
         - Client-side, the application is set not to save timestamps should there be no valid youtube linked to the note. Even so, as a failsafe, any timestamp submitted will be converted into regular note if there is no youtube url given.
-    - Other contents of the note is saved with the helper function [`save_noteList_item`](#save_notelist_item). If any exception occurs in saving the note's content, the note will be deleted and the view will respond with and error.
+    - Other contents of the note is saved with the helper function [`save_noteList_item`](#save_notelist_item). If any exception occurs in saving the note's content, the note will be deleted and the view will respond with an error.
 
     #### view_note
     - This view takes in an integer argument, which should be the ID of the note the user is trying to view.
@@ -239,9 +239,6 @@ The distinctiveness of this project includes the use of other third-party packag
 
     #### delete_note
     - Taking in an argument for the note id, after making sure the note object exist and is created by the requested user, this view will then procede to delete the note.
-
-    - If the user try to access this view with method other than POST, the user will be redirected to the page to view the note.
-
 
     #### list_notes
     - This view will return the list of five notes the user created per page, taking in the optional arguments for the requested page number.
@@ -274,9 +271,32 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary><b>helpers.py</b></summary>
 
-    #### save_noteList_item
+    [helpers.py](OnBeat/backend/helpers.py) contains some helper functions used by [views.py](OnBeat/backend/views.py), kept separate to make code more organised and easiert to navigate.
 
-    helpers
+    #### Error_message
+    - Python class to keep response error message organised. Views responding with this error message will have the client-facing application opening a modal with said message.
+
+    #### validateUsername
+    - Validate username for registration of new user, responding with the appropriate error response.
+
+    #### validatePassword
+    - Validate password for registration of new user.
+
+    #### validateEmail
+    - Validate email for registration of new user.
+
+    #### create_item_and_noteList
+    - This function takes a note content; either text or timestamp, a note, and an index, then proceed to save the item to the appropriate database.
+
+    #### save_note_list_item
+    - This function is used by [create_note](#create_note) when the user is creating a new note and saving all the list of contents of said note.
+
+    #### edit_item
+    - Edit a note content, called by [edit_note](#edit_note) when the user edit an existing note content.
+
+    #### delete_notelist_item
+    - Delete the content of the note but not the note or the youtube url itself.
+
     </details>
 
     <details>
