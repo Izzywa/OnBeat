@@ -548,7 +548,7 @@ The distinctiveness of this project includes the use of other third-party packag
     - The html page rendered when the user access the frontend application as all routes in the `frontend` will render this file.
     - Contains link for:
         - [index.css](#indexcss)
-        - [index.js](#indexjs)
+        - [main.js](#frontendmainjs)
         - [bootstrap](https://getbootstrap.com/docs/3.3/)
         - [jquery](https://jquery.com/)
 
