@@ -597,4 +597,3 @@ cd OnBeat
 ./manage.py runserver
 ```
 
-## Any other additional information the staff should know about your project.
