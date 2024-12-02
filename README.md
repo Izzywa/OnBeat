@@ -362,7 +362,7 @@ The distinctiveness of this project includes the use of other third-party packag
         <details>
         <summary><i>BasicModal.js</i></summary>
 
-        - Pops up a modal. The contents and buttons of the modal is passed as props.
+        - Pops up a modal. The contents and buttons of the modal are passed as props.
         </details>
 
         <details>
@@ -538,9 +538,17 @@ The distinctiveness of this project includes the use of other third-party packag
         </details>
 
         #### frontend/main.js
+        - `webpack` will bundle all the javascript file into this file, which will be the script used by the [index.html](#templatesindexhtml) 
+
     </details>
 
     #### templates/index.html
+    - The html page rendered when the user access the frontend application as all routes in the `frontend` will render this file.
+    - Contains link for:
+        - [index.css](#indexcss)
+        - [index.js](#indexjs)
+        - [bootstrap](https://getbootstrap.com/docs/3.3/)
+        - [jquery](https://jquery.com/)
 
 <hr></hr>
     </details>
