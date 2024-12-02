@@ -590,7 +590,7 @@ python -m pip install -r requirements.txt
 ```
 cd OnBeat
 ```
-    - this folder should be the one containing the `manage.py` file.
+- this folder should be the one containing the `manage.py` file.
 
 7. Run the server
 ```
