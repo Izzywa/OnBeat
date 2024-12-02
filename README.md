@@ -202,7 +202,7 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary><b>views.py</b></summary>
 
-    [views.py](OnBeat/backend/views.py) will hold the views that will be responding to requests made from the application's client side application, either with database query response or changes to the database.
+    [views.py](OnBeat/backend/views.py) will hold the views that will be responding to requests made from the project's client side application, either with database query response or changes to the database.
 
     Some of the functions in this file will use helper function from [helpers.py](OnBeat/backend/helpers.py).
 
