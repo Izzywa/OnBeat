@@ -21,7 +21,8 @@ export default function DisplayTimestamp(props) {
     }
 
     function handleEdit() {
-        if (!props.youtubeError){
+        console.log(props.IframeRef.current)
+        if (!props.youtubeError && props.IframeRef.current){
             setEdit(true)
         }
     }
