@@ -1,5 +1,7 @@
 # OnBeat 
 
+## [Video Sample](https://www.youtube.com/watch?v=tGJiHs1g1ig)
+
 ## Distinctiveness and Complexity
 - This project is a full stack web application fully integrating the Django framework with the React library.
 - This Django project have two application that serve as the backend and the frontend of the application, and named as such.
