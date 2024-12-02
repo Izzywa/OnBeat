@@ -3,15 +3,15 @@
 ## Distinctiveness and Complexity
 - This project is a full stack web application fully integrating the Django framework with the React library.
 - This Django project have two application that serve as the backend and the frontend of the application, and named as such.
-    - The `Backend` application will be responsible for the server side logic and database interactions, with the primary goal of handling requests and delivering responses.
-    - The `Frontend` will utilise React to render the client-side interface providing a user interactive application.
+    - The `backend` application will be responsible for the server side logic and database interactions, with the primary goal of handling requests and delivering responses.
+    - The `frontend` will utilise React to render the client-side interface providing a user interactive application.
 - In the previous `Network` and `Mail` project, a single Django application will render the templates of appliction while the interactive user interface is implemented by asynchronous fetch requests or using `Babel` to translate JSX code written directly into the script of the HTML file.
     - This `OnBeat` project distinctiveness and complexity stems mostly on the setting the React app into the application.
 
 ### <ins>React</ins>
-- Two Django applications were created, `Backend` and `Frontend`.
-- In the `Frontend` application, folders for `static` files and `templates` were created. This application will serve to render all client side interactivity for the application.
-- The Models for this project will be stored in the `Backend` application, which will be responding to requests made by the client from the `Frontend` application with API responses.
+- Two Django applications were created, `backend` and `frontend`.
+- In the `frontend` application, folders for `static` files and `templates` were created. This application will serve to render all client side interactivity for the application.
+- The Models for this project will be stored in the `backend` application, which will be responding to requests made by the client from the `frontend` application with API responses.
 <details>
 <summary> Why </summary>
 <hr></hr>
@@ -302,13 +302,21 @@ The distinctiveness of this project includes the use of other third-party packag
     <details>
     <summary><b>urls.py</b></summary>
 
-    helpers
+    - Contains the urls for the `backend` application.
     </details>
 
     <details>
     <summary><b>models.py</b></summary>
 
-    helpers
+    - Contains the models for the project.
+    - A `Note` object will have a relation with the model `User`. This model will then have Foreign key relations with multiple other models.
+        - `YoutubeUrl` is set to one-to-one relation with `Note`, allowing each note to only have one url.
+            - The url is also validated with `validate_youtube_url`
+        - The `Note` model will have a one-to-many relations with the `NoteContent`, `NoteTimestamp`, and  `NoteList` models.
+        - The `Notelist` functions to keep track of which index the content of the notes is saved, so that the note is viewed in the correct order while also simplifying the return of the result with the `serialize` method.
+            - In this model, the content could only be either the text or timestamp only.
+        - In all the above models, it is set for the objects to be deleted should the main `Note` object is deleted.
+    - `Bookmarks` will keep track the notes a user bookmarked, restricting that a user could not bookmark anoter user's notes. 
     </details>
 
 
