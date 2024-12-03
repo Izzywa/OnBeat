@@ -574,7 +574,7 @@ python -m venv venv
 3. Activate the virtual environment
 
 ```
-venv\Scripts\activate
+source venv/bin/activate
 ```
 
 4. Install the required python packages 
