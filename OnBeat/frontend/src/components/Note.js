@@ -218,7 +218,10 @@ export default function Note(props) {
                         overflow: 'scroll',
                         maxHeight: '50vh'
                     }
-                    : null
+                    : {
+                        overflow: 'scroll',
+                        maxHeight: '100vh'
+                    }
                 }>
             {props.noteObject.noteList.length > 0 ?
             props.noteObject.noteList.map((value, index) => {
