@@ -145,7 +145,7 @@ The distinctiveness of this project includes the use of other third-party packag
 ### <ins>OnBeat</ins>
 
 - The heart of this project is ultimately to make a web application that allows user to watch youtube videos while reading or taking notes simultaneously.
-- It is estimated the numbers of smartphones in the world is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the amount of person that owned a PC varies across the globe.
+- It is estimated the numbers of smartphones in the world is about [90% of the global population](https://explodingtopics.com/blog/smartphone-stats), but the number of people that owned a computer varies across the globe.
 
     <img src="README_images/PCper100.png" width="700" height="500"/>
 
